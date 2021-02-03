@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+
+import React, { Suspense } from 'react';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import Header from './components/Header';
+import Search from './components/Search';
+import ControlledCarousel from './components/Slice';
+import Slice from './components/Slice';
+
+// Lazy load - Code splitting
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="photo-app">
+
+      <BrowserRouter>
+        <Header />
+        <ControlledCarousel />
+        <Search />
+
+        <Switch>
+
+
+          <Route path="/photos" component={Header} />
+
+        </Switch>
+      </BrowserRouter>
+
     </div>
   );
 }

@@ -1,0 +1,53 @@
+.search {
+  width: 100%;
+  height: 400px;
+  background-size: cover;
+  background-image: url("https://3.bp.blogspot.com/-9jOZ-7WD4x8/XG1IIoYfShI/AAAAAAAAAYA/PCd8QcwzplA419TqchmcnTBtp-5Na8kMACLcBGAs/s1600/hinh-nen-bien-50.jpg");
+  background-size: cover;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 20px;
+}
+
+.title {
+  color: rgb(45, 9, 80);
+  font-size: 40px;
+  font-weight: 800;
+  align-items: center;
+  text-align: center;
+  font-family: serif;
+}
+
+.search-exchange {
+  display: flex;
+
+  width: 50px;
+  justify-content: space-between;
+}
+
+.search-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-form__input {
+  border: none;
+  width: 200px;
+  height: 50px;
+  border: 1px solid rgb(199, 198, 198);
+}
+
+.search-form__submit {
+  width: 90px;
+  height: 50px;
+  text-align: center;
+}
+
+.search-icon {
+  background-color: #fff;
+}

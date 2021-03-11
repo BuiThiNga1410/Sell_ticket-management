@@ -1,0 +1,46 @@
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-image: url("https://ben.com.vn/tin-tuc/wp-content/uploads/2020/09/hinh-nen-powerpoint-don-gian-3-1024x576.jpg");
+  height: 600px;
+  background-size: cover;
+}
+
+.login-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+.form-login {
+  width: 400px;
+  border: 1px solid rgb(163, 162, 162);
+  padding: 30px;
+  border-radius: 5px;
+
+  background-color: #fff;
+}
+
+.social-network-login {
+  display: flex;
+  justify-content: center;
+}
+
+.social-network__icon {
+  margin-top: 16px;
+  margin-right: 20px;
+}
+
+.login_input {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.login_input-item {
+  width: 60%;
+}

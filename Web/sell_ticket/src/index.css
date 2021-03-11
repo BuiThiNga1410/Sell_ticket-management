@@ -1,13 +1,73 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+:root {
+  --primary-color: rgba(245, 31, 31, 0.8);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.my-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+.my-btn-primary {
+  background-color: rgb(31, 157, 196);
+  text-align: center;
+  height: 40px;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+}
+
+.my-group-btn {
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-evenly;
+}
+p {
+  margin-bottom: 0;
+}
+
+.my-table {
+  border-radius: 2px;
+  width: 100%;
+}
+.my-table-row {
+  height: 40px;
+}
+
+.my-table-row:first-child {
+  background-color: rgb(56, 144, 170);
+}
+
+.my-table-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.my-table-item {
+  font-size: 16px;
+  font-weight: 400;
+  color: rgb(24, 24, 24);
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.my-table-item_center {
+  text-align: center;
 }

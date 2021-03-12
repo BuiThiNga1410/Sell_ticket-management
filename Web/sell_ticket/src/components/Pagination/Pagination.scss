@@ -1,0 +1,31 @@
+.pagination{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+.pagination-item{
+    text-decoration: none;
+    position: relative;
+    margin: 0 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 10px rgba(0, 0,0,0.3),
+        inset 0 -5px 0px rgba(80, 80, 80, 0.1),
+        inset 0 -10px 0px rgba(150,150,150,0.1);
+    overflow: hidden;
+    color: red;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    background-color: #eed4d4;
+}
+.pagination-item:hover {
+    background-color: rgb(49, 151, 247);
+    box-shadow: 0 0px 20px rgba(0, 0, 0, 0.4),
+      inset 0 -5px 0px rgba(80, 80, 80, 0),
+      inset 0 -10px 0px rgba(150, 150, 150, 0);
+  }

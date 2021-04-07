@@ -1,0 +1,71 @@
+
+.account-avt {
+  background-image: url("https://1.bp.blogspot.com/-n_bFzL9lPUU/Xp23H9Sk8yI/AAAAAAAAhyA/JYfvZhwguxc8vT_YS3w14Xi3YWf3hxqIQCLcBGAsYHQ/s1600/Hinh-Anh-Dep-Tren-Mang%2B%25282%2529.jpg");
+  background-size: cover;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: auto;
+  border: 1px solid #000;
+}
+
+.account-name {
+  text-align: center;
+  margin-top: 16px;
+  font-weight: 600;
+
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(211, 211, 211, 0.6);
+}
+.menu-div {
+  width: 325px;
+  background-color: rgb(223, 224, 224);
+  padding: 30px 16px;
+  padding-top: 30px;
+}
+.menu-title {
+  text-align: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgb(99, 99, 99);
+}
+.menu-list {
+  list-style: none;
+}
+
+.item-list .menu-item {
+  border-bottom: 1px solid rgb(238, 239, 240) ;
+}
+.menu-item {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.menu-item__link {
+  text-decoration: none;
+  color: rgb(44, 43, 43);
+}
+
+.menu-item:first-child {
+  padding-top: 16px;
+}
+
+.item-parent:hover .item-list{
+  display: block;
+}
+
+.item-list {
+  padding-left: 16px;
+  padding-right: 16px;
+  background-color: #fff;
+  list-style: none;
+  display: none;
+}
+
+.item-list::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0px;
+}

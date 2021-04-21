@@ -1,4 +1,5 @@
 import React from 'react';
+import {BrowserRouter as Router, Route, Link, NavLink } from 'react-router-dom';
 import './Menubar.scss';
 
 
@@ -6,14 +7,28 @@ function Menubar(props) {
     return (
         <div className="menu-bar">
             <ul className="nav">
-                <li><a href="#">Quản lý tài khoản cá nhân</a></li>
                 <li>
-                    <a href="#">Quản lý nhân viên</a>
+                    <NavLink to="/">Quản lý khách hàng</NavLink>
                     <ul className="subnav">
-                        <li><a href="#">Danh sách nhân viên</a></li>
-                        <li><a href="#">Thêm nhân viên</a></li>
-                        <li><a href="#">Xóa nhân viên</a></li>
-                        <li><a href="#">Cập nhật thông tin nhân viên</a></li>
+                        <li>
+                            <Link to="/staff">Danh sách khách hàng</Link>
+                        </li>
+                        <li>
+                            <Link to="/staff/add">Thêm khách hàng</Link>
+                        </li>
+                        
+                    </ul>
+                </li>
+                <li>
+                    <NavLink to="/staff">Quản lý nhân viên</NavLink>
+                    <ul className="subnav">
+                        <li>
+                            <Link to="/staff">Danh sách nhân viên</Link>
+                        </li>
+                        <li>
+                            <Link to="/staff/add">Thêm nhân viên</Link>
+                        </li>
+                        
                     </ul>
                 </li>
                 <li>
@@ -25,21 +40,23 @@ function Menubar(props) {
                     </ul>
                 </li>
                 <li>
-                    <a href="#">Quản lý tuyến xe</a>
+                    <Link to="/busroute">Quản lý tuyến xe</Link>
                     <ul className="subnav">
-                        <li><a href="#">Danh sách tuyến xe</a></li>
-                        <li><a href="#">Thêm tuyến xe</a></li>
-                        <li><a href="#">Xóa tuyến xe</a></li>
-                        <li><a href="#">Cập nhật thông tin tuyến xe</a></li>
+                        <li>
+                            <Link to="/busroute">Danh sách tuyến xe</Link>
+                        </li>
+                        <li>
+                            <Link to="busroute/add">Thêm tuyến xe</Link>
+                        </li>
+                        
                     </ul>
                 </li>
                 <li>
-                    <a href="#">Quản lý xe</a>
+                    <Link to="/bus">Quản lý xe</Link>
                     <ul className="subnav">
-                        <li><a href="#">Danh sách xe</a></li>
-                        <li><a href="#">Thêm xe</a></li>
-                        <li><a href="#">Xóa xe</a></li>
-                        <li><a href="#">Cập nhật thông tin xe</a></li>
+                        <li><Link to="/bus">Danh sách xe</Link></li>
+                        <li><Link to="/bus/add">Thêm xe</Link></li>
+                        
                     </ul>
                 </li>
             </ul>

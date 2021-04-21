@@ -8,7 +8,7 @@ Bustable.propTypes = {
 function Bustable(props) {
     return (
         <div className="table-list">
-            <p className="text-of-list">DANH SÁCH XE</p>
+            
             <button className="button addbusbutton">Thêm xe</button>
             <table>
                 <thead>

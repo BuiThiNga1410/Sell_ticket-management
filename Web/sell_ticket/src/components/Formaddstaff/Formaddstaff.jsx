@@ -6,6 +6,7 @@ Formaddstaff.propTypes = {
 };
 
 function Formaddstaff(props) {
+    
     return (
         <div className="form-add-staff">
             <span className="add-title">THÊM NHÂN VIÊN</span>
@@ -27,7 +28,7 @@ function Formaddstaff(props) {
                 </div>
                 <div className="col">
                     <span>Ngày sinh:</span><br/>
-                    <input type="text" required name="date-of-birth" className="form-text"/><br/>
+                    <input className="birthday" id="today" type="date"/><br/>
                     <span>Giới tính:</span><br/>
                     <select className="selection" name="gender">
                         <option value="1">Nam</option>
@@ -44,7 +45,7 @@ function Formaddstaff(props) {
             <div className="button-area">
                 <button className="button">Quay lại</button>
                 <button className="button">Reset</button>
-                <button className="button">Thêm nhân viên</button>
+                <button type="submit" className="button">Thêm nhân viên</button>
             </div>
         </div>
     );

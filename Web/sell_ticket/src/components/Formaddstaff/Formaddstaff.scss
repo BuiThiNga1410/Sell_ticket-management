@@ -19,7 +19,7 @@
 .form-input{
     width: 70%;
     margin-left: 280px;
-    margin-top: 20px;
+    margin-top: 40px;
 }
   .form-input span{
     color: red;
@@ -47,4 +47,16 @@
 .button-area{
     margin-top: 25px;
     margin-left: 560px;
+}
+
+.form-staff{
+  margin-top: 40px;
+}
+.birthday{
+  font-family: 'PT Sans', sans-serif;
+  font-size: 1.2rem;
+  display: block;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  height: 28px;
 }

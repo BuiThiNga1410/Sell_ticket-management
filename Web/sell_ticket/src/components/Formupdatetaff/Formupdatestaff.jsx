@@ -6,6 +6,7 @@ Formupdatestaff.propTypes = {
 };
 
 function Formupdatestaff(props) {
+    console.log(props);
     return (
         <div className="form-add-staff">
             <span className="add-title"> CẬP NHẬT NHÂN VIÊN</span>
@@ -27,7 +28,7 @@ function Formupdatestaff(props) {
                 </div>
                 <div className="col">
                     <span>Ngày sinh:</span><br/>
-                    <input type="text" required name="date-of-birth" className="form-text" value={props.dateofbirth}/><br/>
+                    <input type="date" required name="date-of-birth" className="form-text" value={props.dateofbirth}/><br/>
                     <span>Giới tính:</span><br/>
                     <select className="selection" name="gender" value={props.gender}>
                         <option value="1">Nam</option>

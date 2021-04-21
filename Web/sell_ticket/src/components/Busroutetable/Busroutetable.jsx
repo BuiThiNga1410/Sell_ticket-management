@@ -1,12 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Busroutetable.scss';
-
+import data from './dulieutuyenxe.json'
 
 
 function Busroutetable(props) {
     return (
         <div className="table-list">
-            <p className="text-of-list">DANH SÁCH TUYẾN XE</p>
+            
             <button className="button addbusroutebutton">Thêm tuyến xe</button>
             <table>
                 <thead>
@@ -20,46 +21,21 @@ function Busroutetable(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td data-column="route">Đà Nẵng - Lao Bảo</td>
-                        <td data-column="startingpoint">Bến xe TT Đà Nẵng</td>
-                        <td data-column="destination">Bến xe Lao Bảo</td>
-                        <td data-column="price">120.000</td>
-                        <td data-column="link"><a href="#">Cập nhật</a></td>
-                        <td data-column="link"><a href="#">Xóa</a></td>
-                    </tr>
-                    <tr>
-                        <td data-column="route">Đà Nẵng - Vinh</td>
-                        <td data-column="startingpoint">Bến xe TT Đà Nẵng</td>
-                        <td data-column="destination">Bến xe Vinh</td>
-                        <td data-column="price">200.000</td>
-                        <td data-column="link"><a href="#">Cập nhật</a></td>
-                        <td data-column="link"><a href="#">Xóa</a></td>
-                    </tr>
-                    <tr>
-                        <td data-column="route">Đà Nẵng - Đà Lạt</td>
-                        <td data-column="startingpoint">Bến xe TT Đà Nẵng</td>
-                        <td data-column="destination">Bến xe Đà Lạt</td>
-                        <td data-column="price">280.000</td>
-                        <td data-column="link"><a href="#">Cập nhật</a></td>
-                        <td data-column="link"><a href="#">Xóa</a></td>
-                    </tr>
-                    <tr>
-                        <td data-column="route">Buôn Mê Thuột- Đà Nẵng</td>
-                        <td data-column="startingpoint">Bến xe Buôn Mê Thuột</td>
-                        <td data-column="destination">Bến xe TT Đà Nẵng</td>
-                        <td data-column="price">200.000</td>
-                        <td data-column="link"><a href="#">Cập nhật</a></td>
-                        <td data-column="link"><a href="#">Xóa</a></td>
-                    </tr>
-                    <tr>
-                        <td data-column="route">Quy Nhơn - Đà Nẵng</td>
-                        <td data-column="startingpoint">Bến xe Quy Nhơn</td>
-                        <td data-column="destination">Bến xe TT Đà Nẵng</td>
-                        <td data-column="price">150.000</td>
-                        <td data-column="link"><a href="#">Cập nhật</a></td>
-                        <td data-column="link"><a href="#">Xóa</a></td>
-                    </tr>
+                    {
+                        data.map(busroute=> {
+                            return (
+                                <tr>
+                                    <td data-column="route">{busroute.busroute}</td>
+                                    <td data-column="startingpoint">{busroute.startingpoint}</td>
+                                    <td data-column="destination">{busroute.destination}</td>
+                                    <td data-column="price">{busroute.price}</td>
+                                    <td data-column="link"><a href={"/busroute/update?id="+busroute.id}>Cập nhật</a></td>
+                                    <td data-column="link"><a href={"/busroute/delete?id="+busroute.id}>Xóa</a></td>
+                                </tr>
+                            )
+                        })
+                    }
+                    
                 </tbody>
             </table>
         </div>

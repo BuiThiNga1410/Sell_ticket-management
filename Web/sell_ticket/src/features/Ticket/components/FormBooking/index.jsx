@@ -13,6 +13,7 @@ function FormBooking(props) {
       <FormGroup controlId="name">
         <FormLabel>Họ tên</FormLabel>
         <FormControl placeholder="Nhập họ tên" />
+        <p className="text-error"></p>
       </FormGroup>
 
       <FormGroup controlId="phone">
@@ -22,6 +23,7 @@ function FormBooking(props) {
             <option>Default select</option>
           </FormControl>
           <FormControl placeholder="Nhập số điện thoại" />
+          <p className="text-error"></p>
         </InputGroup>
 
       </FormGroup>
@@ -29,6 +31,7 @@ function FormBooking(props) {
       <FormGroup controlId="email">
         <FormLabel>Email</FormLabel>
         <FormControl placeholder="Nhập Email của bạn" />
+        <p className="text-error"></p>
       </FormGroup>
 
       <FormGroup controlId="note">

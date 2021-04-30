@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Form, FormControl, FormGroup, FormLabel } from 'react-bootstrap';
+import {useState} from 'react';
+import axios from 'axios';
 
 import './Login.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,6 +13,22 @@ Login.propTypes = {
 };
 
 function Login(props) {
+
+  let [responseData, setResponseData] = useState('');
+  const fetchData = React.useCallback(() => {
+    axios.get("https://401e1edf1e02.ngrok.io/api/accounts/1")
+    .then((response) => {
+      setResponseData(response.data);
+      console.log(response.data);
+      
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }, [])
+  React.useEffect(() => {
+    fetchData()
+  }, [fetchData])
   return (
     <div className="login">
       <div className="form-login">

@@ -9,6 +9,14 @@ Profile.propTypes = {
 };
 
 function Profile(props) {
+  const handleClickButton = ()=>{
+    document.getElementsByClassName("file-input")[0].click();
+    // eslint-disable-next-line no-unused-expressions
+  }
+  const handleChoiceFile = (e)=> {
+    console.log("aaaa", e.target.files[0]);
+    document.getElementsByClassName("avt")[0].setAttribute("style", `background-image: url("${URL.createObjectURL(e.target.files[0])}")`);
+  }
   return (
     <div>
       <p className="profile-title">Hồ sơ của tôi</p>
@@ -103,7 +111,8 @@ function Profile(props) {
         </div>
         <div className="profile-avt">
           <div className="avt" />
-          <button className="btn btn-outline-primary">Chọn ảnh</button>
+          <button className="btn btn-outline-primary" onClick={handleClickButton}>Chọn ảnh</button>
+          <input className="file-input" type="file" accept=".png, .jpg" onChange={handleChoiceFile}></input>
         </div>
       </div>
     </div>

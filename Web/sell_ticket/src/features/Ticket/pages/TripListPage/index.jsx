@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import axios from 'axios';
 import { addTicket, getTicket } from '../../TicketSlice';
+import myaxios from '../../../../app/api';
 
 TripListPage.propTypes = {
 
@@ -18,8 +19,12 @@ function TripListPage(props) {
   const history = useHistory();
 
   const fetchData = React.useCallback(() => {
-    axios.get("https://qlbvxk.herokuapp.com/api/tickets")
+    myaxios.post('/accounts/3', {
+      "Email" : "nga@gmail.com",
+      "MatKhau" : "123452"
+  })
     .then((response) => {
+      console.log('data cua ho',response.data);
       dispatch(addTicket({
         id: 2,
         maKhachHang: 'k34',

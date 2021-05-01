@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Route, Switch, useRouteMatch } from 'react-router';
+import { Redirect, Route, Switch, useRouteMatch } from 'react-router';
 
 import ProfilePage from './pages/ProfilePage';
 import ChangePassPage from './pages/ChangePassPage';
@@ -15,7 +15,8 @@ function Account(props) {
   const match = useRouteMatch();
   return (
     <Switch>
-      <Route exact path={match.url} component={AccountMenu} />
+      <Route exact path={match.url} component={ProfilePage} />
+      <Redirect from = {match.url} to = {`${match.url}/profile`}/>
       <Route path={`${match.url}/profile`} component={ProfilePage} />
       <Route path={`${match.url}/changePass`} component={ChangePassPage} />
       <Route path={`${match.url}/purchase`} component={PurchasePage} />

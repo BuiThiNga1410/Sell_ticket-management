@@ -9,6 +9,7 @@ Trip.propTypes = {
 };
 
 function Trip(props) {
+  const {trips} = props;
   return (
     <div className="detail-ticket">
       <Row>
@@ -52,7 +53,7 @@ function Trip(props) {
               <p className="empty-chair">9 chỗ trống</p>
               <div className="detail_book">
                 <p className="infor__detail">Thông tin chi tiết</p>
-                <button className="book-ticket_button">Đặt vé</button>
+                <a href="/ticket/booking" className="btn-book-ticket">Đặt vé</a>
               </div>
             </Col>
           </Row>

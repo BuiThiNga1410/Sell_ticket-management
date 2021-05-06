@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import './Header.scss';
+import { useSelector } from 'react-redux';
 
 Header.propTypes = {
 
 };
-
 function Header(props) {
+  const user = JSON.parse(localStorage.getItem('user'));
+  const name = user.Email.split("@")[0];
+  console.log(name);
   return (
     <div className="div-header">
       <div className="container header">
@@ -28,13 +31,16 @@ function Header(props) {
             </div>
           </li>
           <li className="header-item"><a className="header-link" href="https://vov.vn/xa-hoi/chum-anh-ben-xe-lon-nhat-nuoc-san-sang-hoat-dong-784923.vov">Quản lý xe</a></li>
-          <li className="header-item"><button className="my-btn-primary">Đăng nhập</button></li>
-          <li className="header-item"><button className="my-btn-primary">Đăng kí</button></li>
+          {user
+            ? <a href='/account' className="user-name">Xin chào {name}</a>
+            : (<div className="header-group-right">
+              <li className="header-item"><button className="my-btn-primary">Đăng nhập</button></li>
+              <li className="header-item"><button className="my-btn-primary">Đăng kí</button></li>)
+            </div>)
+          }
         </ul>
       </div>
     </div>
-
-
   );
 }
 

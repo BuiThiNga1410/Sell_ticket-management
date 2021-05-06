@@ -19,12 +19,13 @@ function TripListPage(props) {
   const history = useHistory();
 
   const fetchData = React.useCallback(() => {
-    myaxios.post('/accounts/3', {
-      "Email" : "nga@gmail.com",
-      "MatKhau" : "123452"
+    myaxios.post('/tickets', {
+      MaKh : 1016,
+      MaChoNgoi : 169,
+      MaChuyenXe : 23
   })
     .then((response) => {
-      console.log('data cua ho',response.data);
+      console.log(response.data);
       dispatch(addTicket({
         id: 2,
         maKhachHang: 'k34',

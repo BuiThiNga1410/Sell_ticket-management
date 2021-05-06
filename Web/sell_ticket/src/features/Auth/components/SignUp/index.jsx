@@ -1,49 +1,49 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import {useEffect} from 'react';
 
 import './SignUp.scss';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
+import myaxios from '../../../../app/api';
 
 SignUp.propTypes = {
 
 };
 
 function SignUp(props) {
-  const [username, setUsername] = useState("");
-  const [pass, setPass] = useState("");
-  // const handleSignUp = () => {
-  //   console.log(document.formlogin.email.value);
-  //   var user = document.formlogin.email.value
-  //   setUsername(user);
-  //   setPass(document.formlogin.pass.value);
-  // }
-//   useEffect(() => {
-//     axios.post('https://401e1edf1e02.ngrok.io/api/accounts/3', {
-//         "Email": document.formlogin.email.value,
-//         "MatKhau": document.formlogin.pass.value,
-//        })
-//       .then(function(response) {
-//         console.log(response);
-//       })
-//       .catch((err) => {
-//         console.log(err)
-//       });
-// }, [username]);
-useEffect(() => {
-  // POST request using axios inside useEffect React hook
-  const article = { "Email" : "leaali@gmail.com",
-  "MatKhau" : "1234578" };
-  axios.post('https://401e1edf1e02.ngrok.io/api/accounts/2', article)
-      .then(response => console.log(response));
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const handleSignUp = () => {
+    let email = document.formSignup.email.value;
+    let pass = document.formSignup.pass.value;
+    myaxios.post('/accounts/2', {
+      Email : email,
+      MatKhau : pass,
+  })
+    .then((response) => {
+      if(response.data.maNd)
+      {
+        let user = {
+          maNd: response.data.maNd,
+          Email: email,
+        }
+        localStorage.setItem("user", JSON.stringify(user));
+        history.push('/');
+        window.location.reload();
+      } 
+      else document.querySelector('.invalid').setAttribute("style", "display: block");
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }
 
-// empty dependency array means this effect will only run once (like componentDidMount in classes)
-}, []);
   return (
     <div className="signup">
       <div className="form">
         <p className="form-title">Đăng kí tài khoản</p>
-        <form method="post" name="formlogin">
+        <form method="post" name="formSignup">
         <div className="form-group-row">
             <p className="form-label">Email</p>
             <input type="text" placeholder="Nhập Email" name="email" className="form-input" />
@@ -53,7 +53,7 @@ useEffect(() => {
             <input type="text" placeholder="Nhập mật khẩu" name="pass" className="form-input" />
           </div>
           <div className="form-btn">
-            <input className="btn-submit" type="button" value="Đăng kí"/>
+            <input className="btn-submit" type="button" value="Đăng kí" onClick={handleSignUp}/>
           </div>
         </form>
       </div>

@@ -5,57 +5,58 @@ import {useState} from 'react';
 import axios from 'axios';
 
 import './Login.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebook, faYoutube } from '@fortawesome/free-brands-svg-icons';
+import myaxios from '../../../../app/api';
+import { useHistory } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
 
 Login.propTypes = {
 
 };
 
 function Login(props) {
-
-  let [responseData, setResponseData] = useState('');
-  const fetchData = React.useCallback(() => {
-    axios.get("https://401e1edf1e02.ngrok.io/api/accounts/1")
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const handleValidate = () => {
+    let email = document.querySelector("#email").value;
+    let pass = document.querySelector("#pass").value;
+    myaxios.post('/accounts/validate/2', {
+      Email : email,
+      MatKhau : pass,
+  })
     .then((response) => {
-      setResponseData(response.data);
-      console.log(response.data);
-      
+      if(response.data.maNd)
+      {
+        let user = {
+          maNd: response.data.maNd,
+          Email: email,
+        }
+        localStorage.setItem("user", JSON.stringify(user));
+        history.push('/');
+        window.location.reload();
+      } 
+      else document.querySelector('.invalid').setAttribute("style", "display: block");
     })
     .catch((error) => {
-      console.log(error)
+      console.log(error);
     })
-  }, [])
-  React.useEffect(() => {
-    fetchData()
-  }, [fetchData])
+  }
   return (
     <div className="login">
       <div className="form-login">
         <p className="login-title">Login to your account</p>
         <Form>
           <FormGroup>
-            <FormLabel>Tên đăng nhập</FormLabel>
-            <FormControl placeholder="Tên đăng nhập" />
-          </FormGroup>
-
-          <FormGroup>
-            <FormLabel>Số điện thoại</FormLabel>
-            <FormControl placeholder="Số điện thoại" />
+            <FormLabel>Email</FormLabel>
+            <FormControl placeholder="Email" id = "email" />
           </FormGroup>
 
           <FormGroup>
             <FormLabel>Mật khẩu</FormLabel>
-            <FormControl placeholder="Mật khẩu" />
+            <FormControl placeholder="Mật khẩu" id = "pass" />
           </FormGroup>
-          <div className="social-network-login">
-            <div className="social-network__icon"><FontAwesomeIcon icon={faFacebook} size="2x" color="rgb(30, 90, 168)" /></div>
-            <div className="social-network__icon"><FontAwesomeIcon icon={faYoutube} size="2x" color="rgb(243, 44, 44)" /></div>
-          </div>
-
-          <div className="login_input"><Button className="login_input-item" variant="primary" type="submit"> Login</Button></div>
+          <p className="invalid">Thông tin đăng nhập không hợp lệ!!!</p>
+          <div className="login_input"><Button className="login_input-item" variant="primary" onClick = {handleValidate}> Login</Button></div>
         </Form>
-
       </div>
     </div>
   );

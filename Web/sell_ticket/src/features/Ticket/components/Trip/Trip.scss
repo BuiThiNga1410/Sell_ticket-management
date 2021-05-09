@@ -1,0 +1,53 @@
+.group-benefit {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+
+.benefit-detail {
+  font-size: 15px;
+  height: 40px;
+  background-color: rgb(65, 161, 224);
+
+  color: rgb(235, 245, 244);
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.empty-chair {
+  height: 50%;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 0;
+
+  color: rgba(11, 94, 119, 0.8);
+  text-align: right;
+  align-items: center;
+}
+
+.detail_book {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.infor__detail {
+  text-align: left;
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(11, 94, 119, 0.8);
+
+  margin-bottom: 0;
+}
+
+.book-ticket_button {
+  font-size: 15px;
+  width: 70px;
+  height: 40px;
+  background-color: rgb(252, 106, 62);
+
+  color: rgb(235, 245, 244);
+  border: none;
+  border-radius: 5px;
+}

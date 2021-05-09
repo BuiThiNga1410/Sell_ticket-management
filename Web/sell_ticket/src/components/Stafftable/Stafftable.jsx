@@ -1,14 +1,27 @@
-import React from 'react';
+import React, {useState} from 'react';
 import  './Stafftable.scss';
 import dl from './duliennhanvien.json';
 import { Link } from 'react-router-dom';
-
+import axios from 'axios';
 Stafftable.propTypes = {
     
 };
 
 function Stafftable(props) {
-    
+  let [responseData, setResponseData] = useState('');
+  const fetchData = React.useCallback(() => {
+    axios.get("https://qlbvxk.herokuapp.com/api/staffs")
+    .then((response) => {
+       setResponseData(response.data);
+       //console.log(response.data);
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }, [])
+  React.useEffect(() => {
+    fetchData()
+  }, [fetchData])
     return (
         <div className="table-list-staff">
                 

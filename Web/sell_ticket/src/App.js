@@ -1,5 +1,5 @@
 import './App.css';
-import Header from './components/Header/Header';
+
 import Menubar from './components/Menubar/Menubar';
 import Pagination from './components/Pagination/Pagination';
 import Stafftable from './components/Stafftable/Stafftable';
@@ -17,22 +17,22 @@ import Deletebus from './components/Deletebus/Deletebus';
 import Home from './components/Home/Home';
 import DieuHuongURL from './routes/DieuHuongURL';
 import {BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import Search from './components/Search/Search';
+
+import Header_admin from './components/Header_admin/Header';
 
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <Header/>
+        <Header_admin/>
         <Menubar/>
         <DieuHuongURL/>
         </div>
     </Router>
       
     
-    
-  );
-}
+  ) 
+  }
 
 export default App;

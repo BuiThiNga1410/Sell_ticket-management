@@ -14,20 +14,19 @@ Login.propTypes = {
 };
 
 function Login(props) {
-  const dispatch = useDispatch();
   const history = useHistory();
   const handleValidate = () => {
     let email = document.querySelector("#email").value;
     let pass = document.querySelector("#pass").value;
-    myaxios.post('/accounts/validate/2', {
-      Email : email,
-      MatKhau : pass,
+    myaxios.post('/accounts/validate/3', {
+      "Email" : email,
+      "MatKhau" : pass,
   })
     .then((response) => {
       if(response.data.maNd)
       {
         let user = {
-          maNd: response.data.maNd,
+          ...response.data,
           Email: email,
         }
         localStorage.setItem("user", JSON.stringify(user));
@@ -52,7 +51,7 @@ function Login(props) {
 
           <FormGroup>
             <FormLabel>Mật khẩu</FormLabel>
-            <FormControl placeholder="Mật khẩu" id = "pass" />
+            <FormControl placeholder="Mật khẩu" id = "pass" type="password" />
           </FormGroup>
           <p className="invalid">Thông tin đăng nhập không hợp lệ!!!</p>
           <div className="login_input"><Button className="login_input-item" variant="primary" onClick = {handleValidate}> Login</Button></div>

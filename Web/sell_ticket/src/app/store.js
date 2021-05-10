@@ -4,6 +4,7 @@ import thunk from 'redux-thunk';
 
 const rootReducer = {
   tickets: ticketReducer,
+  
 }
 const store = configureStore(
  {

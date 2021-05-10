@@ -9,7 +9,7 @@ Header.propTypes = {
 };
 function Header(props) {
   const user = JSON.parse(localStorage.getItem('user'));
-  const name = user.Email.split("@")[0];
+  const name = user ? user.Email.split("@")[0] : "";
   console.log(name);
   return (
     <div className="div-header">
@@ -20,13 +20,13 @@ function Header(props) {
             <a className="header-link" href="https://www.quora.com/Where-can-I-find-HTML-CSS-website-templates-Not-Bootstrap">Vé xe tết</a>
           </li>
           <li className="header-item">
-            <a className="header-link" href="https://www.quora.com/Where-can-I-find-HTML-CSS-website-templates-Not-Bootstrap">Chính sách</a>
+            <a className="header-link" href="https://www.quora.com/Where-can-I-find-HTML-CSS-website-templates-Not-Bootstrap">Quản lý vé xe</a>
             <div className="header-item__menu">
               <ul className="header-menu-listItem">
-                <li className="header-menu-item"><a className="header-menu-link" href="#S">Bùi Thị Nga</a></li>
-                <li className="header-menu-item"><a className="header-menu-link" href="#r">Lê Phương Nga</a></li>
-                <li className="header-menu-item"><a className="header-menu-link" href="#y">Lê Phương Lanm</a></li>
-                <li className="header-menu-item"><a className="header-menu-link" href="#i">Nguyễn Ý Nga</a></li>
+                <li className="header-menu-item"><a className="header-menu-link" href="#S">Xem vé xe</a></li>
+                <li className="header-menu-item"><a className="header-menu-link" href="#r">Xóa vé xe</a></li>
+                <li className="header-menu-item"><a className="header-menu-link" href="#y">Cập nhật vé xe</a></li>
+                <li className="header-menu-item"><a className="header-menu-link" href="#i">Thêm vé xe</a></li>
               </ul>
             </div>
           </li>
@@ -34,8 +34,8 @@ function Header(props) {
           {user
             ? <a href='/account' className="user-name">Xin chào {name}</a>
             : (<div className="header-group-right">
-              <li className="header-item"><button className="my-btn-primary">Đăng nhập</button></li>
-              <li className="header-item"><button className="my-btn-primary">Đăng kí</button></li>)
+              <li className="header-item"><a href="/login" className="btn btn-primary">Đăng nhập</a></li>
+              <li className="header-item"><a href="sign-up" className="btn btn-primary">Đăng kí</a></li>
             </div>)
           }
         </ul>

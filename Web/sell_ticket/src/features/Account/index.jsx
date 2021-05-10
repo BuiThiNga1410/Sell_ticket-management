@@ -16,7 +16,7 @@ function Account(props) {
   return (
     <Switch>
       <Route exact path={match.url} component={ProfilePage} />
-      <Redirect from = {match.url} to = {`${match.url}/profile`}/>
+      <Redirect exact from = {match.url} to = {`${match.url}/profile`}/>
       <Route path={`${match.url}/profile`} component={ProfilePage} />
       <Route path={`${match.url}/changePass`} component={ChangePassPage} />
       <Route path={`${match.url}/purchase`} component={PurchasePage} />

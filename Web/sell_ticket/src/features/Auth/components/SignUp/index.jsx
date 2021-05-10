@@ -25,7 +25,7 @@ function SignUp(props) {
       if(response.data.maNd)
       {
         let user = {
-          maNd: response.data.maNd,
+         ...response.data,
           Email: email,
         }
         localStorage.setItem("user", JSON.stringify(user));

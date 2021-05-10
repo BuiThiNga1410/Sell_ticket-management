@@ -8,6 +8,8 @@ import Login from './features/Auth/components/Login';
 import SignUp from './features/Auth/components/SignUp';
 import Account from './features/Account';
 import EmployeeMenu from './components/EmployeeMenu';
+import Search from './components/Search';
+import TicketNV from './features/TicketsNV';
 
 // Lazy load - Code splitting
 const Ticket = React.lazy(() => import('./features/Ticket'));
@@ -16,15 +18,16 @@ function App() {
     <div className="ticket-app">
       <Suspense fallback={<div>Loading ...</div>}>
         <BrowserRouter>
-          <Header />
+          <Header/>
           <Switch>
             <Redirect exact from="/" to="/ticket" />
             <Route path="/account" component={Account} />
-
+            <Route path="/search" component={Search} />
             <Route path="/ticket" component={Ticket} />
             <Route path="/login" component={Login} />
             <Route path="/sign-up" component={SignUp} />
             <Route path="/menu" component={EmployeeMenu}/>
+            <Route path="/qlTicket" component={TicketNV}/>
           </Switch>
           <Footer />
         </BrowserRouter>

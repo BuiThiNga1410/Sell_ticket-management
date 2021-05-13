@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "./Busroutetable.scss";
 import data from "./dulieutuyenxe.json";
 
 function Busroutetable(props) {
   const [busroutes, setBusRoutes] = useState([]);
+  const history = useHistory();
   useEffect(() => {
     fetch("https://qlbvxk.herokuapp.com/api/busroutes")
       .then((res) => res.json())
@@ -12,11 +13,22 @@ function Busroutetable(props) {
         setBusRoutes(result);
       });
   });
+  function handleDelete(id) {
+    fetch(`https://qlbvxk.herokuapp.com/api/busroutes/${id}`, {
+      method: "DELETE",
+    }).then((result) => {
+      result.json().then((res) => {
+        console.warn(res);
+      });
+      history.push("/busroute");
+      window.location.reload();
+    });
+  }
   return (
     <div className="table-list">
       <button className="button addbusroutebutton">
-        <Link to="/staff/bus" className="link-add-button">
-          Thêm xe
+        <Link to="/busroute/add" className="link-add-button">
+          Thêm tuyến xe
         </Link>
       </button>
       <table>
@@ -43,12 +55,20 @@ function Busroutetable(props) {
                 </td>
 
                 <td data-column="link">
-                  <a href={"/busroute/update/" + busroute.maTuyenXe}>
+                  <a
+                    href={"/busroute/update/" + busroute.maTuyenXe}
+                    className="my-link"
+                  >
                     Cập nhật
                   </a>
                 </td>
                 <td data-column="link">
-                  <a href={"/busroute/delete/" + busroute.maTuyenXe}>Xóa</a>
+                  <button
+                    className="btn-delete"
+                    onClick={() => handleDelete(busroute.maTuyenXe)}
+                  >
+                    Xóa
+                  </button>
                 </td>
               </tr>
             );

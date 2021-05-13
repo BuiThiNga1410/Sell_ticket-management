@@ -2,6 +2,15 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import { Link } from "react-router-dom";
+import {
+  Form,
+  FormControl,
+  FormGroup,
+  FormLabel,
+  FormText,
+  InputGroup,
+} from "react-bootstrap";
+import FormFileInput from "react-bootstrap/esm/FormFileInput";
 import "./Formupdatebus.scss";
 
 Formupdatebus.propTypes = {};
@@ -11,6 +20,7 @@ function Formupdatebus(props) {
   const [bus, setBus] = useState([]);
   const { id } = useParams();
   const [employees, setEmployees] = useState([]);
+
   useEffect(() => {
     fetch("https://qlbvxk.herokuapp.com/api/staffs")
       .then((res) => res.json())
@@ -27,31 +37,35 @@ function Formupdatebus(props) {
         setBus(result);
       });
   });
-  const submitForm = (event) => {
-    event.preventDefault();
+
+  function submitForm() {
     let ownerId = document.querySelector(".myselect").value;
-    let numberOfSeats = document.getElementById("numberOfSeats").value;
-    //let numberPlate = document.getElementById("numberPlate").value;
+
+    let numberPlate = document.getElementById("numberPlate").value;
+    let nhaXe = document.getElementById("nhaXe").value;
     axios
-      .put("https://qlbvxk.herokuapp.com/api/buses/2", {
+      .put("https://qlbvxk.herokuapp.com/api/buses/" + id, {
         MaNv: ownerId,
-        SoChoNgoi: numberOfSeats,
+        BienSoXe: numberPlate,
+        NhaXe: nhaXe,
       })
       .then((res) => {
-        if (res.data.maXe) {
-          let bus = {
-            maXe: res.data.maXe,
-          };
-          localStorage.setItem("bus", JSON.stringify(bus));
-          history.push("/bus");
-          window.location.reload();
-        }
+        console.log(res);
+        let bus = {
+          maXe: res.data.maXe,
+        };
+        localStorage.setItem("bus", JSON.stringify(bus));
+        history.push("/bus");
+        window.location.reload();
       })
       .catch((error) => {
         console.log(error);
       });
-  };
+  }
 
+  function handleBack() {
+    history.push("/bus");
+  }
   return (
     <div className="form-update-bus">
       <h1 className="update-bus-title">CẬP NHẬT THÔNG TIN XE</h1>
@@ -80,6 +94,7 @@ function Formupdatebus(props) {
           id="numberOfSeats"
           className="form-text"
           defaultValue={bus.soChoNgoi}
+          readOnly
         />
         <br />
 
@@ -88,16 +103,25 @@ function Formupdatebus(props) {
         <input
           type="text"
           required
-          name="numberPlate"
+          id="numberPlate"
           className="form-text"
           defaultValue={bus.bienSoXe}
-          readOnly
+        />
+        <br />
+        <span>Nhà xe:</span>
+        <br />
+        <input
+          type="text"
+          required
+          id="nhaXe"
+          className="form-text"
+          defaultValue={bus.nhaXe}
         />
         <br />
       </div>
       <div className="button-update-bus">
-        <button className="button">
-          <a href="/bus">Quay lại</a>
+        <button className="button" onClick={handleBack}>
+          Quay lại
         </button>
 
         <button type="submit" onClick={submitForm} className="button">

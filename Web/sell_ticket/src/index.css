@@ -24,3 +24,8 @@ code {
 .button:hover{
   color: rgb(31, 32, 32);
 }
+table { 
+	width: 80%; 
+	border-collapse: collapse; 
+	margin:25px auto;
+}

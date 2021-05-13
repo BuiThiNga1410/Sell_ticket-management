@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 import "./Formupdatebusroute.scss";
 
 Formupdatebusroute.propTypes = {};
@@ -7,6 +7,7 @@ Formupdatebusroute.propTypes = {};
 function Formupdatebusroute(props) {
   const [busroute, setBusRoute] = useState([]);
   const { id } = useParams();
+  const history = useHistory();
   useEffect(() => {
     fetch("https://qlbvxk.herokuapp.com/api/busroutes/" + id)
       .then((res) => res.json())
@@ -14,6 +15,9 @@ function Formupdatebusroute(props) {
         setBusRoute(result);
       });
   });
+  function handleBack() {
+    history.push("/busroute");
+  }
   return (
     <div className="form-update-bus-route">
       <form method="post" className="formUpdateBusRoute">
@@ -26,7 +30,7 @@ function Formupdatebusroute(props) {
             required
             name="name-of-route"
             className="form-text"
-            value={busroute.tenTuyenXe}
+            defaultValue={busroute.tenTuyenXe}
           />
           <br />
           <span>Điểm xuất phát:</span>
@@ -36,7 +40,7 @@ function Formupdatebusroute(props) {
             required
             name="starting-point"
             className="form-text"
-            value={busroute.diaChiBxDi}
+            defaultValue={busroute.diaChiBxDi}
           />
           <br />
           <span>Đích đến: </span>
@@ -46,12 +50,14 @@ function Formupdatebusroute(props) {
             required
             name="destination"
             className="form-text"
-            value={busroute.diaChiBxDen}
+            defaultValue={busroute.diaChiBxDen}
           />
           <br />
         </div>
         <div className="button-area button-of-update-route">
-          <button className="button">Quay lại</button>
+          <button className="button" onClick={handleBack}>
+            Quay lại
+          </button>
           <button className="button">Cập nhật</button>
         </div>
       </form>

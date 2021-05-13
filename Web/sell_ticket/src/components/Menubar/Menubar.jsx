@@ -12,32 +12,21 @@ function Menubar(props) {
     <div className="menu-bar">
       <ul className="nav">
         <li>
-          <NavLink to="/">Quản lý bán vé</NavLink>
-          <ul className="subnav">
-            <li>
-              <Link to="/staff">Danh sách vé đã xác nhận</Link>
-            </li>
-            <li>
-              <Link to="/staff/add">Danh sách vé chưa xác nhận</Link>
-            </li>
-          </ul>
-        </li>
-        <li>
           <NavLink to="/staff">Quản lý nhân viên</NavLink>
           <ul className="subnav">
             <li>
               <Link to="/staff">Danh sách nhân viên</Link>
             </li>
             <li>
-              <Link to="/staff/add">Thêm nhân viên</Link>
+              <Link to="/staff/account/add">Cấp tài khoản</Link>
             </li>
           </ul>
         </li>
         <li>
-          <a href="#">Quản lý chuyến xe</a>
+          <a href="/bustrips">Quản lý chuyến xe</a>
           <ul className="subnav">
             <li>
-              <a href="#">Danh sách chuyến xe</a>
+              <a href="/bustrips">Danh sách chuyến xe</a>
             </li>
             <li>
               <a href="#">Thêm chuyến xe</a>

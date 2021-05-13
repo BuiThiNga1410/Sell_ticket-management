@@ -3,16 +3,26 @@ import PropTypes from "prop-types";
 
 import "./Datastaff.scss";
 import { useState } from "react";
-
 import Search_admin from "../Search_admin/Search_admin";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 Datastaff.propTypes = {};
 
 function Datastaff(props) {
   const [employees, setEmployees] = useState([]);
   const [filters, setFilters] = useState();
-
+  const history = useHistory();
+  function handleDelete(id) {
+    fetch(`https://qlbvxk.herokuapp.com/api/accounts/${id}`, {
+      method: "DELETE",
+    }).then((result) => {
+      result.json().then((res) => {
+        console.warn(res);
+      });
+      history.push("/staff");
+      window.location.reload();
+    });
+  }
   function handleFiltersChange(newFilters) {
     console.log("New filter: ", newFilters);
     if (newFilters.searchTerm == "") {
@@ -35,6 +45,7 @@ function Datastaff(props) {
       title_like: newFilters.searchTerm,
     });
   }
+  // get all staff
   useEffect(() => {
     fetch("https://qlbvxk.herokuapp.com/api/staffs")
       .then((res) => res.json())
@@ -51,8 +62,8 @@ function Datastaff(props) {
             <Search_admin onSubmit={handleFiltersChange} />
             <div className="table-list-staff">
               <button className="button addbutton">
-                <Link to="/staff/add" className="link-add-button">
-                  Thêm nhân viên
+                <Link to="/staff/account/add" className="link-add-button">
+                  Cấp tài khoản
                 </Link>
               </button>
               <table>
@@ -79,12 +90,20 @@ function Datastaff(props) {
                         <td data-column="CMND">{staff.cmnd}</td>
                         <td data-column="Username">{staff.email}</td>
                         <td data-column="link">
-                          <Link to={"/staff/update/" + staff.maNd}>
+                          <a
+                            href={"/staff/update/" + staff.maNd}
+                            className="my-link"
+                          >
                             Cập nhật
-                          </Link>
+                          </a>
                         </td>
                         <td data-column="link">
-                          <Link to={"/staff/delete/" + staff.maNd}>Xóa</Link>
+                          <button
+                            className="btn-delete"
+                            onClick={() => handleDelete(staff.maNd)}
+                          >
+                            Xóa
+                          </button>
                         </td>
                       </tr>
                     );

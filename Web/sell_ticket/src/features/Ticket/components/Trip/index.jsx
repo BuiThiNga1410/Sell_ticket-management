@@ -31,7 +31,7 @@ function Trip(props) {
         <Col>
           <div className="infor_group">
             <p className="infor__name">Nhà xe {trip.nhaXe}</p>
-            {/* <p className="infor__date">{trip.ngayXuatBen}</p> */}
+            <p className="infor__date">{trip.ngayXuatBen.split("T")[0]}</p>
           </div>
 
           {/* <p className="infor-detail">Limousine 9 chỗ VIP</p> */}
@@ -46,12 +46,8 @@ function Trip(props) {
             <p className="infor_group-time__hour">{dest}</p>
             <p>{trip.tenBxDen}</p>
           </div>
-          <Row>
-                <button className="benefit-detail">Tiện nghi, sạch sẽ</button>
-                <button className="benefit-detail">Thông tin rõ ràng</button>
-                <p className="empty-chair">{trip.soChoTrong} chỗ trống</p>
-          <p className="infor-price">{numberWithCommas(trip.donGia)}đ</p>
-          </Row>
+             <p className="empty-chair">{trip.soChoTrong} chỗ trống</p>
+             <p className="infor-price">{numberWithCommas(trip.donGia)}đ</p>
           <div className="flex-center">
           <a href={`/ticket/booking?trip=${trip.maChuyenXe}&price=${trip.donGia}`} className="btn btn-book-ticket">Đặt vé</a>
           </div>

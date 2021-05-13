@@ -18,6 +18,7 @@ code {
 :root {
   --primary-color: rgba(245, 31, 31, 0.8);
 }
+*::-webkit-scrollbar { width: 0 !important }
 
 .row {
   display: flex;
@@ -45,7 +46,14 @@ code {
 p {
   margin-bottom: 0;
 }
-
+.table td,
+.table th {
+  vertical-align: middle;
+}
+.table-scroll {
+  max-height: 400px;
+  overflow: scroll;
+}
 .my-table {
   border-radius: 2px;
   width: 100%;
@@ -76,4 +84,46 @@ p {
 
 .my-table-item_center {
   text-align: center;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.remove-div {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(1,1,1,0.3);
+  display: none;
+}
+.remove-content {
+  background-color: #fff;
+  width: 400px;
+  padding: 24px;
+  border-radius: 4px;
+}
+.remove-lable {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+}
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 36px;
+}
+.actions .btn:first-child {
+  margin-right: 24px;
+}
+.flex-center {
+  display: flex;
+  justify-content: center;
 }

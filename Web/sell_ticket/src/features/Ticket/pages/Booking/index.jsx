@@ -8,7 +8,6 @@ import { faCheckCircle, faMapMarker, faChair } from '@fortawesome/free-solid-svg
 import { Col, Form, FormControl, FormGroup, FormLabel, InputGroup, Row } from 'react-bootstrap';
 import FormBooking from '../../components/FormBooking';
 import myaxios from '../../../../app/api';
-import axios from 'axios';
 import { useHistory } from 'react-router';
 
 Booking.propTypes = {
@@ -16,14 +15,15 @@ Booking.propTypes = {
 };
 
 function Booking(props) {
-
   let step = 1;
   const [seats, setSeats] = useState([]);
+  const [customers, setCustomers] = useState([]);
   const history = useHistory();
   let selectedSeats = [];
   const query = new URLSearchParams(props.location.search);
   const tripId = query.get("trip");
-  const customer = JSON.parse(localStorage.getItem('user'));
+  const price = query.get("price");
+  const user = JSON.parse(localStorage.getItem('user'));
   useEffect(() => {
     myaxios.get(`seats/search?bustripid=${tripId}`)
       .then((response) => {
@@ -33,36 +33,58 @@ function Booking(props) {
       .catch((error) => {
         console.log(error);
       })
+    if (user.vaitro !== 3) {
+      myaxios.get("/customers")
+        .then((response) => {
+          setCustomers(response.data);
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    }
   }, [])
   const handleClickNext = () => {
     switch (step) {
       case 1:
-        document.getElementsByClassName("booking_note")[0].setAttribute("style", "display: none;");
+        if (!selectedSeats.length) {
+          alert("Vui lòng chọn chỗ");
+        }
+        
+        else {
+          document.getElementsByClassName("booking_note")[0].setAttribute("style", "display: none;");
         document.getElementsByClassName("form-booking")[0].setAttribute("style", "display: block");
 
         document.getElementsByClassName("booking_header__item")[1].setAttribute("style", "color: blue");
         document.getElementsByClassName("booking_header__item")[0].setAttribute("style", "color: black");
         step = 2;
+        }
         break;
       case 2:
         //handle booking
-        let note = document.getElementById("note").value;
-        if (selectedSeats) {
-          console.log(selectedSeats);
+        let note = document.getElementById("note") ? document.getElementById("note").value : "";
+        let name = document.getElementById("name")? document.getElementById("name").value : "";
+        let phone = document.getElementById("phone")? document.getElementById("phone").value : "";
+        let customerId = document.getElementById("customerId") ? document.getElementById("customerId").value: 0;
+        console.log(selectedSeats);
+        if (selectedSeats.length && ((name && phone) || customerId)) {
           myaxios.post('/tickets/', {
-            "MaKh": +customer.maNd,
-            "MaChoNgoi": selectedSeats[0],
+            "MaKh": user.vaitro === 3 ? +user.maNd : customerId,
+            "MaChoNgoi": selectedSeats,
             "MaChuyenXe": tripId,
             "GhiChu": note,
           })
             .then((response) => {
               console.log(response.data);
               console.log(note);
-              history.push('/account/purchase');
+              user.vaitro === 3 ? history.push('/account/purchase') : history.push('/qlTicket');
             })
             .catch((error) => {
               console.log(error);
             })
+        }
+        else if (!name || !phone) {
+          alert("Vui lòng cập nhật thông tin cá nhân");
         }
         break;
       default:
@@ -89,16 +111,16 @@ function Booking(props) {
     if (e.target.getAttribute("color") === "blue") {
       e.target.setAttribute("color", "gray");
       selectedSeats = selectedSeats.filter(seat => seat !== +e.target.id);
-      console.log(selectedSeats);
     }
     else if (e.target.getAttribute("color") === "gray") {
       e.target.setAttribute("color", "blue");
       selectedSeats.push(+e.target.id);
       console.log(selectedSeats);
     }
+    document.getElementsByClassName("price-detail")[0].innerHTML = `${selectedSeats.length * price}đ`;
   }
   return (
-    <div>
+    <div className="booking-wrap">
       {/* <div className="container"><Trip /></div> */}
       <div className="container booking_header">
         <p className="booking_header__item"><FontAwesomeIcon icon={faCheckCircle} color="blue" /> Chọn chỗ</p>
@@ -106,7 +128,7 @@ function Booking(props) {
       </div>
       <div className="container booking_note">
         <Row>
-          <Col lg="5">
+          <Col lg="4">
             <div className="note">
               <p className="note__title">Chú thích</p>
               <div className="note__detail">
@@ -126,9 +148,9 @@ function Booking(props) {
             </div>
 
           </Col>
-          <Col lg="7">
+          <Col lg="8">
             <Row>
-              <Col lg="4">
+              <Col lg="6">
                 <p className="floor-name">Tầng 1</p>
                 <div className="floor">
                   <div className="floor__row">
@@ -144,7 +166,7 @@ function Booking(props) {
                 </div>
               </Col>
 
-              <Col lg="4">
+              <Col lg="6">
                 <p className="floor-name">Tầng 2</p>
                 <div className="floor">
                   <div className="floor__row">
@@ -166,17 +188,36 @@ function Booking(props) {
       </div>
       <div className="container form-booking">
         <Form>
-          <FormGroup controlId="name">
-            <FormLabel>Họ tên</FormLabel>
-            <FormControl placeholder="Nhập họ tên" defaultValue={customer.tenNd} />
-            <p className="text-error"></p>
-          </FormGroup>
+          {user.vaitro !== 3 ? (
+            <FormGroup controlId="customerId">
+              <FormLabel>Email</FormLabel>
+              <FormControl as="select">
+                {customers.map((customer) => {
+                  return (
+                    <option value={customer.maNd}>{customer.sdt}</option>
+                  )
+                })}
+              </FormControl>
+              <p className="text-error"></p>
+            </FormGroup>
+          )
+            : (
+              <div>
+                <FormGroup controlId="name">
+                  <FormLabel>Họ tên</FormLabel>
+                  <FormControl placeholder="Nhập họ tên" defaultValue={user.vaitro === 3 && user.tenNd} readOnly />
+                  <p className="text-error"></p>
+                </FormGroup>
 
-          <FormGroup controlId="phone">
-            <FormLabel>Số điện thoại</FormLabel>
-            <FormControl type="number" placeholder="Nhập số điện thoại" defaultValue={+customer.sdt} />
-            <p className="text-error"></p>
-          </FormGroup>
+                <FormGroup controlId="phone">
+                  <FormLabel>Số điện thoại</FormLabel>
+                  <FormControl type="number" placeholder="Nhập số điện thoại" defaultValue={user.vaitro === 3 && +user.sdt} readOnly />
+                  <p className="text-error"></p>
+
+                </FormGroup>
+              </div>
+            )
+          }
           <FormGroup controlId="note">
             <FormLabel>Ghi chú</FormLabel>
             <FormControl as="textarea" placeholder="Nhập vào yêu cầu của bạn" />

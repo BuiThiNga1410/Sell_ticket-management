@@ -10,6 +10,7 @@ import Account from './features/Account';
 import EmployeeMenu from './components/EmployeeMenu';
 import Search from './components/Search';
 import TicketNV from './features/TicketsNV';
+import Customer from './features/Customer';
 
 // Lazy load - Code splitting
 const Ticket = React.lazy(() => import('./features/Ticket'));
@@ -28,6 +29,7 @@ function App() {
             <Route path="/sign-up" component={SignUp} />
             <Route path="/menu" component={EmployeeMenu}/>
             <Route path="/qlTicket" component={TicketNV}/>
+            <Route path="/customer/" component={Customer}/>
           </Switch>
           <Footer />
         </BrowserRouter>

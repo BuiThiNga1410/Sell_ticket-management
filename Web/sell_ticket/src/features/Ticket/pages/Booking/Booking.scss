@@ -1,6 +1,11 @@
 p {
   margin-bottom: 0;
 }
+.booking-wrap {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+}
 .booking_header {
   display: flex;
   justify-content: space-evenly;
@@ -16,7 +21,6 @@ p {
   margin-top: 20px;
 }
 .note {
-  margin-left: 100px;
   padding-bottom: 50px;
 }
 .note__title {
@@ -103,7 +107,7 @@ p {
 }
 .form-booking {
   padding-top: 30px;
-  padding-left: 200px;
-  padding-right: 200px;
+  padding-left: 80px;
+  padding-right: 80px;
   display: none;
 }

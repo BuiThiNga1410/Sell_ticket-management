@@ -18,7 +18,7 @@ function Login(props) {
   const handleValidate = () => {
     let email = document.querySelector("#email").value;
     let pass = document.querySelector("#pass").value;
-    myaxios.post('/accounts/validate/3', {
+    myaxios.post('/accounts/validate', {
       "Email" : email,
       "MatKhau" : pass,
   })

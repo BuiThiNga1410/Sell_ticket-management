@@ -46,29 +46,15 @@ function Trip(props) {
             <p className="infor_group-time__hour">{dest}</p>
             <p>{trip.tenBxDen}</p>
           </div>
-
-          <p className="infor-price">{numberWithCommas(trip.donGia)}đ</p>
-
           <Row>
-            <Col lg="7">
-              <div className="group-benefit">
-                <button className="benefit-detail">Xe chạy đúng giờ</button>
-                <button className="benefit-detail">Lái xe an toàn</button>
-              </div>
-              <div className="group-benefit">
                 <button className="benefit-detail">Tiện nghi, sạch sẽ</button>
                 <button className="benefit-detail">Thông tin rõ ràng</button>
-
-              </div>
-            </Col>
-            <Col>
-              <p className="empty-chair">{trip.soChoTrong} chỗ trống</p>
-              <div className="detail_book">
-                <p className="infor__detail">Thông tin chi tiết</p>
-                <a href={`/ticket/booking?trip=${trip.maChuyenXe}`} className="btn-book-ticket">Đặt vé</a>
-              </div>
-            </Col>
+                <p className="empty-chair">{trip.soChoTrong} chỗ trống</p>
+          <p className="infor-price">{numberWithCommas(trip.donGia)}đ</p>
           </Row>
+          <div className="flex-center">
+          <a href={`/ticket/booking?trip=${trip.maChuyenXe}&price=${trip.donGia}`} className="btn btn-book-ticket">Đặt vé</a>
+          </div>
         </Col>
       </Row>
     </div>

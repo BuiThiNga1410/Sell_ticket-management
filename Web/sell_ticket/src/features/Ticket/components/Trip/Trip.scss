@@ -13,10 +13,10 @@
   border: none;
   border-radius: 5px;
   font-size: 14px;
+  margin: 24px;
 }
 
 .empty-chair {
-  height: 50%;
   font-size: 15px;
   font-weight: 600;
   margin-bottom: 0;
@@ -24,6 +24,7 @@
   color: rgba(11, 94, 119, 0.8);
   text-align: right;
   align-items: center;
+  vertical-align: middle;
 }
 
 .detail_book {
@@ -42,13 +43,7 @@
 }
 
 .btn-book-ticket {
-  text-align: center;
-  font-size: 15px;
-  width: 70px;
-  height: 40px;
-  line-height: 40px;
   background-color: rgb(252, 106, 62);
-
-  color: rgb(235, 245, 244);
-  border-radius: 5px;
+  color: #fff;
+  width: 30%;
 }

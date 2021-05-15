@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import myaxios from '../../../../app/api';
-import './index.scss';
 
 AddCustomer.propTypes = {
 
@@ -36,17 +35,17 @@ function AddCustomer(props) {
             "DiaChi": diaChi,
             "NgaySinh": ngaySinh
           })
-            .then((res) => {
-              console.log(res.data);
-            })
+          .then((res) => {
+            window.location.href = "/customer";
+          })
             .catch((error) => {
               console.log(error);
             })
-          window.location.href = "/customer";
         })
         .catch((error) => {
           console.log(error);
-        })
+        });
+        console.log("hihi");
     }
   }
   const handleValidate = (e) => {
@@ -59,7 +58,7 @@ function AddCustomer(props) {
         regex = /\S+@\S+\.\S+/;
         break;
       case "tenNd":
-        regex = /^[a-zA-Z ]{2,30}$/;
+        regex = /^\D+$/;
         break;
       default:
         break;
@@ -75,51 +74,51 @@ function AddCustomer(props) {
 
   }
   return (
-    <div className="container">
+    <div className="container my-form">
       <h4 className="text-title">THÊM KHÁCH HÀNG</h4>
       <form>
         <div class="form-group row">
-          <label for="email" class="col-sm-2 col-form-label">Email</label>
-          <div class="col-sm-10">
+          <label for="email" class="col-sm-3 col-form-label">Email</label>
+          <div class="col-sm-9">
             <input type="text" class="form-control" id="email" onKeyUp={handleValidate} required></input>
             <p className="text-error">Email nhập vào không hợp lệ</p>
           </div>
         </div>
         <div class="form-group row">
-          <label for="pass" class="col-sm-2 col-form-label">Mật khẩu</label>
-          <div class="col-sm-10">
+          <label for="pass" class="col-sm-3 col-form-label">Mật khẩu</label>
+          <div class="col-sm-9">
             <input type="text" class="form-control" id="pass" required></input>
           </div>
         </div>
         <div class="form-group row">
-          <label for="tenNd" class="col-sm-2 col-form-label">Tên khách hàng</label>
-          <div class="col-sm-10">
+          <label for="tenNd" class="col-sm-3 col-form-label">Tên khách hàng</label>
+          <div class="col-sm-9">
             <input type="text" class="form-control" id="tenNd" onKeyUp={handleValidate} required></input>
             <p className="text-error">Tên khách hàng nhập vào không hợp lệ</p>
           </div>
         </div>
         <div class="form-group row">
-          <label for="sdt" class="col-sm-2 col-form-label">Số điện thoại</label>
-          <div class="col-sm-10">
+          <label for="sdt" class="col-sm-3 col-form-label">Số điện thoại</label>
+          <div class="col-sm-9">
             <input type="text" class="form-control" id="sdt" onKeyUp={handleValidate} required></input>
             <p className="text-error">Số điện thoại nhập vào không hợp lệ</p>
           </div>
         </div>
         <div class="form-group row">
-          <label for="cmnd" class="col-sm-2 col-form-label">CMND</label>
-          <div class="col-sm-10">
+          <label for="cmnd" class="col-sm-3 col-form-label">CMND</label>
+          <div class="col-sm-9">
             <input type="number" class="form-control" id="cmnd" required></input>
           </div>
         </div>
         <div class="form-group row">
-          <label for="diaChi" class="col-sm-2 col-form-label">Địa chỉ</label>
-          <div class="col-sm-10">
+          <label for="diaChi" class="col-sm-3 col-form-label">Địa chỉ</label>
+          <div class="col-sm-9">
             <input type="text" class="form-control" id="diaChi" required></input>
           </div>
         </div>
         <div class="form-group row">
-          <label for="ngaySinh" class="col-sm-2 col-form-label">Ngày sinh</label>
-          <div class="col-sm-10">
+          <label for="ngaySinh" class="col-sm-3 col-form-label">Ngày sinh</label>
+          <div class="col-sm-9">
             <input type="date" class="form-control" id="ngaySinh"></input>
           </div>
         </div>

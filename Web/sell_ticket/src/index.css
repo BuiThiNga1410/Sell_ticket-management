@@ -7,7 +7,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 a {
-  text-decoration: none;
+  text-decoration: none !important;
 }
 ul {
   list-style: none;
@@ -50,6 +50,16 @@ p {
 .table th {
   vertical-align: middle;
 }
+thead {
+  position: relative;
+}
+th {
+  position: sticky;
+  top: 0;
+}
+tbody {
+  padding-top: 50px;
+}
 .table-scroll {
   max-height: 400px;
   overflow: scroll;
@@ -91,7 +101,7 @@ p {
   justify-content: center;
   align-items: center;
 }
-.remove-div {
+.overlay {
   position: absolute;
   top: 0;
   right: 0;
@@ -103,11 +113,24 @@ p {
   background-color: rgba(1,1,1,0.3);
   display: none;
 }
-.remove-content {
+.remove-content,
+.notification {
   background-color: #fff;
   width: 400px;
   padding: 24px;
   border-radius: 4px;
+}
+.notification {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+}
+.notifi-label {
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 24px;
 }
 .remove-lable {
   text-align: center;
@@ -132,4 +155,33 @@ p {
   font-size: 13px;
   margin-top: 10px;
   display: none;
+}
+.my-form {
+  max-width: 700px;
+  width: 100%;
+}
+.search-form {
+  margin: 36px;
+}
+.search-input {
+  border: 1px solid rgb(177, 173, 173);
+  padding: 6px 12px;
+  min-width: 300px;
+}
+.notFound {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.notFound-label {
+  font-size: 16px;
+  font-weight: 600;
+}
+.notFound-img {
+  width: 150px;
+}
+.flex-column-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

@@ -4,9 +4,12 @@ import myaxios from '../../../../app/api';
 
 import './Profile.scss';
 import { Button, Col, Form, FormCheck, FormControl, FormGroup, FormLabel, Row } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheckCircle } from '@fortawesome/free-regular-svg-icons';
 
 function Profile(props) {
   let user = JSON.parse(localStorage.getItem('user'));
+  let valid = true;
   const handleClickButton = () => {
     document.getElementsByClassName("file-input")[0].click();
     // eslint-disable-next-line no-unused-expressions
@@ -21,11 +24,6 @@ function Profile(props) {
     let cmnd = document.getElementById("cmnd").value;
     let address = document.getElementById("address").value;
     let birthday = document.getElementById("birthday").value;
-    console.log("name", name);
-    console.log("sdt", sdt);
-    console.log("cmnd", cmnd);
-    console.log("address", address);
-    console.log("birthday", birthday);
     myaxios.put(`/customers/${user.maNd}`, {
       "TenNd": name,
       "Sdt": sdt,
@@ -34,6 +32,7 @@ function Profile(props) {
       "NgaySinh": birthday,
     })
       .then((response) => {
+        document.getElementsByClassName("overlay")[0].setAttribute("style", "display: flex");
         console.log(response.data);
         let newUser = {
           "maNd": user.maNd,
@@ -43,15 +42,43 @@ function Profile(props) {
           "cmnd": cmnd,
           "diaChi": address,
           "ngaySinh": birthday,
+          "vaitro": user.vaitro,
         }
         localStorage.setItem('user', JSON.stringify(newUser));
+        setTimeout(() => {
+          window.location.href = "/ticket/trip-list";
+        }, 1000)
       })
       .catch((error) => {
         console.log(error);
       })
   }
+  const handleValidate = (e) => {
+    let regex = /./;
+    switch (e.target.id) {
+      case "sdt":
+        regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+        break;
+      case "email":
+        regex = /\S+@\S+\.\S+/;
+        break;
+      case "name":
+        regex = /^\D+$/;
+        break;
+      default:
+        break;
+    }
+    if (!regex.test(e.target.value)) {
+      valid = false;
+      e.target.parentElement.childNodes[1].setAttribute("style", "display: block");
+    }
+    else {
+      valid = true;
+      e.target.parentElement.childNodes[1].setAttribute("style", "display: none");
+    }
+  }
   return (
-    <div>
+    <div className="profile-page">
       <p className="profile-title">Hồ sơ của tôi</p>
       <div className="profile">
         <div className="form-profile">
@@ -59,21 +86,23 @@ function Profile(props) {
             <FormGroup as={Row}>
               <FormLabel column sm="3">Tên đăng nhập</FormLabel>
               <Col sm="9">
-                <FormControl plaintext readOnly defaultValue={user.Email.split("@")[0]} />
+                <FormControl plaintext readOnly defaultValue={user.Email.split("@")[0]}/>
               </Col>
             </FormGroup>
 
             <FormGroup as={Row} controlId="name">
               <FormLabel column sm="3">Họ tên</FormLabel>
               <Col sm="9">
-                <FormControl defaultValue={user.tenNd} />
+                <FormControl defaultValue={user.tenNd} onKeyUp={handleValidate}/>
+                <p className="text-error">Tên khách hàng nhập vào không hợp lệ</p>
               </Col>
             </FormGroup>
 
             <FormGroup as={Row} controlId="sdt">
               <FormLabel column sm="3">Số điện thoại</FormLabel>
               <Col sm="9">
-                <FormControl defaultValue={user.sdt} />
+                <FormControl defaultValue={user.sdt} onKeyUp={handleValidate}/>
+                <p className="text-error">Số điện thoại nhập vào không hợp lệ</p>
               </Col>
 
             </FormGroup>
@@ -81,7 +110,7 @@ function Profile(props) {
             <FormGroup as={Row} controlId="cmnd">
               <FormLabel column sm="3">CMND</FormLabel>
               <Col sm="9">
-                <FormControl defaultValue={user.cmnd} />
+                <FormControl type="number" defaultValue={user.cmnd} />
               </Col>
             </FormGroup>
             <FormGroup as={Row} controlId="address">
@@ -106,6 +135,12 @@ function Profile(props) {
           <div className="avt" />
           <button className="btn btn-outline-primary" onClick={handleClickButton}>Chọn ảnh</button>
           <input className="file-input" type="file" accept=".png, .jpg" onChange={handleChoiceFile}></input>
+        </div>
+      </div>
+      <div className="overlay">
+        <div className="notification">
+          <p className="notifi-label">Lưu thông tin thành công</p>
+          <FontAwesomeIcon icon={faCheckCircle} color="green" size="2x"/>
         </div>
       </div>
     </div>

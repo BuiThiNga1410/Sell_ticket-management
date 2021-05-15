@@ -1,11 +1,9 @@
 .login {
+  height: 500px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-
-  background-image: url("https://ben.com.vn/tin-tuc/wp-content/uploads/2020/09/hinh-nen-powerpoint-don-gian-3-1024x576.jpg");
-  height: 600px;
+  align-items: center;
+  background-color: rgba(166, 231, 243, 0.08);
   background-size: cover;
 }
 

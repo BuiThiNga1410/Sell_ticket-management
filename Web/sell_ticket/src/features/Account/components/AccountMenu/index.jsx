@@ -12,18 +12,18 @@ AccountMenu.propTypes = {
 
 function AccountMenu(props) {
   return (
-      <div className="menu-div">
+    <div className="menu-div-account">
       <div className="account-avt" />
-        <p className="account-name">NgaBui1410</p>
+      <p className="account-name">NgaBui1410</p>
       <ul className="menu-list">
         <li className="menu-item item-parent">
-          <FontAwesomeIcon className="menu-icon" icon={faUserCircle} color="orange"/>Tài khoản của tôi
+          <FontAwesomeIcon className="menu-icon" icon={faUserCircle} color="orange" />Tài khoản của tôi
           <ul className="item-list">
             <li className="menu-item"><a className="menu-item__link" href="/account/profile"> Tài khoản của tôi</a></li>
             <li className="menu-item"><a className="menu-item__link" href="/account/changePass">Đổi mật khẩu</a></li>
           </ul>
         </li>
-        <li className="menu-item"><a className="menu-item__link" href="/account/purchase"><FontAwesomeIcon icon={faBook} color="orange" className="menu-icon"/>Đơn mua</a></li>
+        <li className="menu-item"><a className="menu-item__link" href="/account/purchase"><FontAwesomeIcon icon={faBook} color="orange" className="menu-icon" />Đơn mua</a></li>
       </ul>
     </div>
 

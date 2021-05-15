@@ -54,7 +54,10 @@ function TripListPage(props) {
           })}
         </div>
       ): (
-        <p>Không tìm thấy chuyến xe của bạn</p>
+        <div className="notFound">
+          <p className="notFound-label">Không tìm thấy chuyến xe của bạn</p>
+          <img className="notFound-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuW_Gkd6eDbGQ7X3JmDZKbSX8q8TZLOPEdv-lMLjICH_OEfS4MVRDAoFP3fsvQU1lV7Ac&usqp=CAU" alt="not found"/>
+        </div>
       )}
     </div>
   );

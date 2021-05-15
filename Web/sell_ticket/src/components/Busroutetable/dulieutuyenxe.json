@@ -1,0 +1,37 @@
+[
+    {
+        "id":1,
+        "busroute":"Đà Nẵng - Lao Bảo",
+        "startingpoint":"Bến xe TT Đà Nẵng",
+        "destination":"Bến xe Lao Bảo",
+        "price":"120.000"
+    },
+    {
+        "id":2,
+        "busroute":"Đà Nẵng - Vinh",
+        "startingpoint":"Bến xe TT Đà Nẵng",
+        "destination":"Bến xe Vinh",
+        "price":"200.000"
+    },
+    {
+        "id":3,
+        "busroute":"Đà Nẵng - Đà Lạt",
+        "startingpoint":"Bến xe TT Đà Nẵng",
+        "destination":"Bến xe Đà Lạt",
+        "price":"300.000"
+    },
+    {
+        "id":4,
+        "busroute":"Buôn Mê Thuột - Đà Nẵng",
+        "startingpoint":"Bến xe Buôn Mê Thuột",
+        "destination":"Bến xe TT Đà Nẵng",
+        "price":"200.000"
+    },
+    {
+        "id":5,
+        "busroute":"Quy Nhơn - Đà Nẵng",
+        "startingpoint":"Bến xe Quy Nhơn",
+        "destination":"Bến xe TT Đà Nẵng",
+        "price":"150.000"
+    }
+]

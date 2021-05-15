@@ -1,0 +1,42 @@
+.mydate{
+    height: 35px;
+    margin-right: 20px;
+    margin-top: 10px;
+    width: 170px;
+    margin-bottom: 20px;
+}
+.mytime{
+    height: 36px;
+    width: 160px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+h1{
+    position: relative;
+    left: 30px;
+    margin-bottom: 20px;
+}
+.form-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.datetime{
+    display: flex;
+}
+.seat-and-price{
+    display: flex;
+}
+.numberOfSeats{
+    width: 170px;
+    margin-right: 20px;
+}
+.price{
+    width: 160px;
+    margin-right: 20px;
+}
+.mybutton{
+    margin-top: 20px;    
+    display: flex;
+    justify-content: center;
+}

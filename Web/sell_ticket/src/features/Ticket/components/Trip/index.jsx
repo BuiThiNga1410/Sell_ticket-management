@@ -5,59 +5,78 @@ import './Trip.scss';
 import { Col, Row } from 'react-bootstrap';
 
 Trip.propTypes = {
-
+  trips: PropTypes.array,
 };
-
+Trip.defaultProps = {
+  trip: [],
+}
 function Trip(props) {
+  const { trip } = props;
+  const dep = trip.ngayXuatBen.split("T")[1].slice(0, -3);
+  const dest = trip.ngayDen.split("T")[1].slice(0, -3);
+  const numberWithCommas = (x) => {
+    x = x.toString();
+    var pattern = /(-?\d+)(\d{3})/;
+    while (pattern.test(x))
+      x = x.replace(pattern, "$1,$2");
+    return x;
+
+  }
+  const handleBeforeBooking = () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if(!user.length) {
+      // eslint-disable-next-line no-restricted-globals
+      if(confirm("Vui lòng đăng nhập để tiến hành mua vé")) {
+        window.location.href = "/login";
+      }
+      return;
+    }
+    if (!trip.soChoTrong) {
+      alert("Chuyến xe đã hết chỗ, vui lòng chọn chuyến khác");
+      return;
+    }
+    if (!(user.tenNd && user.sdt)) {
+      // eslint-disable-next-line no-restricted-globals
+      if(confirm("Vui lòng cập nhật thông tin đầy đủ trước khi mua vé")) {
+        window.location.href = "/account/profile";
+      }
+      return;
+    }
+    window.location.href = `/ticket/booking?trip=${trip.maChuyenXe}&price=${trip.donGia}`;
+  }
   return (
-    <div className="detail-ticket">
-      <Row>
-        <Col xs="12" md="6" lg="5">
-          <img className="img_car" src="https://static.vexere.com/production/images/1601886237795.jpeg?w=250&h=250" alt="img"></img>
-        </Col>
-        <Col>
-          <div className="infor_group">
-            <p className="infor__name">Tràng An Limousine</p>
-            <p className="infor__date">Ngày 23/2/2020</p>
-          </div>
+    <div className="trip-page">
+      <div className="detail-ticket">
+        <Row>
+          <Col xs="12" md="6" lg="5">
+            <img className="img_car" src="https://static.vexere.com/production/images/1601886237795.jpeg?w=250&h=250" alt="img"></img>
+          </Col>
+          <Col>
+            <div className="infor_group">
+              <p className="infor__name">Nhà xe {trip.nhaXe}</p>
+              <p className="infor__date">{trip.ngayXuatBen.split("T")[0]}</p>
+            </div>
 
-          <p className="infor-detail">Limousine 9 chỗ VIP</p>
+            {/* <p className="infor-detail">Limousine 9 chỗ VIP</p> */}
 
-          <div className="infor_group-time">
-            <p className="infor_group-time__hour">19:00</p>
-            <p>Rạp xiếc trung ương</p>
-          </div>
+            <div className="infor_group-time">
+              <p className="infor_group-time__hour">{dep}</p>
+              <p>{trip.tenBxDi}</p>
+            </div>
 
-          <p className="infor_time">1h00m</p>
-          <div className="infor_group-time">
-            <p className="infor_group-time__hour">20:00</p>
-            <p>Văn phòng Ninh Bình</p>
-          </div>
-
-          <p className="infor-price">150.000đ</p>
-
-          <Row>
-            <Col lg="7">
-              <div className="group-benefit">
-                <button className="benefit-detail">Xe chạy đúng giờ</button>
-                <button className="benefit-detail">Lái xe an toàn</button>
-              </div>
-              <div className="group-benefit">
-                <button className="benefit-detail">Tiện nghi, sạch sẽ</button>
-                <button className="benefit-detail">Thông tin rõ ràng</button>
-
-              </div>
-            </Col>
-            <Col>
-              <p className="empty-chair">9 chỗ trống</p>
-              <div className="detail_book">
-                <p className="infor__detail">Thông tin chi tiết</p>
-                <button className="book-ticket_button">Đặt vé</button>
-              </div>
-            </Col>
-          </Row>
-        </Col>
-      </Row>
+            {/* <p className="infor_time"></p> */}
+            <div className="infor_group-time">
+              <p className="infor_group-time__hour">{dest}</p>
+              <p>{trip.tenBxDen}</p>
+            </div>
+            <p className="empty-chair">{trip.soChoTrong} chỗ trống</p>
+            <p className="infor-price">{numberWithCommas(trip.donGia)}đ</p>
+            <div className="flex-center">
+              <button className="btn btn-book-ticket" onClick={handleBeforeBooking}>Đặt vé</button>
+            </div>
+          </Col>
+        </Row>
+      </div>
     </div>
   );
 }

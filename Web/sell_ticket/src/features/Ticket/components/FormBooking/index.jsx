@@ -13,28 +13,23 @@ function FormBooking(props) {
       <FormGroup controlId="name">
         <FormLabel>Họ tên</FormLabel>
         <FormControl placeholder="Nhập họ tên" />
+        <p className="text-error"></p>
       </FormGroup>
 
       <FormGroup controlId="phone">
         <FormLabel>Số điện thoại</FormLabel>
         <InputGroup className="mb-2">
           <FormControl as="select" placeholder="(VN)+84" >
-            <option>Default select</option>
+            <option>+(84)</option>
           </FormControl>
           <FormControl placeholder="Nhập số điện thoại" />
+          <p className="text-error"></p>
         </InputGroup>
 
       </FormGroup>
-
-      <FormGroup controlId="email">
-        <FormLabel>Email</FormLabel>
-        <FormControl placeholder="Nhập Email của bạn" />
-      </FormGroup>
-
       <FormGroup controlId="note">
         <FormLabel>Ghi chú</FormLabel>
-        <FormControl placeholder="Nhập vào yêu cầu của bạn" />
-        <FormText className="policy" >Bằng việc bấm nút Đặt chỗ, bạn đã đồng ý với Chính sách bảo mật thông tin và Quy chế của Nhà xe</FormText>
+        <FormControl as="textarea" placeholder="Nhập vào yêu cầu của bạn" />
       </FormGroup>
     </Form >
   );

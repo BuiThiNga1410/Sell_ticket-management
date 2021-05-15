@@ -4,7 +4,7 @@
   background-size: cover;
 }
 .div-header {
-  background-color: var(--primary-color);
+  background-color: rgb(49, 98, 138);
 }
 .header {
   margin-bottom: 0px;
@@ -90,4 +90,17 @@
 .header-menu-link:hover {
   color: red;
   text-decoration: none;
+}
+.user-name {
+  color: rgb(218, 240, 27);
+  font-size: 16px;
+  font-weight: 600;
+  margin-right: 16px;
+}
+.user-name:hover {
+  color: #fff;
+}
+.header-group-right {
+  display: flex;
+  align-items: center;
 }

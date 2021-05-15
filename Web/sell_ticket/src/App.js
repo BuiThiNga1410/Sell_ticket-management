@@ -13,21 +13,26 @@ import TicketNV from './features/TicketsNV';
 import Customer from './features/Customer';
 import Menubar from './components/Menubar/Menubar';
 import DieuHuongURL from './routes/DieuHuongURL';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-
 import Header_admin from './components/Header_admin/Header';
+import Ticket from './features/Ticket'
 
 
 // Lazy load - Code splitting
-const Ticket = React.lazy(() => import('./features/Ticket'));
+// const Ticket = React.lazy(() => import('./features/Ticket'));
 function App() {
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem('user'))? JSON.parse(localStorage.getItem('user')) : {};
   return (
     <div className="ticket-app">
-      <Suspense fallback={<div>Loading ...</div>}>
-        <BrowserRouter>
-          {user.vaitro === 1 ? (
+      {/* <Suspense fallback={<div>Loading ...</div>}> */}
+        {user.vaitro ? (<BrowserRouter>
+          { user.vaitro === 1 ? (
             <div>
+              <Header_admin />
+              <Menubar />
+              <DieuHuongURL />
+            </div>
+          ) : (
+            <div className="App">
               <Header />
               <Switch>
                 <Redirect exact from="/" to="/ticket" />
@@ -41,17 +46,14 @@ function App() {
                 <Route path="/customer/" component={Customer} />
               </Switch>
             </div>
-          ) : (
-            <div className="App">
-              <Header_admin />
-              <Menubar />
-              <DieuHuongURL />
-            </div>
           )}
 
           <Footer />
-        </BrowserRouter>
-      </Suspense>
+        </BrowserRouter>)
+        :
+        (<Login/>)
+      
+          }{/* </Suspense> */}
     </div>
   );
 }

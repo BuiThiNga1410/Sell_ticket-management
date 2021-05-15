@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Link, useHistory } from "react-router-dom";
 import "./DataBusTrip.scss";
-import Search from "../Search/Search";
+
 DataBusTrip.propTypes = {};
 
 function DataBusTrip(props) {

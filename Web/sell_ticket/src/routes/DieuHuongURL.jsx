@@ -19,7 +19,7 @@ DieuHuongURL.propTypes = {};
 function DieuHuongURL(props) {
   return (
     <div>
-      <Route exact path="/" component={Home} />
+      <Route exact path="/admin/home" component={Home} />
 
       <Route exact path="/staff" component={Datastaff} />
       <Route exact path="/staff/account/add" component={FormInforAccount} />

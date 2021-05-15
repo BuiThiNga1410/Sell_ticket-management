@@ -68,7 +68,7 @@ function Formupdatebus(props) {
   return (
     <div className="form-update-bus">
       <h1 className="update-bus-title">CẬP NHẬT THÔNG TIN XE</h1>
-      <div className="form-input">
+      <div className="my-form-input">
         <span>Tên chủ xe:</span>
         <br />
         <select className="form-text myselect">

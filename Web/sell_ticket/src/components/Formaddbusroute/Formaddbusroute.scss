@@ -1,21 +1,21 @@
 .form-add-bus-route{
     margin-top: 40px;
-    width: 87%;
-    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .add-route-title{
     color: red;
     font-size: 30px;
     text-align: center;
-    position: relative;
-    left: 90px;
+   
 }
-.form-input{
-    margin-left: 520px;
+.my-form-input{
+   
     margin-top: 20px;
 }
 .button-of-add-route{
-    margin-left: 542px;
+    //margin-left: 542px;
 }
 .myselect{
     width: 350px;
@@ -26,8 +26,8 @@
 }
 .mypara{
     margin: 25px;
-    position: relative;
-   left: -70px;
+
+   
 }
 .myform{
     padding: 7px;

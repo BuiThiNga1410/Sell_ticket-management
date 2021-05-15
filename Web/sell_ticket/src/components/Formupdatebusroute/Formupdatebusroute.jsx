@@ -66,7 +66,7 @@ function Formupdatebusroute(props) {
   return (
     <div className="form-add-bus-route">
       <p className="add-route-title">CẬP NHẬT TUYẾN XE</p>
-      <div className="form-input">
+      <div className="my-form-input">
         <span>Điểm xuất phát:</span>
         <br />
         <select id="dep" className="myselect">

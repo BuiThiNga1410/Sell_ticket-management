@@ -21,10 +21,7 @@ code {
 }
 *::-webkit-scrollbar { width: 0 !important }
 
-.row {
-  display: flex;
-  flex-wrap: wrap;
-}
+
 
 .my-row {
   display: flex;
@@ -46,6 +43,9 @@ code {
 }
 p {
   margin-bottom: 0;
+}
+table {
+  margin: 0;
 }
 .table td,
 .table th {

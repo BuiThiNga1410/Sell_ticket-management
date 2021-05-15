@@ -47,7 +47,7 @@ function Formaddbus(props) {
     <div className="form-add-bus">
       <p className="add-bus-title">THÊM XE</p>
       <form method="post" className="formAddBus">
-        <div className="form-input">
+        <div className="my-form-input">
           <span>Tên tài xế:</span>
           <br />
 

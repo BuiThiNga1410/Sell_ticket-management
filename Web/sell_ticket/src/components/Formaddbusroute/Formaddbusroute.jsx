@@ -50,7 +50,7 @@ function Formaddbusroute(props) {
   return (
     <div className="form-add-bus-route">
       <p className="add-route-title">THÊM TUYẾN XE</p>
-      <div className="form-input">
+      <div className="my-form-input">
         <span>Điểm xuất phát:</span>
         <br />
         <select id="dep" className="myselect">
@@ -71,6 +71,8 @@ function Formaddbusroute(props) {
         <br />
         <input type="number" required id="time" className="myform" />
         <br />
+      </div>
+      <div>
         <p className="mypara">
           <b>Lưu ý</b> Nếu bến xe chưa tồn tại, bạn có thể thêm bến xe mới{" "}
           <a href="/busstation/add">tại đây</a>

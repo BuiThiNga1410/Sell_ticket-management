@@ -58,7 +58,7 @@ function Datastaff(props) {
       <div className="searchForm">
         <h1 className="title-table">DANH SÁCH NHÂN VIÊN</h1>
         <div className="container">
-          <div className="row">
+          <div className="my-row">
             <Search_admin onSubmit={handleFiltersChange} />
             <div className="table-list-staff">
               <button className="button addbutton">

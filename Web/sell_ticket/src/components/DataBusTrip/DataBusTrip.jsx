@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Link, useHistory } from "react-router-dom";
-
+import "./DataBusTrip.scss";
+import Search from "../Search/Search";
 DataBusTrip.propTypes = {};
 
 function DataBusTrip(props) {
@@ -35,67 +36,64 @@ function DataBusTrip(props) {
     <div>
       <div className="searchForm">
         <h1 className="title-table">DANH SÁCH CHUYẾN XE</h1>
+
         <div className="container">
           <div className="row">
             <div className="table-list">
-              <button className="button addbusbutton">
-                <Link to="/bus/add" className="link-add-button my-button">
-                  Thêm chuyến xe
-                </Link>
-              </button>
+              <div>
+                <button className="button addbusbutton editbutton">
+                  <Link to="/bustrip/add" className="link-add-button my-button">
+                    Thêm chuyến xe
+                  </Link>
+                </button>
+              </div>
 
-              <table className="mytable">
-                <thead>
-                  <tr>
-                    <th>Tên bến xe đi</th>
+              <div className="table-container">
+                <table className="mytable">
+                  <thead>
+                    <tr>
+                      <th>Tên bến xe đi</th>
 
-                    <th>Tên bến xe đến</th>
+                      <th>Tên bến xe đến</th>
 
-                    <th>Nhà xe</th>
-                    <th>Số chỗ trống</th>
-                    <th>Ngày xuất bến</th>
-                    <th>Ngày đến</th>
-                    <th>Đơn giá</th>
-                    <th>Cập nhật</th>
-                    <th>Xóa</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {bustrips.map((bustrip) => {
-                    return (
-                      <tr>
-                        <td data-column="dep">{bustrip.tenBxDi}</td>
+                      <th>Nhà xe</th>
+                      <th>Số chỗ trống</th>
+                      <th>Ngày xuất bến</th>
+                      <th>Ngày đến</th>
+                      <th>Đơn giá</th>
 
-                        <td data-column="dest">{bustrip.tenBxDen}</td>
+                      <th>Xóa</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {bustrips.map((bustrip) => {
+                      return (
+                        <tr>
+                          <td data-column="dep">{bustrip.tenBxDi}</td>
 
-                        <td data-column="nhaXe">{bustrip.nhaXe}</td>
-                        <td data-column="numberOfEmplySeats">
-                          {bustrip.soChoTrong}
-                        </td>
-                        <td>{bustrip.ngayXuatBen.split("T")[0]}</td>
-                        <td>{bustrip.ngayDen.split("T")[0]}</td>
-                        <td>{numberWithCommas(bustrip.donGia)}</td>
-                        <td data-column="link">
-                          <a
-                            href={"/bus/update/" + bustrip.maChuyenXe}
-                            className="my-link"
-                          >
-                            Cập nhật
-                          </a>
-                        </td>
-                        <td data-column="link">
-                          <button
-                            className="btn-delete"
-                            onClick={() => handleDelete(bustrip.maChuyenXe)}
-                          >
-                            Xóa
-                          </button>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
+                          <td data-column="dest">{bustrip.tenBxDen}</td>
+
+                          <td data-column="nhaXe">{bustrip.nhaXe}</td>
+                          <td data-column="numberOfEmplySeats">
+                            {bustrip.soChoTrong}
+                          </td>
+                          <td>{bustrip.ngayXuatBen.split("T")[0]}</td>
+                          <td>{bustrip.ngayDen.split("T")[0]}</td>
+                          <td>{numberWithCommas(bustrip.donGia)}</td>
+                          <td data-column="link">
+                            <button
+                              className="btn-delete"
+                              onClick={() => handleDelete(bustrip.maChuyenXe)}
+                            >
+                              Xóa
+                            </button>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>

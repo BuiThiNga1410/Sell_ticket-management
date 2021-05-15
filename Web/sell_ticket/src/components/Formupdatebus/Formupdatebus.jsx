@@ -36,11 +36,10 @@ function Formupdatebus(props) {
       .then((result) => {
         setBus(result);
       });
-  });
+  }, []);
 
   function submitForm() {
     let ownerId = document.querySelector(".myselect").value;
-
     let numberPlate = document.getElementById("numberPlate").value;
     let nhaXe = document.getElementById("nhaXe").value;
     axios

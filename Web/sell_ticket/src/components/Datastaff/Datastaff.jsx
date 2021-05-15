@@ -66,50 +66,52 @@ function Datastaff(props) {
                   Cấp tài khoản
                 </Link>
               </button>
-              <table>
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Họ và tên</th>
-                    <th>Địa chỉ</th>
-                    <th>Số điện thoại</th>
-                    <th>CMND</th>
-                    <th>Username</th>
-                    <th>Cập nhật</th>
-                    <th>Xóa</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {employees.map((staff) => {
-                    return (
-                      <tr>
-                        <td data-column="Id">{staff.maNd}</td>
-                        <td data-column="Name">{staff.tenNd}</td>
-                        <td data-column="Address">{staff.diaChi}</td>
-                        <td data-column="Phonenumber">{staff.sdt}</td>
-                        <td data-column="CMND">{staff.cmnd}</td>
-                        <td data-column="Username">{staff.email}</td>
-                        <td data-column="link">
-                          <a
-                            href={"/staff/update/" + staff.maNd}
-                            className="my-link"
-                          >
-                            Cập nhật
-                          </a>
-                        </td>
-                        <td data-column="link">
-                          <button
-                            className="btn-delete"
-                            onClick={() => handleDelete(staff.maNd)}
-                          >
-                            Xóa
-                          </button>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
+              <div className="table-container">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Họ và tên</th>
+                      <th>Địa chỉ</th>
+                      <th>Số điện thoại</th>
+                      <th>CMND</th>
+                      <th>Username</th>
+                      <th>Cập nhật</th>
+                      <th>Xóa</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {employees.map((staff) => {
+                      return (
+                        <tr>
+                          <td data-column="Id">{staff.maNd}</td>
+                          <td data-column="Name">{staff.tenNd}</td>
+                          <td data-column="Address">{staff.diaChi}</td>
+                          <td data-column="Phonenumber">{staff.sdt}</td>
+                          <td data-column="CMND">{staff.cmnd}</td>
+                          <td data-column="Username">{staff.email}</td>
+                          <td data-column="link">
+                            <a
+                              href={"/staff/update/" + staff.maNd}
+                              className="my-link"
+                            >
+                              Cập nhật
+                            </a>
+                          </td>
+                          <td data-column="link">
+                            <button
+                              className="btn-delete"
+                              onClick={() => handleDelete(staff.maNd)}
+                            >
+                              Xóa
+                            </button>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>

@@ -23,13 +23,13 @@ function Menubar(props) {
           </ul>
         </li>
         <li>
-          <a href="/bustrips">Quản lý chuyến xe</a>
+          <a href="/bustrip">Quản lý chuyến xe</a>
           <ul className="subnav">
             <li>
-              <a href="/bustrips">Danh sách chuyến xe</a>
+              <a href="/bustrip">Danh sách chuyến xe</a>
             </li>
             <li>
-              <a href="#">Thêm chuyến xe</a>
+              <a href="/bustrip/add">Thêm chuyến xe</a>
             </li>
           </ul>
         </li>

@@ -12,7 +12,7 @@ function Busroutetable(props) {
       .then((result) => {
         setBusRoutes(result);
       });
-  });
+  }, []);
   function handleDelete(id) {
     fetch(`https://qlbvxk.herokuapp.com/api/busroutes/${id}`, {
       method: "DELETE",
@@ -31,50 +31,52 @@ function Busroutetable(props) {
           Thêm tuyến xe
         </Link>
       </button>
-      <table>
-        <thead>
-          <tr>
-            <th>Tuyến xe</th>
-            <th>Điểm xuất phát</th>
-            <th>Điểm đến</th>
+      <div className="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Tuyến xe</th>
+              <th>Điểm xuất phát</th>
+              <th>Điểm đến</th>
 
-            <th>Cập nhật</th>
-            <th>Xóa</th>
-          </tr>
-        </thead>
-        <tbody>
-          {busroutes.map((busroute) => {
-            return (
-              <tr>
-                <td data-column="route">{busroute.tenTuyenXe}</td>
-                <td data-column="startingpoint">
-                  {busroute.diaChiBxDi.split(",")[0]}
-                </td>
-                <td data-column="destination">
-                  {busroute.diaChiBxDen.split(",")[0]}
-                </td>
+              <th>Cập nhật</th>
+              <th>Xóa</th>
+            </tr>
+          </thead>
+          <tbody>
+            {busroutes.map((busroute) => {
+              return (
+                <tr>
+                  <td data-column="route">{busroute.tenTuyenXe}</td>
+                  <td data-column="startingpoint">
+                    {busroute.diaChiBxDi.split(",")[0]}
+                  </td>
+                  <td data-column="destination">
+                    {busroute.diaChiBxDen.split(",")[0]}
+                  </td>
 
-                <td data-column="link">
-                  <a
-                    href={"/busroute/update/" + busroute.maTuyenXe}
-                    className="my-link"
-                  >
-                    Cập nhật
-                  </a>
-                </td>
-                <td data-column="link">
-                  <button
-                    className="btn-delete"
-                    onClick={() => handleDelete(busroute.maTuyenXe)}
-                  >
-                    Xóa
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+                  <td data-column="link">
+                    <a
+                      href={"/busroute/update/" + busroute.maTuyenXe}
+                      className="my-link"
+                    >
+                      Cập nhật
+                    </a>
+                  </td>
+                  <td data-column="link">
+                    <button
+                      className="btn-delete"
+                      onClick={() => handleDelete(busroute.maTuyenXe)}
+                    >
+                      Xóa
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

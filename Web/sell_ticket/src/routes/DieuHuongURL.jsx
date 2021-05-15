@@ -13,6 +13,7 @@ import Databus from "../components/Databus/Databus";
 import DataBusTrip from "../components/DataBusTrip/DataBusTrip";
 import FormInforAccount from "../components/FormInforAccount/FormInforAccount";
 import FormAddBusStation from "../components/FormAddBusStation/FormAddBusStation";
+import FormAddBusTrip from "../components/FormAddBusTrip/FormAddBusTrip";
 DieuHuongURL.propTypes = {};
 
 function DieuHuongURL(props) {
@@ -32,9 +33,10 @@ function DieuHuongURL(props) {
       <Route exact path="/bus/add" component={Formaddbus} />
       <Route exact path="/bus/update/:id" component={Formupdatebus} />
 
-      <Route exact path="/bustrips" component={DataBusTrip} />
+      <Route exact path="/bustrip" component={DataBusTrip} />
 
       <Route exact path="/busstation/add" component={FormAddBusStation} />
+      <Route exact path="/bustrip/add" component={FormAddBusTrip} />
     </div>
   );
 }

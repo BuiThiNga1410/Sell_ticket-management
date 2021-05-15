@@ -26,8 +26,6 @@ function Formaddbusroute(props) {
     if (depId == destId) {
       alert("Không thể chọn cùng một bến xe");
     } else {
-      console.log(depId);
-      console.log(destId);
       axios
         .post("https://qlbvxk.herokuapp.com/api/busroutes", {
           MaBxdi: depId,

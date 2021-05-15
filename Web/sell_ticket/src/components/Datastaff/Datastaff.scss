@@ -15,8 +15,13 @@ table {
 	width: 90%; 
 	border-collapse: collapse; 
 	margin:25px auto;
+	position: relative;
 }
-
+thead th {
+	position: sticky;
+	top: 0;
+	z-index: 3;
+}
 /* Zebra striping */
 tr:nth-of-type(odd) { 
 	background: #eee; 
@@ -46,6 +51,7 @@ only screen and (max-width: 760px),
 
 	table { 
 	  	width: 100%; 
+		
 	}
 
 	/* Force table to not be like tables anymore */
@@ -55,9 +61,10 @@ only screen and (max-width: 760px),
 	
 	/* Hide table headers (but not display: none;, for accessibility) */
 	thead tr { 
-		position: absolute;
+		position: fixed;
 		top: -9999px;
 		left: -9999px;
+		z-index: 2;
 	}
 	
 	tr { border: 1px solid #ccc; }

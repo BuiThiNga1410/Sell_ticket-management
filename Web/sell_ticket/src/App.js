@@ -57,6 +57,7 @@ function App() {
         </div>
       ) : (
         <div>
+          <Redirect exact from="/" to="/login" />
           <Route path="/login" component={Login} />
           <Route path="/sign-up" component={SignUp} />
         </div>

@@ -2,6 +2,10 @@ import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "./Header_admin.scss";
 function Header_admin() {
+  const handleLogOut = () => {
+    localStorage.setItem('user', '{}');
+    window.location.href = '/';
+  }
   return (
     <div className="Header">
       <Link to="/">
@@ -22,7 +26,7 @@ function Header_admin() {
           </span>
         </li>
         <li className="header-item">
-          <button className="header-button">Đăng xuất</button>
+          <button className="header-button" onClick={handleLogOut}>Đăng xuất</button>
         </li>
       </ul>
     </div>

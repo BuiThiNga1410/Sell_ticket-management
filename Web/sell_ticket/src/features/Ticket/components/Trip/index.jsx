@@ -10,21 +10,21 @@ Trip.propTypes = {
 Trip.defaultProps = {
   trip: [],
 }
+const numberWithCommas = (x) => {
+  x = x.toString();
+  var pattern = /(-?\d+)(\d{3})/;
+  while (pattern.test(x))
+    x = x.replace(pattern, "$1,$2");
+  return x;
+
+}
 function Trip(props) {
   const { trip } = props;
   const dep = trip.ngayXuatBen.split("T")[1].slice(0, -3);
   const dest = trip.ngayDen.split("T")[1].slice(0, -3);
-  const numberWithCommas = (x) => {
-    x = x.toString();
-    var pattern = /(-?\d+)(\d{3})/;
-    while (pattern.test(x))
-      x = x.replace(pattern, "$1,$2");
-    return x;
-
-  }
   const handleBeforeBooking = () => {
     const user = JSON.parse(localStorage.getItem('user'));
-    if(!user.length) {
+    if(!user.vaitro) {
       // eslint-disable-next-line no-restricted-globals
       if(confirm("Vui lòng đăng nhập để tiến hành mua vé")) {
         window.location.href = "/login";

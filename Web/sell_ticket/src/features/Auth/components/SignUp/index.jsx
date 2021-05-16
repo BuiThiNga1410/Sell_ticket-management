@@ -10,12 +10,24 @@ import myaxios from "../../../../app/api";
 SignUp.propTypes = {};
 
 function SignUp(props) {
-  const dispatch = useDispatch();
-  const history = useHistory();
+  let valid = true;
+  const handleValidate = (e) => {
+    let regex = /\S+@\S+\.\S+/;
+    if (!regex.test(e.target.value)) {
+      valid = false;
+      document.querySelector(".text-error").setAttribute("style", "display: block");
+    }
+    else {
+      valid = true;
+      document.querySelector(".text-error").setAttribute("style", "display: none");
+    }
+
+  }
   const handleSignUp = () => {
     let email = document.formSignup.email.value;
     let pass = document.formSignup.pass.value;
-    myaxios
+    if(valid && email && pass) {
+      myaxios
       .post("/accounts/2", {
         Email: email,
         MatKhau: pass,
@@ -27,8 +39,8 @@ function SignUp(props) {
             Email: email,
           };
           localStorage.setItem("user", JSON.stringify(user));
-          history.push("/");
-          window.location.reload();
+          window.location.href = "/";
+          // window.location.reload();
         } else
           document
             .querySelector(".invalid")
@@ -37,6 +49,7 @@ function SignUp(props) {
       .catch((error) => {
         console.log(error);
       });
+    }
   };
 
   return (
@@ -75,5 +88,4 @@ function SignUp(props) {
     </div>
   );
 }
-
 export default SignUp;

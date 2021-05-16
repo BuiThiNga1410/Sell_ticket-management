@@ -9,7 +9,7 @@ p {
 .booking_header {
   display: flex;
   justify-content: space-evenly;
-
+  padding-bottom: 24px;
   margin-top: 50px;
   border-bottom: 1px solid rgb(236, 232, 232);
 }
@@ -18,7 +18,7 @@ p {
   color: blue;
 }
 .booking_note {
-  margin-top: 20px;
+  margin: 20px;
 }
 .note {
   padding-bottom: 50px;
@@ -79,7 +79,7 @@ p {
   padding: 16px 100px;
 }
 
-.price {
+.my-price {
   display: flex;
   justify-content: space-evenly;
 }

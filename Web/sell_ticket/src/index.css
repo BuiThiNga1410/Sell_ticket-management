@@ -62,6 +62,7 @@ tbody {
   padding-top: 50px;
 }
 .table-scroll {
+  max-width: 1200px;
   max-height: 400px;
   overflow: scroll;
 }
@@ -78,8 +79,8 @@ tbody {
 }
 
 .my-table-title {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  /* font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace; */
 }
 .button{
   width: auto;
@@ -117,6 +118,7 @@ tbody {
   width: 400px;
   padding: 24px;
   border-radius: 4px;
+  z-index: 999;
 }
 .notification {
   display: flex;
@@ -155,8 +157,8 @@ tbody {
   display: none;
 }
 .my-form {
-  max-width: 700px;
-  width: 100%;
+  max-width: 700px !important;
+  width: 100% !important;
 }
 .search-form {
   margin: 36px;

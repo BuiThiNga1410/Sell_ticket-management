@@ -19,10 +19,24 @@ Login.propTypes = {};
 
 function Login(props) {
   const history = useHistory();
-  const handleValidate = () => {
+  let valid = true;
+  const handleValidate = (e) => {
+    let regex = /\S+@\S+\.\S+/;
+    if (!regex.test(e.target.value)) {
+      valid = false;
+      document.querySelector(".text-error").setAttribute("style", "display: block");
+    }
+    else {
+      valid = true;
+      document.querySelector(".text-error").setAttribute("style", "display: none");
+    }
+
+  }
+  const handleLogin = () => {
     let email = document.querySelector("#email").value;
     let pass = document.querySelector("#pass").value;
-    myaxios
+    if(valid && email && pass) {
+      myaxios
       .post("/accounts/validate", {
         Email: email,
         MatKhau: pass,
@@ -45,6 +59,7 @@ function Login(props) {
       .catch((error) => {
         console.log(error);
       });
+    }
   };
   return (
     <div className="login">
@@ -53,21 +68,22 @@ function Login(props) {
         <Form>
           <FormGroup>
             <FormLabel>Email</FormLabel>
-            <FormControl placeholder="Email" id="email" />
+            <FormControl placeholder="Email" id="email" onKeyUp={handleValidate} required />
+            <p className="text-error">Email nhập vào không hợp lệ</p>
           </FormGroup>
 
           <FormGroup>
             <FormLabel>Mật khẩu</FormLabel>
-            <FormControl placeholder="Mật khẩu" id="pass" type="password" />
+            <FormControl placeholder="Mật khẩu" id="pass" type="password" required />
           </FormGroup>
           <p className="invalid">Thông tin đăng nhập không hợp lệ!!!</p>
+          <p>Bạn muốn <a href="/sign-up">Đăng kí</a> ?</p>
           <div className="login_input">
             <Button
               className="login_input-item"
               variant="primary"
-              onClick={handleValidate}
+              onClick={handleLogin}
             >
-              {" "}
               Login
             </Button>
           </div>

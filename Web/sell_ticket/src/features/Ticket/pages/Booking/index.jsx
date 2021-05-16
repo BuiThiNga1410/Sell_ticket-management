@@ -13,6 +13,14 @@ import { useHistory } from 'react-router';
 Booking.propTypes = {
 
 };
+const numberWithCommas = (x) => {
+  x = x.toString();
+  var pattern = /(-?\d+)(\d{3})/;
+  while (pattern.test(x))
+    x = x.replace(pattern, "$1,$2");
+  return x;
+
+}
 
 function Booking(props) {
   let step = 1;
@@ -117,7 +125,7 @@ function Booking(props) {
       selectedSeats.push(+e.target.id);
       console.log(selectedSeats);
     }
-    document.getElementsByClassName("price-detail")[0].innerHTML = `${selectedSeats.length * price}đ`;
+    document.getElementsByClassName("price-detail")[0].innerHTML = `${numberWithCommas(selectedSeats.length * price)}đ`;
   }
   return (
     <div className="booking-wrap">
@@ -228,7 +236,7 @@ function Booking(props) {
       <div className="booking_footer container">
         <button className="btn btn-outline-dark" onClick={handleClickPrev}>Quay lại</button>
         <div className="price-next">
-          <div className="price">
+          <div className="my-price">
             <p className="price-title">Tổng cộng: </p>
             <p className="price-detail">0đ</p>
           </div>

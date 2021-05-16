@@ -59,7 +59,7 @@ function ViewTicket(props) {
       })
   }
   return (
-    <div className="container">
+    <div className="container view-infor">
       <p className="text-title">THÔNG TIN VÉ XE</p>
       <div className="flex-center search-form">
         <input type="search" className="search-input"></input>

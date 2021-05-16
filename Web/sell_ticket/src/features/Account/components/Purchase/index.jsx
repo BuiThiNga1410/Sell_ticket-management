@@ -7,6 +7,14 @@ import './Purchase.scss';
 Purchase.propTypes = {
 
 };
+const numberWithCommas = (x) => {
+  x = x.toString();
+  var pattern = /(-?\d+)(\d{3})/;
+  while (pattern.test(x))
+    x = x.replace(pattern, "$1,$2");
+  return x;
+
+}
 
 function Purchase(props) {
   const [tickets, setTickets] = useState([]);
@@ -47,7 +55,7 @@ function Purchase(props) {
                     {ticket.maVe}
                   </td>
                   <td className="my-table-item my-table-item_center">
-                    {ticket.donGia}
+                    {numberWithCommas(ticket.donGia)}đ
                   </td>
                   <td className="my-table-item my-table-item_center">
                     {ticket.bienSoXe}

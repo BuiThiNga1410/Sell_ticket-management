@@ -12,7 +12,7 @@ function Header(props) {
   const name = user.maNd ? user.Email.split("@")[0] : "";
   const handleLogOut = () => {
     localStorage.setItem('user', '{}');
-    window.location.reload();
+    window.location.href = '/login';
   }
   return (
     <div className="div-header">

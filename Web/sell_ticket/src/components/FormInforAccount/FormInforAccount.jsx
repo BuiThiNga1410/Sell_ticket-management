@@ -33,32 +33,44 @@ function FormInforAccount(props) {
       });
   };
   return (
-    <div className="form-add-account">
-      <div className="container add-acc-form">
-        <h1>THÔNG TIN TÀI KHOẢN</h1>
-        <form>
-          <div className="formGroup">
-            <h3>Username</h3>
-            <br />
-            <input type="text" id="email" className="acc-input" />
+    <div className="myForm">
+      <div className="form-add-account">
+        <div className="container add-acc-form">
+          <h2>THÔNG TIN TÀI KHOẢN</h2>
+          <div>
+            <div className="formGroup">
+              <h3>Username</h3>
+              <br />
+              <input
+                type="text"
+                id="email"
+                placeholder="Email"
+                className="acc-input"
+              />
+            </div>
+            <div className="formGroup">
+              <h3>Password</h3>
+              <br />
+              <input
+                type="text"
+                id="password"
+                placeholder="Password"
+                className="acc-input"
+              />
+            </div>
+            <div className="form-button">
+              <button className="button" onClick={handleBack}>
+                Quay lại
+              </button>
+              <button type="reset" className="button">
+                Reset
+              </button>
+              <button type="submit" onClick={submitForm} className="button">
+                Thêm tài khoản
+              </button>
+            </div>
           </div>
-          <div className="formGroup">
-            <h3>Password</h3>
-            <br />
-            <input type="text" id="password" className="acc-input" />
-          </div>
-          <div className="form-button">
-            <button className="button" onClick={handleBack}>
-              Quay lại
-            </button>
-            <button type="reset" className="button">
-              Reset
-            </button>
-            <button type="submit" onClick={submitForm} className="button">
-              Thêm tài khoản
-            </button>
-          </div>
-        </form>
+        </div>
       </div>
     </div>
   );

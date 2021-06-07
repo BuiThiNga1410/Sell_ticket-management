@@ -1,43 +1,93 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Button, Form, FormControl, FormGroup, FormLabel } from 'react-bootstrap';
+import React from "react";
+import PropTypes from "prop-types";
+import {
+  Button,
+  Form,
+  FormControl,
+  FormGroup,
+  FormLabel,
+} from "react-bootstrap";
+import { useState } from "react";
+import axios from "axios";
 
-import './Login.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebook, faYoutube } from '@fortawesome/free-brands-svg-icons';
+import "./Login.scss";
+import myaxios from "../../../../app/api";
+import { useHistory } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
 
-Login.propTypes = {
-
-};
+Login.propTypes = {};
 
 function Login(props) {
+  const history = useHistory();
+  let valid = true;
+  const handleValidate = (e) => {
+    let regex = /\S+@\S+\.\S+/;
+    if (!regex.test(e.target.value)) {
+      valid = false;
+      document.querySelector(".text-error").setAttribute("style", "display: block");
+    }
+    else {
+      valid = true;
+      document.querySelector(".text-error").setAttribute("style", "display: none");
+    }
+
+  }
+  const handleLogin = () => {
+    let email = document.querySelector("#email").value;
+    let pass = document.querySelector("#pass").value;
+    if(valid && email && pass) {
+      myaxios
+      .post("/accounts/validate", {
+        Email: email,
+        MatKhau: pass,
+      })
+      .then((response) => {
+        if (response.data.maNd) {
+          let user = {
+            ...response.data,
+            Email: email,
+          };
+          localStorage.setItem("user", JSON.stringify(user));
+          if (response.data.vaitro === 1) window.location.href = "/admin/home";
+          else window.location.href = "/";
+          // window.location.reload();
+        } else
+          document
+            .querySelector(".invalid")
+            .setAttribute("style", "display: block");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    }
+  };
   return (
     <div className="login">
       <div className="form-login">
         <p className="login-title">Login to your account</p>
         <Form>
           <FormGroup>
-            <FormLabel>Tên đăng nhập</FormLabel>
-            <FormControl placeholder="Tên đăng nhập" />
-          </FormGroup>
-
-          <FormGroup>
-            <FormLabel>Số điện thoại</FormLabel>
-            <FormControl placeholder="Số điện thoại" />
+            <FormLabel>Email</FormLabel>
+            <FormControl placeholder="Email" id="email" onKeyUp={handleValidate} required />
+            <p className="text-error">Email nhập vào không hợp lệ</p>
           </FormGroup>
 
           <FormGroup>
             <FormLabel>Mật khẩu</FormLabel>
-            <FormControl placeholder="Mật khẩu" />
+            <FormControl placeholder="Mật khẩu" id="pass" type="password" required />
           </FormGroup>
-          <div className="social-network-login">
-            <div className="social-network__icon"><FontAwesomeIcon icon={faFacebook} size="2x" color="rgb(30, 90, 168)" /></div>
-            <div className="social-network__icon"><FontAwesomeIcon icon={faYoutube} size="2x" color="rgb(243, 44, 44)" /></div>
+          <p className="invalid">Thông tin đăng nhập không hợp lệ!!!</p>
+          <p>Bạn muốn <a href="/sign-up">Đăng kí</a> ?</p>
+          <div className="login_input">
+            <Button
+              className="login_input-item"
+              variant="primary"
+              onClick={handleLogin}
+            >
+              Login
+            </Button>
           </div>
-
-          <div className="login_input"><Button className="login_input-item" variant="primary" type="submit"> Login</Button></div>
         </Form>
-
       </div>
     </div>
   );

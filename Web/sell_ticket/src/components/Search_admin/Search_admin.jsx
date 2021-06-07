@@ -33,14 +33,13 @@ function Search_admin(props) {
         <div className="btn-group">
           <input
             type="text"
-            className="form-control"
+            className="my-form-control"
             name
             id
             aria-describedby="helpId"
             placeholder="Nhập từ khóa"
             onChange={handleSearchTermChange}
           />
-          <button className="btn btn-infor">Tìm kiếm</button>
         </div>
       </div>
       <hr />

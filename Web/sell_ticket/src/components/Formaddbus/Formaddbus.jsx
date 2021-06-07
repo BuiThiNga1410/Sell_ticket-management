@@ -45,10 +45,10 @@ function Formaddbus(props) {
 
   return (
     <div className="form-add-bus">
-      <p className="add-bus-title">THÊM XE</p>
-      <form method="post" className="formAddBus">
-        <div className="form-input">
-          <span>Tên tài xế:</span>
+      <h3 className="add-bus-title">THÊM XE</h3>
+      <form method="post" className="formBus">
+        <div className="my-form-input">
+          <h5>Tên tài xế:</h5>
           <br />
 
           <select className="form-text myselect">
@@ -59,7 +59,7 @@ function Formaddbus(props) {
 
           <br />
 
-          <span>Số chỗ:</span>
+          <h5>Số chỗ:</h5>
           <br />
           <input
             type="number"
@@ -69,7 +69,7 @@ function Formaddbus(props) {
           />
           <br />
 
-          <span>Biển số xe:</span>
+          <h5>Biển số xe:</h5>
           <br />
           <input type="text" required id="numberPlate" className="form-text" />
           <br />

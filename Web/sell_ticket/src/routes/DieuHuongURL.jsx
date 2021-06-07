@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  useRouteMatch,
+} from "react-router-dom";
 import Formupdatebus from "../components/Formupdatebus/Formupdatebus";
 import Formaddbus from "../components/Formaddbus/Formaddbus";
 import Formaddbusroute from "../components/Formaddbusroute/Formaddbusroute";
@@ -14,12 +19,14 @@ import DataBusTrip from "../components/DataBusTrip/DataBusTrip";
 import FormInforAccount from "../components/FormInforAccount/FormInforAccount";
 import FormAddBusStation from "../components/FormAddBusStation/FormAddBusStation";
 import FormAddBusTrip from "../components/FormAddBusTrip/FormAddBusTrip";
+import DataRevenues from "../components/DataRevenues/DataRevenues";
 DieuHuongURL.propTypes = {};
 
 function DieuHuongURL(props) {
+  const match = useRouteMatch();
   return (
     <div>
-      <Route exact path="/" component={Home} />
+      <Route exact path="/admin/home" component={Home} />
 
       <Route exact path="/staff" component={Datastaff} />
       <Route exact path="/staff/account/add" component={FormInforAccount} />
@@ -37,6 +44,8 @@ function DieuHuongURL(props) {
 
       <Route exact path="/busstation/add" component={FormAddBusStation} />
       <Route exact path="/bustrip/add" component={FormAddBusTrip} />
+
+      <Route exact path="/revenues" component={DataRevenues} />
     </div>
   );
 }

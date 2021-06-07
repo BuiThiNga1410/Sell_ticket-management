@@ -26,11 +26,14 @@ function Busroutetable(props) {
   }
   return (
     <div className="table-list">
-      <button className="button addbusroutebutton">
-        <Link to="/busroute/add" className="link-add-button">
-          Thêm tuyến xe
-        </Link>
-      </button>
+      <div>
+        <button className="button addbusroutebutton">
+          <Link to="/busroute/add" className="link-add-button">
+            Thêm tuyến xe
+          </Link>
+        </button>
+      </div>
+
       <div className="table-container">
         <table>
           <thead>

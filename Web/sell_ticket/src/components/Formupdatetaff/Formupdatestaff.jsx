@@ -100,7 +100,7 @@ function Formupdatestaff(props) {
           required
           id="dateOfBirth"
           className="form-text"
-          defaultValue="11-11-2011"
+          //defaultValue={employee.ngaySinh.split("T")[0]}
         />
         <br />
       </div>

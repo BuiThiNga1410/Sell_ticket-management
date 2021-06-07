@@ -1,3 +1,4 @@
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -6,10 +7,81 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+a {
+  text-decoration: none !important;
+}
+ul {
+  list-style: none;
+}
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+:root {
+  --primary-color: rgba(245, 31, 31, 0.8);
+}
+*::-webkit-scrollbar { width: 0 !important }
+
+
+
+.my-row {
+  display: flex;
+  flex-wrap: wrap;   
+   justify-content: center;
+}
+.my-btn-primary {
+  background-color: rgb(31, 157, 196);
+  text-align: center;
+  height: 40px;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+}
+
+.my-group-btn {
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-evenly;
+}
+p {
+  margin-bottom: 0;
+}
+table {
+  margin: 0;
+}
+.table td,
+.table th {
+  vertical-align: middle;
+}
+thead {
+  position: relative;
+}
+th {
+  position: sticky;
+  top: 0;
+}
+tbody {
+  padding-top: 50px;
+}
+.table-scroll {
+  max-width: 1200px;
+  max-height: 400px;
+  overflow: scroll;
+}
+.my-table {
+  border-radius: 2px;
+  width: 100%;
+}
+.my-table-row {
+  height: 40px;
+}
+
+.my-table-row:first-child {
+  background-color: rgb(56, 144, 170);
+}
+
+.my-table-title {
+  /* font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace; */
 }
 .button{
   width: auto;
@@ -24,8 +96,118 @@ code {
 .button:hover{
   color: rgb(31, 32, 32);
 }
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(1,1,1,0.3);
+  display: none;
+}
+.remove-content,
+.notification {
+  background-color: #fff;
+  width: 400px;
+  padding: 24px;
+  border-radius: 4px;
+  z-index: 999;
+}
+.notification {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+}
+.notifi-label {
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 24px;
+}
+.remove-lable {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+}
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 36px;
+}
+.actions .btn:first-child {
+  margin-right: 24px;
+}
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
+.text-error {
+  color: rgb(221, 74, 74);
+  font-size: 13px;
+  margin-top: 10px;
+  display: none;
+}
+.my-form {
+  max-width: 700px !important;
+  width: 100% !important;
+}
+.search-form {
+  margin: 36px;
+}
+.search-input {
+  border: 1px solid rgb(177, 173, 173);
+  padding: 6px 12px;
+  min-width: 300px;
+}
+.notFound {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.notFound-label {
+  font-size: 16px;
+  font-weight: 600;
+}
+.notFound-img {
+  width: 150px;
+}
+.flex-column-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 table { 
-	width: 80%; 
+
 	border-collapse: collapse; 
-	margin:25px auto;
+	
+}
+.btn-delete{
+	width: 80px;
+	height: 30px;
+	text-align: center;
+	background-color: red;
+	color: white;
+	font-style:bold ;
+	border-radius: 0.25rem;
+}
+.my-link{
+	text-decoration: none;
+	width: 80px;
+	height: 30px;
+	background-color: #5e91b3;
+	padding: 8px;
+	text-align: center;
+	color: white;
+	border-radius: 8px;
+	margin: auto;
 }

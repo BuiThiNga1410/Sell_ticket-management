@@ -7,6 +7,7 @@ RatingPage.propTypes = {
 };
 
 function RatingPage(props) {
+  
   return (
     <div className="rating-page">
       <div className="rating-item"><Rating /></div>

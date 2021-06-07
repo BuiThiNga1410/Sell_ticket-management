@@ -49,9 +49,9 @@ function Formaddbusroute(props) {
   }
   return (
     <div className="form-add-bus-route">
-      <p className="add-route-title">THÊM TUYẾN XE</p>
-      <div className="form-input">
-        <span>Điểm xuất phát:</span>
+      <h3>THÊM TUYẾN XE</h3>
+      <div className="my-form-input">
+        <h5>Điểm xuất phát:</h5>
         <br />
         <select id="dep" className="myselect">
           {busStations.map((busStation) => {
@@ -59,7 +59,7 @@ function Formaddbusroute(props) {
           })}
         </select>
         <br />
-        <span>Đích đến: </span>
+        <h5>Đích đến: </h5>
         <br />
         <select id="dest" className="myselect">
           {busStations.map((busStation) => {
@@ -67,10 +67,12 @@ function Formaddbusroute(props) {
           })}
         </select>
         <br />
-        <span>Thời gian di chuyển (giờ):</span>
+        <h5>Thời gian di chuyển (giờ):</h5>
         <br />
         <input type="number" required id="time" className="myform" />
         <br />
+      </div>
+      <div>
         <p className="mypara">
           <b>Lưu ý</b> Nếu bến xe chưa tồn tại, bạn có thể thêm bến xe mới{" "}
           <a href="/busstation/add">tại đây</a>

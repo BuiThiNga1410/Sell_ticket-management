@@ -51,10 +51,10 @@ function Formupdatebusroute(props) {
           ThoiGianDiChuyen: time,
         })
         .then((res) => {
-          // let busroute = {
-          //   maTuyenXe: res.data.maTuyenXe,
-          // };
-          // localStorage.setItem("busroute", JSON.stringify(busroute));
+          let busroute = {
+            maTuyenXe: res.data.maTuyenXe,
+          };
+          localStorage.setItem("busroute", JSON.stringify(busroute));
           history.push("/busroute");
           window.location.reload();
         })
@@ -66,7 +66,7 @@ function Formupdatebusroute(props) {
   return (
     <div className="form-add-bus-route">
       <p className="add-route-title">CẬP NHẬT TUYẾN XE</p>
-      <div className="form-input">
+      <div className="my-form-input">
         <span>Điểm xuất phát:</span>
         <br />
         <select id="dep" className="myselect">
@@ -75,7 +75,7 @@ function Formupdatebusroute(props) {
               <option
                 value={busStation.maBx}
                 // selected={
-                //   busStation.tenBx == busRoute.tenTuyenXe.split(" - ")[0]
+                //   busStation.tenBx == busRoute.tenTuyenXe && busRoute.tenTuyenXe.split(" - ")[0]
                 //     ? "selected"
                 //     : ""
                 // }
@@ -107,7 +107,13 @@ function Formupdatebusroute(props) {
         <br />
         <span>Thời gian di chuyển (giờ):</span>
         <br />
-        <input type="number" required id="time" className="myform" />
+        <input
+          type="number"
+          required
+          id="time"
+          defaultValue={busRoute.thoiGianDiChuyen}
+          className="myform"
+        />
         <br />
         {/* <p className="mypara">
           <b>Lưu ý</b> Nếu bến xe chưa tồn tại, bạn có thể thêm bến xe mới{" "}

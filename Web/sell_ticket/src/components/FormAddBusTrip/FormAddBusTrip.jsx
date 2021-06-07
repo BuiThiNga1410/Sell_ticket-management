@@ -24,7 +24,7 @@ function FormAddBusTrip(props) {
       });
   }, []);
   function handleBack() {
-    window.location.href = "/bustrips";
+    window.location.href = "/bustrip";
   }
   function submitForm() {
     let busRouteId = document.querySelector("#busroute").value;
@@ -49,7 +49,7 @@ function FormAddBusTrip(props) {
           };
 
           localStorage.setItem("bustrip", JSON.stringify(bustrip));
-          history.push("/bustrips");
+          history.push("/bustrip");
           window.location.reload();
         }
       })
@@ -64,9 +64,9 @@ function FormAddBusTrip(props) {
   return (
     <div className="form-container">
       <div className="form-add-bus-trip">
-        <h1>THÊM CHUYẾN XE</h1>
+        <h3>THÊM CHUYẾN XE</h3>
         <div className="form-item">
-          <h4>Tuyến xe</h4>
+          <h5>Tuyến xe</h5>
           <select className="form-text myselect" id="busroute">
             {busroutes.map((busroute) => {
               return (
@@ -78,7 +78,7 @@ function FormAddBusTrip(props) {
           </select>
         </div>
         <div className="form-item">
-          <h4>Nhà xe - Biển số</h4>
+          <h5>Nhà xe - Biển số</h5>
           <select className="form-text myselect" id="bus">
             {buses.map((bus) => {
               return (
@@ -91,11 +91,11 @@ function FormAddBusTrip(props) {
         </div>
         <div className="form-item datetime">
           <div className="date">
-            <h4>Ngày xuất bến</h4>
+            <h5>Ngày xuất bến</h5>
             <input type="date" id="date" className="mydate" />
           </div>
           <div className="time">
-            <h4>Giờ xuất bến</h4>
+            <h5>Giờ xuất bến</h5>
             <select id="time" className="mytime">
               <option value="00:00:00">00:00</option>
               <option value="01:00:00">01:00</option>
@@ -127,7 +127,7 @@ function FormAddBusTrip(props) {
         </div>
         <div className="form-item seat-and-price">
           <div className="seats">
-            <h4>Số chỗ ngồi</h4>
+            <h5>Số chỗ ngồi</h5>
             <input
               className="numberOfSeats form-text"
               type="number"
@@ -135,7 +135,7 @@ function FormAddBusTrip(props) {
             />
           </div>
           <div className="price">
-            <h4>Đơn giá</h4>
+            <h5>Đơn giá</h5>
             <input className="price form-text" type="number" id="price" />
           </div>
         </div>

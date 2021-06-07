@@ -31,14 +31,14 @@ function MainPage(props) {
   const [list_travel, setList_travel] = useState([]);
 
   const travels = [
-    "https://futabus.vn/_nuxt/img/commonDest_item4.31f8475.png",
-    "https://futabus.vn/_nuxt/img/commonDest_item8.7c778b7.png",
-    "https://futabus.vn/_nuxt/img/commonDest_item11.20dc039.png",
-    "https://futabus.vn/_nuxt/img/commonDest_item13.ec8fa83.png",
-    "https://futabus.vn/_nuxt/img/commonDest_item17.baf0c1e.png",
-    "https://futabus.vn/_nuxt/img/commonDest_item2.b700251.png",
-    "https://futabus.vn/_nuxt/img/commonDest_item12.3dd7d3c.png",
-    "https://futabus.vn/_nuxt/img/commonDest_item14.28ea5c6.png",
+    "https://d2sx1calt21doo.cloudfront.net/xxt/experience/image/3-jpg-1080x720-FIT-fe1fe6a204f8ebd899d9b7406e5f779e.jpeg",
+    "https://cdn1.nhatrangtoday.vn/images/photos/kinh-nghiem-dat-ve-xe-nha-trang-da-lat-1.jpg",
+    "https://baoxaydung.com.vn/stores/news_dataimages/vananh/052020/27/08/2423_image002.png",
+    "https://fansipanlegend.sunworld.vn/wp-content/uploads/2020/06/Logo.jpg",
+    "https://gonatour.vn/vnt_upload/news/09_2020/khu_du_lich_suoi_tien.jpg",
+    "https://image.thanhnien.vn/1024/uploaded/quochung.qc/2020_03_04/axishotram/1_tfdg.jpg",
+    "https://www.vietnambooking.com/wp-content/uploads/2020/07/hon-kho-quy-nhon-1.jpg",
+    "https://vcdn-dulich.vnecdn.net/2020/09/16/image001-1600240652-9628-1600241203.jpg",
   ];
 
   return (

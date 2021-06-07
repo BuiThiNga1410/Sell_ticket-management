@@ -34,6 +34,9 @@ function Header(props) {
           <li className="header-item">
             <a className="header-link" href="/ticket/trip-list">Chuyến xe</a>
           </li>
+          <li className="header-item">
+            <a className="header-link" href="/sale-report">Báo cáo doanh thu</a>
+          </li>
           {user.vaitro === 2 && (
             <li className="header-item">
             <p className="header-link">Quản lý khách hàng</p>

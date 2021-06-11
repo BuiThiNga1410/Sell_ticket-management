@@ -28,7 +28,6 @@ function Formupdatebusroute(props) {
       .then((result) => {
         console.log(result);
         setBusRoute(result);
-        console.log("busroute", busRoute);
       })
       .catch((error) => {
         console.log(error);
@@ -74,11 +73,12 @@ function Formupdatebusroute(props) {
             return (
               <option
                 value={busStation.maBx}
-                // selected={
-                //   busStation.tenBx == busRoute.tenTuyenXe && busRoute.tenTuyenXe.split(" - ")[0]
-                //     ? "selected"
-                //     : ""
-                // }
+                selected={
+                  busRoute.tenTuyenXe &&
+                  busRoute.tenTuyenXe.split(" - ")[0] === busStation.tenBx
+                    ? "selected"
+                    : ""
+                }
               >
                 {busStation.tenBx}
               </option>
@@ -93,11 +93,12 @@ function Formupdatebusroute(props) {
             return (
               <option
                 value={busStation.maBx}
-                // selected={
-                //   busStation.tenBx == busRoute.tenTuyenXe.split(" - ")[1]
-                //     ? "selected"
-                //     : ""
-                // }
+                selected={
+                  busRoute.tenTuyenXe &&
+                  busRoute.tenTuyenXe.split(" - ")[1] === busStation.tenBx
+                    ? "selected"
+                    : ""
+                }
               >
                 {busStation.tenBx}
               </option>

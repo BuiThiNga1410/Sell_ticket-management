@@ -36,11 +36,10 @@ function FormInforAccount(props) {
     <div className="myForm">
       <div className="form-add-account">
         <div className="container add-acc-form">
-          <h2>THÔNG TIN TÀI KHOẢN</h2>
+          <h3>THÔNG TIN TÀI KHOẢN</h3>
           <div>
             <div className="formGroup">
-              <h3>Username</h3>
-              <br />
+              <h5>Username</h5>
               <input
                 type="text"
                 id="email"
@@ -49,8 +48,7 @@ function FormInforAccount(props) {
               />
             </div>
             <div className="formGroup">
-              <h3>Password</h3>
-              <br />
+              <h5>Password</h5>
               <input
                 type="text"
                 id="password"

@@ -1,0 +1,36 @@
+
+.trip-page {
+  position: relative;
+}
+.empty-chair {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 0;
+
+  color: rgba(11, 94, 119, 0.8);
+  text-align: right;
+  align-items: center;
+  vertical-align: middle;
+}
+
+.detail_book {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.infor__detail {
+  text-align: left;
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(11, 94, 119, 0.8);
+
+  margin-bottom: 0;
+}
+
+.btn-book-ticket {
+  background-color: rgb(252, 106, 62);
+  color: #fff;
+  width: 30%;
+  margin-top: 24px;
+}

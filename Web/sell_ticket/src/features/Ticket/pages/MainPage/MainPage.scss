@@ -1,0 +1,80 @@
+.search-bustrip {
+  width: 100%;
+  height: 500px;
+  background-size: cover;
+  background-image:url("../../../../img/banner.jpg");
+  background-size: cover;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  color: rgb(233, 39, 39);
+  font-size: 40px;
+  font-weight: 700;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.service-info {
+  margin-top: 50px;
+}
+
+.service-title {
+  text-align: center;
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--primary-color);
+
+  margin-bottom: 30px;
+}
+.rule {
+  display: flex;
+  align-items: center;
+}
+.rule-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid rgba(245, 31, 31, 0.8);
+}
+
+.rule-title {
+  margin-left: 20px;
+  font-size: 35px;
+  font-weight: 700;
+  color: rgba(245, 31, 31, 0.8);
+}
+
+.rule-content {
+  margin-left: 96px;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgb(63, 60, 60);
+}
+
+.travel-title {
+  color: var(--primary-color);
+  font-size: 25px;
+  font-weight: 600;
+  font-family: sans-serif;
+  text-align: center;
+
+  margin-top: 100px;
+  border-top: 1px solid var(--primary-color);
+  padding-top: 20px;
+}
+
+.travel-content {
+  font-size: 17px;
+  color: rgba(65, 133, 104, 0.8);
+  text-align: center;
+  font-weight: 500;
+}

@@ -1,13 +1,43 @@
 .form-add-bus-route{
     margin-top: 40px;
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .add-route-title{
-    color: red;
+    color: black;
     font-size: 30px;
-    position: relative;
-    left: 550px;
+    text-align: center;
+   
 }
-.form-input{
-    margin-left: 520px;
+.my-form-input{
+   
+    margin-top: 20px;
+}
+.button-of-add-route{
+    //margin-left: 542px;
+}
+.myselect{
+    width: 350px;
+    height: 40px;
+    border-radius: 3px;
+    
+    margin-bottom: 10px;
+}
+.mypara{
+    margin: 25px;
+
+   
+}
+.myform{
+    padding: 7px;
+    width: 350px;
+    height: 40px;
+    border-radius: 3px;
+    border: 1px solid black;
+    margin-bottom: 10px;
+    
+}
+h5{
+    margin-bottom: 0px;
 }

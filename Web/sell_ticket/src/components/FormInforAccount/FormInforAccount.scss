@@ -1,0 +1,37 @@
+.add-account-form{
+    margin-top: 40px;
+    
+}
+form{
+    margin-top: 30px;
+}
+.form-add-account{
+    margin-top: 40px ;
+    display: flex;
+    justify-content: center;
+}
+.formGroup{
+    margin-bottom: 25px;
+}
+.acc-input{
+    width: 350px;
+    height: 35px;
+    /* border: solid; */
+    border-radius: 5px;
+}
+.form-button{
+    position: relative;
+    left: 22px;
+    margin-top: 30px;
+}
+.myForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+}
+.formGroup>h3{
+    margin-bottom: 0px;
+    font-weight: 3px;
+}

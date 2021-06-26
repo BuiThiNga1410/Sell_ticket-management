@@ -1,0 +1,42 @@
+.mytable{
+    width: 100%;
+}
+.addbustripbutton{
+    position: relative;
+    left: 1130px;
+}
+.editbutton{
+    margin-top: 40px;
+    position: relative;
+    left: 986px;
+    top: -50px;
+}
+.table-container{
+    height: 280px;
+    margin-top: 10px;
+    overflow-y: scroll;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.my_date_input{
+    height: 40px;
+}
+.my-search-form-1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 78px;
+    left: -20px;
+    margin-bottom: 48px;
+    width: 1010px;
+}
+.my-table-list{
+    width: 100%;
+}
+.button-revenues{
+    width: 245px;
+    height: 40px;
+}

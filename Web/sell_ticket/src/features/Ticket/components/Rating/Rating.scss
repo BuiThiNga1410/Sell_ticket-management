@@ -1,0 +1,104 @@
+.detail-ticket {
+  margin-top: 16px;
+}
+
+// .detail-ticket:hover {
+//   box-shadow: 1px 1px 1px rgba(222, 226, 228, 0.8);
+// }
+.img_car {
+  width: 100%;
+  background-size: cover;
+}
+.infor__name {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.infor__date {
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(255, 22, 22, 0.9);
+}
+
+.infor-detail {
+  font-size: 14px;
+  font-weight: 400;
+}
+.infor_group {
+  display: flex;
+  justify-content: space-between;
+}
+.infor_group-time {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 16px;
+}
+
+.infor_group-time__hour {
+  font-size: 18px;
+  font-weight: 650;
+  padding-right: 16px;
+  color: rgba(11, 94, 119, 0.8);
+}
+
+.infor_time {
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 0px;
+  color: rgba(161, 164, 165, 0.8);
+}
+.infor-price {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 18px;
+  font-weight: 700;
+  color: red;
+}
+
+.rating {
+  border-top: 1px solid rgba(243, 161, 147, 0.8);
+  margin-top: 30px;
+}
+
+.rating__title {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  color: rgba(11, 94, 119, 0.8);
+
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  margin-bottom: 0;
+}
+
+.rating__star {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.rating__star-icon {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.rating__cmt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+}
+.input-rating {
+  width: 500px;
+  height: 80px;
+  border-radius: 5px;
+  outline: red;
+}
+
+.respond {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}

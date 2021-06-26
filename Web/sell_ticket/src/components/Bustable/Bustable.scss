@@ -6,9 +6,9 @@
     color: red;
   }
 table { 
-	width: 800px; 
+
 	border-collapse: collapse; 
-	margin:25px auto;
+	
 }
 /* Zebra striping */
 tr:nth-of-type(odd) { 
@@ -82,6 +82,29 @@ only screen and (max-width: 760px),
 }
 .addbusbutton{
 	position: relative;
-	left: 1010px;
+	left: 960px;
 	margin-top: 10px;
+}
+.my-button{
+	left: 959px;
+}
+.btn-delete{
+	width: 80px;
+	height: 30px;
+	text-align: center;
+	background-color: red;
+	color: white;
+	font-style:bold ;
+	border-radius: 0.25rem;
+}
+.my-link{
+	text-decoration: none;
+	width: 80px;
+	height: 30px;
+	background-color: #5e91b3;
+	padding: 8px;
+	text-align: center;
+	color: white;
+	border-radius: 8px;
+	margin: auto;
 }

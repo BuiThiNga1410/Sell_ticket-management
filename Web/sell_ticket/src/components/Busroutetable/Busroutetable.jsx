@@ -1,69 +1,87 @@
-import React from 'react';
-import './Busroutetable.scss';
-
-
+import React, { useEffect, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import "./Busroutetable.scss";
+import data from "./dulieutuyenxe.json";
 
 function Busroutetable(props) {
-    return (
-        <div className="table-list">
-            <p className="text-of-list">DANH SÁCH TUYẾN XE</p>
-            <button className="button addbusroutebutton">Thêm tuyến xe</button>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Tuyến xe</th>
-                        <th>Điểm xuất phát</th>
-                        <th>Điểm đến</th>
-                        <th>Giá vé</th>
-                        <th>Cập nhật</th>
-                        <th>Xóa</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td data-column="route">Đà Nẵng - Lao Bảo</td>
-                        <td data-column="startingpoint">Bến xe TT Đà Nẵng</td>
-                        <td data-column="destination">Bến xe Lao Bảo</td>
-                        <td data-column="price">120.000</td>
-                        <td data-column="link"><a href="#">Cập nhật</a></td>
-                        <td data-column="link"><a href="#">Xóa</a></td>
-                    </tr>
-                    <tr>
-                        <td data-column="route">Đà Nẵng - Vinh</td>
-                        <td data-column="startingpoint">Bến xe TT Đà Nẵng</td>
-                        <td data-column="destination">Bến xe Vinh</td>
-                        <td data-column="price">200.000</td>
-                        <td data-column="link"><a href="#">Cập nhật</a></td>
-                        <td data-column="link"><a href="#">Xóa</a></td>
-                    </tr>
-                    <tr>
-                        <td data-column="route">Đà Nẵng - Đà Lạt</td>
-                        <td data-column="startingpoint">Bến xe TT Đà Nẵng</td>
-                        <td data-column="destination">Bến xe Đà Lạt</td>
-                        <td data-column="price">280.000</td>
-                        <td data-column="link"><a href="#">Cập nhật</a></td>
-                        <td data-column="link"><a href="#">Xóa</a></td>
-                    </tr>
-                    <tr>
-                        <td data-column="route">Buôn Mê Thuột- Đà Nẵng</td>
-                        <td data-column="startingpoint">Bến xe Buôn Mê Thuột</td>
-                        <td data-column="destination">Bến xe TT Đà Nẵng</td>
-                        <td data-column="price">200.000</td>
-                        <td data-column="link"><a href="#">Cập nhật</a></td>
-                        <td data-column="link"><a href="#">Xóa</a></td>
-                    </tr>
-                    <tr>
-                        <td data-column="route">Quy Nhơn - Đà Nẵng</td>
-                        <td data-column="startingpoint">Bến xe Quy Nhơn</td>
-                        <td data-column="destination">Bến xe TT Đà Nẵng</td>
-                        <td data-column="price">150.000</td>
-                        <td data-column="link"><a href="#">Cập nhật</a></td>
-                        <td data-column="link"><a href="#">Xóa</a></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    );
+  const [busroutes, setBusRoutes] = useState([]);
+  const history = useHistory();
+  useEffect(() => {
+    fetch("https://qlbvxk.herokuapp.com/api/busroutes")
+      .then((res) => res.json())
+      .then((result) => {
+        setBusRoutes(result);
+      });
+  }, []);
+  function handleDelete(id) {
+    fetch(`https://qlbvxk.herokuapp.com/api/busroutes/${id}`, {
+      method: "DELETE",
+    }).then((result) => {
+      result.json().then((res) => {
+        console.warn(res);
+      });
+      history.push("/busroute");
+      window.location.reload();
+    });
+  }
+  return (
+    <div className="table-list">
+      <div>
+        <button className="button addbusroutebutton">
+          <Link to="/busroute/add" className="link-add-button">
+            Thêm tuyến xe
+          </Link>
+        </button>
+      </div>
+
+      <div className="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Tuyến xe</th>
+              <th>Điểm xuất phát</th>
+              <th>Điểm đến</th>
+
+              <th>Cập nhật</th>
+              <th>Xóa</th>
+            </tr>
+          </thead>
+          <tbody>
+            {busroutes.map((busroute) => {
+              return (
+                <tr>
+                  <td data-column="route">{busroute.tenTuyenXe}</td>
+                  <td data-column="startingpoint">
+                    {busroute.diaChiBxDi.split(",")[0]}
+                  </td>
+                  <td data-column="destination">
+                    {busroute.diaChiBxDen.split(",")[0]}
+                  </td>
+
+                  <td data-column="link">
+                    <a
+                      href={"/busroute/update/" + busroute.maTuyenXe}
+                      className="my-link"
+                    >
+                      Cập nhật
+                    </a>
+                  </td>
+                  <td data-column="link">
+                    <button
+                      className="btn-delete"
+                      onClick={() => handleDelete(busroute.maTuyenXe)}
+                    >
+                      Xóa
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
 }
 
 export default Busroutetable;

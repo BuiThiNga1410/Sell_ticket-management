@@ -1,83 +1,104 @@
-import React from 'react';
-import './Bustable.scss';
-
-Bustable.propTypes = {
-    
-};
+import React, { useEffect, useState } from "react";
+import "./Bustable.scss";
+import { Link, useHistory } from "react-router-dom";
+Bustable.propTypes = {};
 
 function Bustable(props) {
-    return (
-        <div className="table-list">
-            <p className="text-of-list">DANH SÁCH XE</p>
-            <button className="button addbusbutton">Thêm xe</button>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Chủ xe</th>
-                        <th>SĐT</th>
-                        <th>Dòng xe</th>
-                        <th>Số chỗ</th>
-                        <th>Loại xe</th>
-                        <th>Biển số xe</th>
-                        <th>Cập nhật</th>
-                        <th>Xóa</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td data-column="bus-owner">Lê Lương</td>
-                        <td data-column="phone-number">0859293354</td>
-                        <td data-column="type-of-bus">Huyndai</td>
-                        <td data-column="number-of-seats">40</td>
-                        <td data-column="">Giường nằm (thường)</td>
-                        <td data-column="number-plate">43A23456</td>
-                        <td data-column="link"><a href="#">Cập nhật</a></td>
-                        <td data-column="link"><a href="#">Xóa</a></td>
-                    </tr>
-                    <tr>
-                        <td data-column="bus-owner">Lê Trí Đô</td>
-                        <td data-column="phone-number">0859293354</td>
-                        <td data-column="type-of-bus">Huyndai</td>
-                        <td data-column="number-of-seats">40</td>
-                        <td data-column="">Giường nằm (thường)</td>
-                        <td data-column="">43A23456</td>
-                        <td data-column="link"><a href="#">Cập nhật</a></td>
-                        <td data-column="link"><a href="#">Xóa</a></td>
-                    </tr>
-                    <tr>
-                        <td data-column="bus-owner">Lê A</td>
-                        <td data-column="phone-number">0859293354</td>
-                        <td data-column="type-of-bus">Huyndai</td>
-                        <td data-column="number-of-seats">40</td>
-                        <td data-column="">Giường nằm (thường)</td>
-                        <td data-column="">43A23456</td>
-                        <td data-column="link"><a href="#">Cập nhật</a></td>
-                        <td data-column="link"><a href="#">Xóa</a></td>
-                    </tr>
-                    <tr>
-                        <td data-column="bus-owner">Lê B</td>
-                        <td data-column="phone-number">0859293354</td>
-                        <td data-column="type-of-bus">Huyndai</td>
-                        <td data-column="number-of-seats">30</td>
-                        <td data-column="">Giường nằm (VIP)</td>
-                        <td data-column="">43A23456</td>
-                        <td data-column="link"><a href="#">Cập nhật</a></td>
-                        <td data-column="link"><a href="#">Xóa</a></td>
-                    </tr>
-                    <tr>
-                        <td data-column="bus-owner">Lê C</td>
-                        <td data-column="phone-number">0859293354</td>
-                        <td data-column="type-of-bus">Huyndai</td>
-                        <td data-column="number-of-seats">30</td>
-                        <td data-column="">Giường nằm (VIP)</td>
-                        <td data-column="">43A23456</td>
-                        <td data-column="link"><a href="#">Cập nhật</a></td>
-                        <td data-column="link"><a href="#">Xóa</a></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    );
+  const [buses, setBuses] = useState([]);
+  const history = useHistory();
+  const [filters, setFilters] = useState();
+  function handleDelete(id) {
+    fetch(`https://qlbvxk.herokuapp.com/api/buses/${id}`, {
+      method: "DELETE",
+    }).then((result) => {
+      result.json().then((res) => {
+        console.warn(res);
+      });
+      history.push("/bus");
+      window.location.reload();
+    });
+  }
+
+  useEffect(() => {
+    fetch("https://qlbvxk.herokuapp.com/api/buses/")
+      .then((res) => res.json())
+      .then((result) => {
+        setBuses(result);
+      });
+  });
+
+  function handleFiltersChange(newFilters) {
+    console.log("New filter: ", newFilters);
+    if (newFilters.searchTerm == "") {
+      fetch("https://qlbvxk.herokuapp.com/api/buses/")
+        .then((res) => res.json())
+        .then((result) => {
+          setBuses(result);
+        });
+    } else {
+      fetch(
+        `https://qlbvxk.herokuapp.com/api/buses/search?name=${newFilters.searchTerm}`
+      )
+        .then((res) => res.json())
+        .then((result) => {
+          setBuses(result);
+        });
+    }
+
+    setFilters({
+      title_like: newFilters.searchTerm,
+    });
+  }
+  return (
+    <div className="table-list">
+      <button className="button addbusbutton">
+        <Link to="/bus/add" className="link-add-button my-button">
+          Thêm xe
+        </Link>
+      </button>
+      <table>
+        <thead>
+          <tr>
+            <th>Chủ xe</th>
+            <th>SĐT</th>
+
+            <th>Số chỗ</th>
+
+            <th>Biển số xe</th>
+            <th>Cập nhật</th>
+            <th>Xóa</th>
+          </tr>
+        </thead>
+        <tbody>
+          {buses.map((bus) => {
+            return (
+              <tr>
+                <td data-column="bus-owner">{bus.tenNv}</td>
+                <td data-column="phone-number">{bus.sdt}</td>
+
+                <td data-column="number-of-seats">{bus.soChoNgoi}</td>
+
+                <td data-column="number-plate">{bus.bienSoXe}</td>
+                <td data-column="link">
+                  <a href={"/bus/update/" + bus.maXe} className="my-link">
+                    Cập nhật
+                  </a>
+                </td>
+                <td data-column="link">
+                  <button
+                    className="btn-delete"
+                    onClick={() => handleDelete(bus.maXe)}
+                  >
+                    Xóa
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
 }
 
 export default Bustable;

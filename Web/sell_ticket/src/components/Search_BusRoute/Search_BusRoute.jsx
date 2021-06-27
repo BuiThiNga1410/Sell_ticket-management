@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarker, faExchangeAlt } from "@fortawesome/free-solid-svg-icons";
 import "./Search_BusRoute.scss";

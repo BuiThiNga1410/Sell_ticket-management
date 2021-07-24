@@ -67,10 +67,10 @@ function Login() {
               className="form-input"
               {...register("password", {
                 required: "This filed is required",
-                minLength: {
-                  value: 6,
-                  message: 'Password must have at least 6 characters'
-                }
+                // minLength: {
+                //   value: 6,
+                //   message: 'Password must have at least 6 characters'
+                // }
               })}
             />
             {errors.password && <p className="text-error">{errors.password.message}</p>}

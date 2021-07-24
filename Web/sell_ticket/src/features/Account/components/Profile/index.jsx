@@ -1,29 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import myaxios from '../../../../app/api';
 
 import './Profile.scss';
-import { Button, Col, Form, FormCheck, FormControl, FormGroup, FormLabel, Row } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-regular-svg-icons';
+import { useForm } from 'react-hook-form';
 
 function Profile(props) {
+  const { register, formState: { errors }, handleSubmit } = useForm();
   let user = JSON.parse(localStorage.getItem('user'));
-  let valid = true;
-  const handleClickButton = () => {
-    document.getElementsByClassName("file-input")[0].click();
-    // eslint-disable-next-line no-unused-expressions
-  }
-  const handleChoiceFile = (e) => {
-    console.log("aaaa", e.target.files[0]);
-    document.getElementsByClassName("avt")[0].setAttribute("style", `background-image: url("${URL.createObjectURL(e.target.files[0])}")`);
-  }
-  const handleChangeInfo = () => {
-    let name = document.getElementById("name").value;
-    let sdt = document.getElementById("sdt").value;
-    let cmnd = document.getElementById("cmnd").value;
-    let address = document.getElementById("address").value;
-    let birthday = document.getElementById("birthday").value;
+  const handleChangeInfo = (data) => {
+    const name = data.name;
+    const sdt = data.sdt;
+    const cmnd = data.cmnd;
+    const address = data.address;
+    const birthday = data.dob;
     myaxios.put(`/customers/${user.maNd}`, {
       "TenNd": name,
       "Sdt": sdt,
@@ -46,101 +37,124 @@ function Profile(props) {
         }
         localStorage.setItem('user', JSON.stringify(newUser));
         setTimeout(() => {
-          window.location.href = "/ticket/trip-list";
-        }, 1000)
+          document.getElementsByClassName("overlay")[0].setAttribute("style", "display: none");
+        }, 2000)
       })
       .catch((error) => {
         console.log(error);
       })
-  }
-  const handleValidate = (e) => {
-    let regex = /./;
-    switch (e.target.id) {
-      case "sdt":
-        regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
-        break;
-      case "email":
-        regex = /\S+@\S+\.\S+/;
-        break;
-      case "name":
-        regex = /^\D+$/;
-        break;
-      default:
-        break;
-    }
-    if (!regex.test(e.target.value)) {
-      valid = false;
-      e.target.parentElement.childNodes[1].setAttribute("style", "display: block");
-    }
-    else {
-      valid = true;
-      e.target.parentElement.childNodes[1].setAttribute("style", "display: none");
-    }
   }
   return (
     <div className="profile-page">
       <p className="profile-title">Hồ sơ của tôi</p>
       <div className="profile">
         <div className="form-profile">
-          <Form>
-            <FormGroup as={Row}>
-              <FormLabel column sm="3">Tên đăng nhập</FormLabel>
-              <Col sm="9">
-                <FormControl plaintext readOnly defaultValue={user.Email.split("@")[0]}/>
-              </Col>
-            </FormGroup>
-
-            <FormGroup as={Row} controlId="name">
-              <FormLabel column sm="3">Họ tên</FormLabel>
-              <Col sm="9">
-                <FormControl defaultValue={user.tenNd} onKeyUp={handleValidate}/>
-                <p className="text-error">Tên khách hàng nhập vào không hợp lệ</p>
-              </Col>
-            </FormGroup>
-
-            <FormGroup as={Row} controlId="sdt">
-              <FormLabel column sm="3">Số điện thoại</FormLabel>
-              <Col sm="9">
-                <FormControl defaultValue={user.sdt} onKeyUp={handleValidate}/>
-                <p className="text-error">Số điện thoại nhập vào không hợp lệ</p>
-              </Col>
-
-            </FormGroup>
-
-            <FormGroup as={Row} controlId="cmnd">
-              <FormLabel column sm="3">CMND</FormLabel>
-              <Col sm="9">
-                <FormControl type="number" defaultValue={user.cmnd} />
-              </Col>
-            </FormGroup>
-            <FormGroup as={Row} controlId="address">
-              <FormLabel column sm="3">Địa chỉ</FormLabel>
-              <Col sm="9">
-                <FormControl defaultValue={user.diaChi} />
-              </Col>
-            </FormGroup>
-
-            <FormGroup as={Row} controlId="birthday">
-              <FormLabel column sm="3">Ngày sinh</FormLabel>
-              <Col sm="9">
-                <FormControl type="date" defaultValue={user.ngaySinh} />
-              </Col>
-            </FormGroup>
-            <div className="save-info">
-              <Button type="button" onClick={handleChangeInfo}>Lưu thông tin</Button>
+          <form onSubmit={handleSubmit(handleChangeInfo)}>
+            <div className="form-group">
+              <label className="form-label" htmlFor="name">Họ và tên</label>
+              <input
+                type="text"
+                placeholder="name"
+                name="name"
+                id="name"
+                defaultValue={user.tenNd}
+                className="form-input"
+                {...register("name", {
+                  required: "This filed is required",
+                  pattern: {
+                    value: /^[a-zA-Z ]+$/,
+                    message: 'Name is invalid'
+                  }
+                })}
+              />
+              {errors.name && <p className="text-error">{errors.name.message}</p>}
             </div>
-          </Form>
-        </div>
-        <div className="profile-avt">
-          <div className="avt" />
-          <button className="btn btn-outline-primary" onClick={handleClickButton}>Chọn ảnh</button>
-          <input className="file-input" type="file" accept=".png, .jpg" onChange={handleChoiceFile}></input>
+            <div className="form-group">
+              <label className="form-label" htmlFor="sdt">Số điện thoại</label>
+              <input
+                type="text"
+                placeholder="sdt"
+                name="sdt"
+                id="sdt"
+                defaultValue={user.sdt}
+                className="form-input"
+                {...register("sdt", {
+                  required: "This filed is required",
+                  pattern: {
+                    value: /^\d+$/,
+                    message: 'Phone number is invalid'
+                  }
+                })}
+              />
+              {errors.sdt && <p className="text-error">{errors.sdt.message}</p>}
+            </div>
+            <div className="form-group">
+              <label className="form-label" htmlFor="cmnd">CMND</label>
+              <input
+                type="text"
+                placeholder="cmnd"
+                name="cmnd"
+                id="cmnd"
+                className="form-input"
+                defaultValue={user.cmnd}
+                {...register("cmnd", {
+                  required: "This filed is required",
+                  pattern: {
+                    value: /^\d+$/,
+                    message: 'CMND is invalid'
+                  }
+                })}
+              />
+              {errors.cmnd && <p className="text-error">{errors.cmnd.message}</p>}
+              <div className="form-group">
+                <label className="form-label" htmlFor="dob">Ngày sinh</label>
+                <input
+                  type="date"
+                  placeholder="dob"
+                  name="dob"
+                  id="dob"
+                  className="form-input"
+                  defaultValue={user.ngaySinh}
+                  {...register("dob", {
+                    required: "This filed is required",
+                  })}
+                />
+                {errors.dob && <p className="text-error">{errors.dob.message}</p>}
+              </div>
+              <div className="form-group">
+                <label className="form-label" htmlFor="address">Địa chỉ</label>
+                <input
+                  type="text"
+                  placeholder="address"
+                  name="address"
+                  id="address"
+                  className="form-input"
+                  defaultValue={user.diaChi}
+                  {...register("address", {
+                    required: "This filed is required",
+                    maxLength: {
+                      value: 255,
+                      message: 'Address do not more than 500 characters'
+                    }
+                  })}
+                />
+                {errors.address && <p className="text-error">{errors.address.message}</p>}
+              </div>
+              <div className="form-btn">
+                <input
+                  className="btn-submit"
+                  type="submit"
+                  value="Update"
+                />
+              </div>
+            </div>
+          </form>
         </div>
       </div>
       <div className="overlay">
         <div className="notification">
           <p className="notifi-label">Lưu thông tin thành công</p>
-          <FontAwesomeIcon icon={faCheckCircle} color="green" size="2x"/>
+          <FontAwesomeIcon icon={faCheckCircle} color="green" size="2x" />
         </div>
       </div>
     </div>

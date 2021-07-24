@@ -10,7 +10,7 @@ ProfilePage.propTypes = {
 
 function ProfilePage(props) {
   return (
-    <div className="profilePage">
+    <div className="container profilePage">
       <AccountMenu/>
       <Profile/>
     </div>

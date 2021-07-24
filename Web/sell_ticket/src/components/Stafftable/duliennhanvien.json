@@ -1,0 +1,26 @@
+[
+    {
+        "id":1,
+        "name":"Nguyễn Văn Đức",
+        "position":"Nhân viên duyệt vé",
+        "age":22,
+        "phonenumber":"0379584939",
+        "email":"nguyenvanduc@gmail.com",
+        "gender":"1",
+        "username":"nguyenvanduc.thangthanh",
+        "password":"ngvduc.thangthanh"
+
+    },
+    {
+        "id":2,
+        "name":"Trần Bê",
+        "position":"Nhân viên duyệt vé",
+        "age":22,
+        "phonenumber":"0379584939",
+        "email":"tranbe@gmail.com",
+        "gender":"1",
+        "username":"tranbe.thangthanh",
+        "password":"tbe.thangthanh"
+
+    }
+]

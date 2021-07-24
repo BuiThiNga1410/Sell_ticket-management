@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Header.scss';
 
 Header.propTypes = {
@@ -14,7 +15,9 @@ function Header(props) {
   return (
     <div className="div-header">
       <div className="container header">
+        <Link to='/'>
         <img className="header-logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS69D9FzUs5f4XRrGWMRiwIooyI0zYCB5ZC-w&usqp=CAU" alt="logo"></img>
+        </Link>
         <ul className="header-list">
           <li className="header-item">
             <a className="header-link" href="/ticket/trip-list">Chuyến xe</a>

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import AccountMenu from '../../components/AccountMenu';
 import Purchase from '../../components/Purchase';
@@ -11,7 +10,7 @@ PurchasePage.propTypes = {
 
 function PurchasePage(props) {
   return (
-    <div className="purchasePage">
+    <div className="container purchasePage">
       <AccountMenu/>
       <Purchase/>
     </div>

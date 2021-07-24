@@ -209,3 +209,9 @@ table {
 	border-radius: 8px;
 	margin: auto;
 }
+
+.txt-success {
+  color: rgb(65, 190, 138);
+  font-weight: 500;
+  align-items: center;
+}

@@ -112,8 +112,8 @@ function MainPage(props) {
         <p className="travel-content">
           Gợi ý những điểm du lịch được ưa thích trong năm
         </p>
+        <Slice height={300} number_col={4} list_imgs={travels} />
       </div>
-      <Slice height={300} number_col={4} list_imgs={travels} />
     </div>
   );
 }

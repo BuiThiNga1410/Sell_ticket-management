@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import './AccountMenu.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,12 +9,13 @@ AccountMenu.propTypes = {
 
 };
 
-function AccountMenu(props) {
+function AccountMenu() {
+  const user = JSON.parse(localStorage.getItem('user'));
   return (
     <div className="menu-div-account">
       <div className="account-avt" />
-      <p className="account-name">NgaBui1410</p>
-      <ul className="menu-list">
+      <p className="account-name">{user.tenNd || user.Email.split('@')[0]}</p>
+      <ul className="menu-list"> 
         <li className="menu-item item-parent">
           <FontAwesomeIcon className="menu-icon" icon={faUserCircle} color="orange" />Tài khoản của tôi
           <ul className="item-list">

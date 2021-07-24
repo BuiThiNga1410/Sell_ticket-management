@@ -1,14 +1,22 @@
 .add-bus-title{
-    margin-top: 40px;
-    color: red;
+    
+    color: black;
     font-size: 30px;
-    position: relative;
-    left: 634px;
+    text-align: center;
 }
 .button-add-bus{
     margin-top: 25px;
     display: flex;
     justify-content: center;
-    margin-left: 60px;
+  
 }
 
+.form-add-bus{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.formBus{
+    margin-top: 0px;
+}

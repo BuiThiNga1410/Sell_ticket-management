@@ -1,16 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
-import { Link } from "react-router-dom";
-import {
-  Form,
-  FormControl,
-  FormGroup,
-  FormLabel,
-  FormText,
-  InputGroup,
-} from "react-bootstrap";
-import FormFileInput from "react-bootstrap/esm/FormFileInput";
 import "./Formupdatebus.scss";
 
 Formupdatebus.propTypes = {};
@@ -66,10 +56,10 @@ function Formupdatebus(props) {
     history.push("/bus");
   }
   return (
-    <div className="form-update-bus">
-      <h1 className="update-bus-title">CẬP NHẬT THÔNG TIN XE</h1>
+    <div className="form-add-bus">
+      <h3>CẬP NHẬT THÔNG TIN XE</h3>
       <div className="my-form-input">
-        <span>Tên chủ xe:</span>
+        <h5>Tên nhân viên:</h5>
         <br />
         <select className="form-text myselect">
           {employees.map((staff) => {
@@ -85,19 +75,7 @@ function Formupdatebus(props) {
         </select>
         <br />
 
-        <span>Số chỗ:</span>
-        <br />
-        <input
-          type="text"
-          required
-          id="numberOfSeats"
-          className="form-text"
-          defaultValue={bus.soChoNgoi}
-          readOnly
-        />
-        <br />
-
-        <span>Biển số xe:</span>
+        <h5>Biển số xe:</h5>
         <br />
         <input
           type="text"
@@ -107,7 +85,7 @@ function Formupdatebus(props) {
           defaultValue={bus.bienSoXe}
         />
         <br />
-        <span>Nhà xe:</span>
+        <h5>Nhà xe:</h5>
         <br />
         <input
           type="text"
@@ -118,7 +96,7 @@ function Formupdatebus(props) {
         />
         <br />
       </div>
-      <div className="button-update-bus">
+      <div className="button-add-bus">
         <button className="button" onClick={handleBack}>
           Quay lại
         </button>

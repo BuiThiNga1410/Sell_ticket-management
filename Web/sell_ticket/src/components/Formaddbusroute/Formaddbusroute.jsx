@@ -49,26 +49,26 @@ function Formaddbusroute(props) {
   }
   return (
     <div className="form-add-bus-route">
-      <p className="add-route-title">THÊM TUYẾN XE</p>
+      <h3>THÊM TUYẾN XE</h3>
       <div className="my-form-input">
-        <span>Điểm xuất phát:</span>
-        <br />
+        <h5>Điểm xuất phát:</h5>
+
         <select id="dep" className="myselect">
           {busStations.map((busStation) => {
             return <option value={busStation.maBx}>{busStation.tenBx}</option>;
           })}
         </select>
         <br />
-        <span>Đích đến: </span>
-        <br />
+        <h5>Đích đến: </h5>
+
         <select id="dest" className="myselect">
           {busStations.map((busStation) => {
             return <option value={busStation.maBx}>{busStation.tenBx}</option>;
           })}
         </select>
         <br />
-        <span>Thời gian di chuyển (giờ):</span>
-        <br />
+        <h5>Thời gian di chuyển (giờ):</h5>
+
         <input type="number" required id="time" className="myform" />
         <br />
       </div>

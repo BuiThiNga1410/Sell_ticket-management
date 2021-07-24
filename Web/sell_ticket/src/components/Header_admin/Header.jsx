@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "./Header_admin.scss";
 function Header_admin() {
   const handleLogOut = () => {
-    localStorage.setItem('user', '{}');
-    window.location.href = '/';
-  }
+    localStorage.setItem("user", "{}");
+    window.location.href = "/login";
+  };
   return (
     <div className="Header">
       <Link to="/">
@@ -15,7 +15,7 @@ function Header_admin() {
           className="header-logo"
         />
       </Link>
-      <h1 className="title">HỆ THỐNG QUẢN LÝ BÁN VÉ DÀNH CHO ADMIN</h1>
+      <h1 className="header-title">HỆ THỐNG QUẢN LÝ BÁN VÉ DÀNH CHO ADMIN</h1>
       <ul className="header-list">
         <li className="header-item">
           <span>
@@ -26,7 +26,9 @@ function Header_admin() {
           </span>
         </li>
         <li className="header-item">
-          <button className="header-button" onClick={handleLogOut}>Đăng xuất</button>
+          <button className="header-button" onClick={handleLogOut}>
+            Đăng xuất
+          </button>
         </li>
       </ul>
     </div>

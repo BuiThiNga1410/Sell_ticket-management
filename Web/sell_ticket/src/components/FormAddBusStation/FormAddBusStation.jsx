@@ -1,8 +1,7 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { useHistory } from "react-router";
 import axios from "axios";
-
+import "./FormAddBusStation.scss";
 FormAddBusStation.propTypes = {};
 
 function FormAddBusStation(props) {
@@ -37,14 +36,14 @@ function FormAddBusStation(props) {
   }
   return (
     <div className="form-add-bus-route">
-      <p className="add-route-title">THÊM BẾN XE</p>
-      <div className="form-input">
-        <span>Tên bến xe</span>
-        <br />
+      <span className="add-route-title">THÊM BẾN XE</span>
+      <div className="form-add-bus-station">
+        <h5>Tên bến xe</h5>
+
         <input type="text" required id="nameOfBusStation" className="myform" />
         <br />
-        <span>Địa chỉ</span>
-        <br />
+        <h5>Địa chỉ</h5>
+
         <input type="text" required id="address" className="myform" />
         <br />
       </div>

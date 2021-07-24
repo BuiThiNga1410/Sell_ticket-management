@@ -40,7 +40,6 @@ function Search_admin(props) {
             placeholder="Nhập từ khóa"
             onChange={handleSearchTermChange}
           />
-          <button className="btn btn-infor">Tìm kiếm</button>
         </div>
       </div>
       <hr />

@@ -45,22 +45,20 @@ function Formaddbus(props) {
 
   return (
     <div className="form-add-bus">
-      <p className="add-bus-title">THÊM XE</p>
-      <form method="post" className="formAddBus">
+      <h3 className="add-bus-title">THÊM XE</h3>
+      <form method="post" className="formBus">
         <div className="my-form-input">
-          <span>Tên tài xế:</span>
-          <br />
+          <h5>Tên tài xế:</h5>
 
           <select className="form-text myselect">
             {employees.map((staff) => {
               return <option value={staff.maNd}>{staff.tenNd}</option>;
             })}
           </select>
-
           <br />
 
-          <span>Số chỗ:</span>
-          <br />
+          <h5>Số chỗ:</h5>
+
           <input
             type="number"
             required
@@ -69,8 +67,8 @@ function Formaddbus(props) {
           />
           <br />
 
-          <span>Biển số xe:</span>
-          <br />
+          <h5>Biển số xe:</h5>
+
           <input type="text" required id="numberPlate" className="form-text" />
           <br />
         </div>

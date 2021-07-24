@@ -59,59 +59,86 @@ function Datastaff(props) {
         <h1 className="title-table">DANH SÁCH NHÂN VIÊN</h1>
         <div className="container">
           <div className="my-row">
-            <Search_admin onSubmit={handleFiltersChange} />
-            <div className="table-list-staff">
-              <button className="button addbutton">
-                <Link to="/staff/account/add" className="link-add-button">
-                  Cấp tài khoản
-                </Link>
-              </button>
-              <div className="table-container">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Họ và tên</th>
-                      <th>Địa chỉ</th>
-                      <th>Số điện thoại</th>
-                      <th>CMND</th>
-                      <th>Username</th>
-                      <th>Cập nhật</th>
-                      <th>Xóa</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {employees.map((staff) => {
-                      return (
-                        <tr>
-                          <td data-column="Id">{staff.maNd}</td>
-                          <td data-column="Name">{staff.tenNd}</td>
-                          <td data-column="Address">{staff.diaChi}</td>
-                          <td data-column="Phonenumber">{staff.sdt}</td>
-                          <td data-column="CMND">{staff.cmnd}</td>
-                          <td data-column="Username">{staff.email}</td>
-                          <td data-column="link">
-                            <a
-                              href={"/staff/update/" + staff.maNd}
-                              className="my-link"
-                            >
-                              Cập nhật
-                            </a>
-                          </td>
-                          <td data-column="link">
-                            <button
-                              className="btn-delete"
-                              onClick={() => handleDelete(staff.maNd)}
-                            >
-                              Xóa
-                            </button>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
+            <div className="table-list my-table-list">
+              <div>
+                <Search_admin
+                  className="edit-search"
+                  onSubmit={handleFiltersChange}
+                />
               </div>
+              <div>
+                <button className="btn btn-primary button addbusbutton myeditbutton">
+                  <Link
+                    to="/staff/account/add"
+                    className="link-add-button my-button"
+                  >
+                    Cấp tài khoản
+                  </Link>
+                </button>
+              </div>
+              {employees.length ? (
+                <div className="table-container">
+                  <table className="mytable">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+
+                        <th>Họ và tên</th>
+
+                        <th>Địa chỉ</th>
+                        <th>Số điện thoại</th>
+                        <th>CMND</th>
+                        <th>Username</th>
+                        <th>Cập nhật</th>
+
+                        <th>Xóa</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {employees.map((employee) => {
+                        return (
+                          <tr>
+                            <td data-column="id">{employee.maNd}</td>
+
+                            <td data-column="name">{employee.tenNd}</td>
+
+                            <td data-column="address">{employee.diaChi}</td>
+
+                            <td data-column="sdt">{employee.sdt}</td>
+                            <td data-column="cmnd">{employee.cmnd}</td>
+                            <td data-column="username">{employee.email}</td>
+                            <td data-column="link">
+                              <a
+                                href={"/staff/update/" + employee.maNd}
+                                className="my-link"
+                              >
+                                Cập nhật
+                              </a>
+                            </td>
+                            <td data-column="link">
+                              <button
+                                className="btn-delete"
+                                onClick={() => handleDelete(employee.maNd)}
+                              >
+                                Xóa
+                              </button>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              ) : (
+                <div className="notFound myLabel">
+                  <p className="notFound-label">Không tìm thấy dữ liệu</p>
+                  <img
+                    className="notFound-img"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuW_Gkd6eDbGQ7X3JmDZKbSX8q8TZLOPEdv-lMLjICH_OEfS4MVRDAoFP3fsvQU1lV7Ac&usqp=CAU"
+                    alt="not found"
+                  />
+                </div>
+              )}
             </div>
           </div>
         </div>

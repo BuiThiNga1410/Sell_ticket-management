@@ -55,6 +55,9 @@ function Menubar(props) {
             </li>
           </ul>
         </li>
+        <li>
+          <Link to="/revenues">Quản lý báo cáo</Link>
+        </li>
       </ul>
     </div>
   );

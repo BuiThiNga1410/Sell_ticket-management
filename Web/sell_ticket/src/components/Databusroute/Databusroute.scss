@@ -82,6 +82,27 @@ only screen and (max-width: 760px),
 }
 .addbusroutebutton{
 	position: relative;
-	left: 827px;
+	left: 901px;
+    top: -21px;
 	margin-top: 10px;
+}
+.my-search-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 77px;
+  width: 730px; 
+  left: 74px;
+  margin-bottom: 48px;
+}
+
+.my-search-form__input {
+  border: none;
+  width: 200px !important;
+  height: 40px;
+  border: 1px solid rgb(199, 198, 198);
+}
+.search-icon {
+  background-color: #fff;
 }

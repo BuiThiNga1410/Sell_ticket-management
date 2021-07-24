@@ -1,5 +1,5 @@
 .title-table{
-    margin-top: 40px;
+    
     text-align: center;
     position: relative;
     top: 40px;
@@ -12,10 +12,9 @@
     color: red;
   }
 .table-container { 
-	width: 90%; 
-	border-collapse: collapse; 
-	margin:25px auto;
-	position: relative;
+	//width: 115%;
+	//margin:25px auto;
+	//position: relative;
 }
 thead th {
 	position: sticky;
@@ -96,8 +95,9 @@ only screen and (max-width: 760px),
 }
 .addbutton{
 	position: relative;
-	left: 1104px;
-	margin-top: 10px;
+	left: 878px;
+	margin-top: 10px;    
+	top: -13px;
 }
 .link-add-button{
 	text-decoration: none;
@@ -131,4 +131,6 @@ only screen and (max-width: 760px),
 	  }
 	}
   }
-  
+  .container{
+	      margin-top: -40px;
+  }

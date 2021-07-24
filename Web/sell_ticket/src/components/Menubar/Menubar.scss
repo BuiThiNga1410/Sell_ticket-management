@@ -15,7 +15,7 @@
 }
 .nav > li{
     display: inline-block;
-    width: calc(100%/4);
+    width: calc(100%/5);
    
 }
 .nav >li >a{
@@ -56,4 +56,3 @@
 .nav li:hover .subnav{
     display: block;
 }
-

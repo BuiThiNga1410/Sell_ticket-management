@@ -7,10 +7,12 @@
   background-color: rgb(49, 98, 138);
 }
 .header {
-  margin-bottom: 0px;
+  margin-bottom: 0;
+  padding: 20px auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  
 }
 
 .header-list {

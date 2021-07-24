@@ -57,7 +57,7 @@ function Datastaff(props) {
     <div>
       <div className="searchForm">
         <h1 className="title-table">DANH SÁCH NHÂN VIÊN</h1>
-        <div className="container">
+        <div className="container-draft">
           <div className="my-row">
             <div className="table-list my-table-list">
               <div>

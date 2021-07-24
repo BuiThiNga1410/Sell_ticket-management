@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import {
   Button,
   Form,
@@ -7,41 +6,24 @@ import {
   FormGroup,
   FormLabel,
 } from "react-bootstrap";
-import { useState } from "react";
-import axios from "axios";
 
 import "./Login.scss";
 import myaxios from "../../../../app/api";
-import { useHistory } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
+import { useForm } from 'react-hook-form';
 
-Login.propTypes = {};
+function Login() {
+  const { register, formState: { errors }, handleSubmit } = useForm();
 
-function Login(props) {
-  const history = useHistory();
-  let valid = true;
-  const handleValidate = (e) => {
-    let regex = /\S+@\S+\.\S+/;
-    if (!regex.test(e.target.value)) {
-      valid = false;
-      document.querySelector(".text-error").setAttribute("style", "display: block");
-    }
-    else {
-      valid = true;
-      document.querySelector(".text-error").setAttribute("style", "display: none");
-    }
-
-  }
-  const handleLogin = () => {
-    let email = document.querySelector("#email").value;
-    let pass = document.querySelector("#pass").value;
-    if(valid && email && pass) {
-      myaxios
+  const handleLogin = (data) => {
+    let email = data.email;
+    let pass = data.password;
+    myaxios
       .post("/accounts/validate", {
         Email: email,
         MatKhau: pass,
       })
       .then((response) => {
+        console.log(response);
         if (response.data.maNd) {
           let user = {
             ...response.data,
@@ -50,44 +32,66 @@ function Login(props) {
           localStorage.setItem("user", JSON.stringify(user));
           if (response.data.vaitro === 1) window.location.href = "/admin/home";
           else window.location.href = "/";
-          // window.location.reload();
-        } else
+        } else {
           document
             .querySelector(".invalid")
             .setAttribute("style", "display: block");
+        }
       })
       .catch((error) => {
         console.log(error);
       });
-    }
   };
   return (
     <div className="login">
       <div className="form-login">
         <p className="login-title">Login to your account</p>
-        <Form>
-          <FormGroup>
-            <FormLabel>Email</FormLabel>
-            <FormControl placeholder="Email" id="email" onKeyUp={handleValidate} required />
-            <p className="text-error">Email nhập vào không hợp lệ</p>
-          </FormGroup>
-
-          <FormGroup>
-            <FormLabel>Mật khẩu</FormLabel>
-            <FormControl placeholder="Mật khẩu" id="pass" type="password" required />
-          </FormGroup>
-          <p className="invalid">Thông tin đăng nhập không hợp lệ!!!</p>
-          <p>Bạn muốn <a href="/sign-up">Đăng kí</a> ?</p>
-          <div className="login_input">
-            <Button
-              className="login_input-item"
-              variant="primary"
-              onClick={handleLogin}
-            >
-              Login
-            </Button>
+        <form onSubmit={handleSubmit(handleLogin)}>
+          <div className="form-group">
+            <label htmlFor="email" className="form-label">Email</label>
+            <input
+              placeholder="Nhập Email"
+              name="email"
+              id="email"
+              className="form-input"
+              {...register("email", {
+                required: "This filed is required",
+                pattern: {
+                  value: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                  message: 'Email is invalid'
+                }
+              })}
+            />
+            {errors.email && <p className="text-error">{errors.email.message}</p>}
           </div>
-        </Form>
+          <div className="form-group">
+            <label className="form-label" htmlFor="password">Password</label>
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              id="password"
+              className="form-input"
+              {...register("password", {
+                required: "This filed is required",
+                minLength: {
+                  value: 6,
+                  message: 'Password must have at least 6 characters'
+                }
+              })}
+            />
+            {errors.password && <p className="text-error">{errors.password.message}</p>}
+            <p className="redirect">Do you want <a href="/sign-up">Register account</a> ?</p>
+            <p className="invalid">Invalid login information</p>
+            <div className="form-btn">
+              <input
+                className="btn-submit"
+                type="submit"
+                value="Login"
+              />
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   );

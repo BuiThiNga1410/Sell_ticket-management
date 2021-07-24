@@ -1,5 +1,5 @@
 .login {
-  height: 500px;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -43,6 +43,7 @@
   width: 60%;
 }
 .invalid {
+  margin-top: 16px;
   color: rgb(214, 34, 34);
   text-align: center;
   display: none;

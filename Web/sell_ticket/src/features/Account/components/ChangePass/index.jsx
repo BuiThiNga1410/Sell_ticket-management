@@ -41,12 +41,12 @@ function ChangePass() {
   return (
     <div className="change-pass-page">
       <div class="change-pass">
-        <p className="form-changePass-label">Thay đổi mật khẩu</p>
         {!!status && (
           <p className={`${status.isSuccess ? 'txt-success' : 'text-error'}`}>{status.message}</p>
         )}
         <div className="form-changePass">
-          <form onSubmit={handleSubmit(handleChangePass)}>
+          <form className="form" onSubmit={handleSubmit(handleChangePass)}>
+            <p className="form-title">Thay đổi mật khẩu</p>
             <div className="form-group">
               <label className="form-label" htmlFor="oldPassword">Password</label>
               <input

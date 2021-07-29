@@ -4,7 +4,7 @@
   background-size: cover;
 }
 .div-header {
-  background-color: rgb(49, 98, 138);
+  background-color: rgb(99, 155, 201);
 }
 .header {
   margin-bottom: 0;
@@ -61,13 +61,12 @@
 }
 .header-link {
   color: #fff;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 550;
 }
 
 .header-link:hover {
-  text-decoration: none;
-  color: red;
+  opacity: 0.8;
 }
 
 .header-menu-listItem {
@@ -84,6 +83,10 @@
   color: #000;
   border-bottom: 1px solid rgb(221, 230, 229);
   cursor: pointer;
+
+  &:hover {
+    background-color: rgb(224, 220, 220);
+  }
 }
 
 .header-menu-link {

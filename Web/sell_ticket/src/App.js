@@ -15,6 +15,7 @@ import Menubar from "./components/Menubar/Menubar";
 import DieuHuongURL from "./routes/DieuHuongURL";
 import Header_admin from "./components/Header_admin/Header";
 import Ticket from "./features/Ticket";
+import SaleReport from "./components/SaleReport";
 
 // Lazy load - Code splitting
 // const Ticket = React.lazy(() => import('./features/Ticket'));
@@ -47,6 +48,7 @@ function App() {
                   <div>
                     <Route path="/qlTicket" component={TicketNV} />
                     <Route path="/customer/" component={Customer} />
+                    <Route path="/sale-report" component={SaleReport}/>
                   </div>
                 )}
               </Switch>

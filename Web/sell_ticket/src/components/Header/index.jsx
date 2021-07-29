@@ -25,7 +25,7 @@ function Header(props) {
           {user.vaitro === 2 && (
             <>
               <li className="header-item">
-                <p className="header-link">Quản lý vé xe</p>
+                <a href="/qlTicket"className="header-link">Quản lý vé xe</a>
                 <div className="header-item__menu">
                   <ul className="header-menu-listItem">
                     <li className="header-menu-item"><a className="header-menu-link" href="/qlTicket">Xem vé xe</a></li>
@@ -38,7 +38,7 @@ function Header(props) {
                 <a className="header-link" href="/sale-report">Báo cáo doanh thu</a>
               </li>
               <li className="header-item">
-                <p className="header-link">Quản lý khách hàng</p>
+                <a href="/customer" className="header-link">Quản lý khách hàng</a>
                 <div className="header-item__menu">
                   <ul className="header-menu-listItem">
                     <li className="header-menu-item"><a className="header-menu-link" href="/customer">Xem khách hàng</a></li>
@@ -50,8 +50,8 @@ function Header(props) {
             </>
           )}
           {user.maNd
-            ? (<div className="header-group-right">
-              <a href='/account' className="user-name">Xin chào {name}</a>
+            ? (<div className="header-group-right header-item">
+              <a href='/account' className="header-link user-name">Xin chào {name}</a>
               <button className="btn btn-primary" type="button" onClick={handleLogOut}>Đăng xuất</button>
             </div>
             )

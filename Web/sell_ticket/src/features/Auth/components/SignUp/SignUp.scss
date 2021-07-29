@@ -7,12 +7,11 @@
   background-size: cover;
 }
 .form {
-  padding: 20px;
-  border: 1px solid rgb(185, 182, 182);
-
-  width: 400px;
+  padding: 30px;
+  box-shadow: 1px 2px 4px rgb(194, 192, 192);
+  margin-bottom: 30px;
+  // width: 400px;
   border-radius: 5px;
-
   background-color: #fff;
 }
 
@@ -21,10 +20,10 @@
 }
 
 .form-title {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 600;
-  color: var(--primary-color);
   text-align: center;
+  margin-bottom: 24px;
 }
 
 .form-group-row {
@@ -43,6 +42,7 @@
   padding: 4px 8px;
   border-radius: 3px;
   border: 1px solid rgb(185, 182, 182);
+  font-size: 14px;
 }
 
 .form-btn {
@@ -57,4 +57,6 @@
   border: none;
   border-radius: 5px;
   text-align: center;
+  margin: 0 16px;
 }
+

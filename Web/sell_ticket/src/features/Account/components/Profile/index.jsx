@@ -46,10 +46,10 @@ function Profile(props) {
   }
   return (
     <div className="profile-page">
-      <p className="profile-title">Hồ sơ của tôi</p>
       <div className="profile">
         <div className="form-profile">
-          <form onSubmit={handleSubmit(handleChangeInfo)}>
+          <form className="form" onSubmit={handleSubmit(handleChangeInfo)}>
+            <p className="form-title">THÔNG TIN CÁ NHÂN</p>
             <div className="form-group">
               <label className="form-label" htmlFor="name">Họ và tên</label>
               <input
@@ -62,7 +62,7 @@ function Profile(props) {
                 {...register("name", {
                   required: "This filed is required",
                   pattern: {
-                    value: /^[a-zA-Z ]+$/,
+                    value: /^\D+$/,
                     message: 'Name is invalid'
                   }
                 })}
@@ -106,47 +106,47 @@ function Profile(props) {
                 })}
               />
               {errors.cmnd && <p className="text-error">{errors.cmnd.message}</p>}
-              <div className="form-group">
-                <label className="form-label" htmlFor="dob">Ngày sinh</label>
-                <input
-                  type="date"
-                  placeholder="dob"
-                  name="dob"
-                  id="dob"
-                  className="form-input"
-                  defaultValue={user.ngaySinh}
-                  {...register("dob", {
-                    required: "This filed is required",
-                  })}
-                />
-                {errors.dob && <p className="text-error">{errors.dob.message}</p>}
-              </div>
-              <div className="form-group">
-                <label className="form-label" htmlFor="address">Địa chỉ</label>
-                <input
-                  type="text"
-                  placeholder="address"
-                  name="address"
-                  id="address"
-                  className="form-input"
-                  defaultValue={user.diaChi}
-                  {...register("address", {
-                    required: "This filed is required",
-                    maxLength: {
-                      value: 255,
-                      message: 'Address do not more than 500 characters'
-                    }
-                  })}
-                />
-                {errors.address && <p className="text-error">{errors.address.message}</p>}
-              </div>
-              <div className="form-btn">
-                <input
-                  className="btn-submit"
-                  type="submit"
-                  value="Update"
-                />
-              </div>
+            </div>
+            <div className="form-group">
+              <label className="form-label" htmlFor="dob">Ngày sinh</label>
+              <input
+                type="date"
+                placeholder="dob"
+                name="dob"
+                id="dob"
+                className="form-input"
+                defaultValue={user.ngaySinh}
+                {...register("dob", {
+                  required: "This filed is required",
+                })}
+              />
+              {errors.dob && <p className="text-error">{errors.dob.message}</p>}
+            </div>
+            <div className="form-group">
+              <label className="form-label" htmlFor="address">Địa chỉ</label>
+              <input
+                type="text"
+                placeholder="address"
+                name="address"
+                id="address"
+                className="form-input"
+                defaultValue={user.diaChi}
+                {...register("address", {
+                  required: "This filed is required",
+                  maxLength: {
+                    value: 255,
+                    message: 'Address do not more than 500 characters'
+                  }
+                })}
+              />
+              {errors.address && <p className="text-error">{errors.address.message}</p>}
+            </div>
+            <div className="form-btn">
+              <input
+                className="btn-submit"
+                type="submit"
+                value="Update"
+              />
             </div>
           </form>
         </div>

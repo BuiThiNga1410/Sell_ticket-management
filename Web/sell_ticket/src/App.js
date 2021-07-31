@@ -16,6 +16,7 @@ import DieuHuongURL from "./routes/DieuHuongURL";
 import Header_admin from "./components/Header_admin/Header";
 import Ticket from "./features/Ticket";
 import SaleReport from "./components/SaleReport";
+import Footer_admin from "./components/Footer_admin/Footer_admin";
 
 // Lazy load - Code splitting
 // const Ticket = React.lazy(() => import('./features/Ticket'));
@@ -33,6 +34,7 @@ function App() {
               <Header_admin />
               <Menubar />
               <DieuHuongURL />
+              <Footer_admin/>
             </div>
           ) : (
             <div className="App">
@@ -52,10 +54,12 @@ function App() {
                   </div>
                 )}
               </Switch>
+              <Footer />
             </div>
+            
           )}
 
-          <Footer />
+          
         </div>
       ) : (
         <div>

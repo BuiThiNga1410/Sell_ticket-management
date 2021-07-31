@@ -67,7 +67,7 @@ function Databus(props) {
               </div>
               <div>
                 <button className="btn btn-primary button addbusbutton myeditbutton">
-                  <Link to="/bustrip/add" className="link-add-button my-button">
+                  <Link to="/bus/add" className="link-add-button my-button">
                     Thêm xe
                   </Link>
                 </button>

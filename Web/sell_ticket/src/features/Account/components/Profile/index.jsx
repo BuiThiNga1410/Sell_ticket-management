@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import myaxios from '../../../../app/api';
 
 import './Profile.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-regular-svg-icons';
 import { useForm } from 'react-hook-form';
+import ReactLoading from 'react-loading';
 
 function Profile(props) {
   const { register, formState: { errors }, handleSubmit } = useForm();
   let user = JSON.parse(localStorage.getItem('user'));
+  const [isLoading, setLoading] = useState(false);
+
   const handleChangeInfo = (data) => {
+    setLoading(true);
     const name = data.name;
     const sdt = data.sdt;
     const cmnd = data.cmnd;
@@ -23,6 +27,7 @@ function Profile(props) {
       "NgaySinh": birthday,
     })
       .then((response) => {
+        setLoading(false);
         document.getElementsByClassName("overlay")[0].setAttribute("style", "display: flex");
         console.log(response.data);
         let newUser = {
@@ -41,6 +46,7 @@ function Profile(props) {
         }, 2000)
       })
       .catch((error) => {
+        setLoading(false);
         console.log(error);
       })
   }
@@ -142,11 +148,23 @@ function Profile(props) {
               {errors.address && <p className="text-error">{errors.address.message}</p>}
             </div>
             <div className="form-btn">
-              <input
+              <button
                 className="btn-submit"
                 type="submit"
-                value="Update"
-              />
+                disabled={isLoading}
+              >
+                <span className="f-center-y">
+                  <span className="txt-mg-right">Update</span>
+                  {isLoading && (
+                    <ReactLoading
+                      type={"spokes"}
+                      color={"#ffffff"}
+                      height={24}
+                      width={24}
+                    />
+                  )}
+                </span>
+              </button>
             </div>
           </form>
         </div>

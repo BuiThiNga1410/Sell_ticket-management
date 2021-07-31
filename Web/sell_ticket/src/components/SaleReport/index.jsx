@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import myaxios from '../../app/api';
 import './SaleReport.scss';
+import ReactLoading from 'react-loading';
 
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
@@ -8,15 +9,22 @@ import { useHistory } from 'react-router-dom';
 function SaleReport() {
   const { register, formState: { errors }, handleSubmit } = useForm();
   const history = useHistory();
+  const [isLoading, setLoading] = useState(false);
+  const [status, setStatus] = useState();
 
   function handleSaleReport(data) {
+    setLoading(true);
+    setStatus(null);
     myaxios.get(`/bustrips/revenue?date=${data.date}`)
       .then((res) => {
         if (!res.data.length) {
-          alert("Không có chyến xe nào xuất phát vào ngày bạn chọn");
+          setStatus({
+            isSuccess: false,
+            message: "Không có chyến xe nào xuất phát vào ngày bạn chọn",
+          });
+          setLoading(false)
           return;
         }
-        console.log(res.data);
         myaxios.post('/revenues', {
           "Ngay": data.date,
           "SoVe": res.data.reduce((sum, ve) => {
@@ -27,11 +35,24 @@ function SaleReport() {
           }, 0) - data.petrolMoney - data.roadTolls,
           "GhiChu": data.note,
         })
+          .then(() => {
+            setLoading(false);
+            setStatus({
+              isSuccess: true,
+              message: "Báo cáo đã được ghi lại",
+            });
+          })
           .catch((error) => {
+            setLoading(false);
+            setStatus({
+              isSuccess: false,
+              message: "Sale report failed",
+            });
             console.log(error);
           })
       })
       .catch((error) => {
+        setLoading(false);
         console.log(error);
       })
   }
@@ -91,8 +112,25 @@ function SaleReport() {
             {...register("note")}
           />
         </div>
+        {!!status && (
+          <p className={`txt-center ${status.isSuccess ? "txt-success" : "text-error"}`}>
+            {status.message}
+          </p>
+        )}
         <div className="form-btn">
-          <input className="btn btn-primary btn-submit" type="submit" value="Save" />
+          <button className="btn btn-primary btn-submit" type="submit" disabled={isLoading}>
+            <span className="f-center-y">
+              <span className="txt-mg-right">Save</span>
+              {isLoading && (
+                <ReactLoading
+                  type={"spokes"}
+                  color={"#ffffff"}
+                  height={24}
+                  width={24}
+                />
+              )}
+            </span>
+          </button>
           <input
             className="btn btn-outline-secondary"
             value="Hủy"

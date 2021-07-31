@@ -3,11 +3,13 @@ import { useParams } from 'react-router';
 import myaxios from '../../../../app/api';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
+import ReactLoading from 'react-loading';
 
 function UpdateCustomer() {
   const { register, formState: { errors }, handleSubmit } = useForm();
   const { customerId } = useParams();
   const [customer, setCustomer] = useState();
+  const [isLoading, setLoading] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -21,6 +23,7 @@ function UpdateCustomer() {
   }, [])
 
   const handleUpdate = (data) => {
+    setLoading(true);
     myaxios.put(`/customers/${customerId}`, {
       "TenNd": data.name,
       "Sdt": data.sdt,
@@ -29,11 +32,13 @@ function UpdateCustomer() {
       "NgaySinh": data.dob.split("T")[0]
     })
       .then(() => {
+        setLoading(false);
         setTimeout(() => {
           window.location.href = "/customer";
         }, 2000);
       })
       .catch((error) => {
+        setLoading(false);
         console.log(error);
       })
   }
@@ -145,11 +150,23 @@ function UpdateCustomer() {
               {errors.address && <p className="text-error">{errors.address.message}</p>}
             </div>
             <div className="form-btn">
-              <input
+              <button
                 className="btn-submit"
                 type="submit"
-                value="Update"
-              />
+                disabled={isLoading}
+              >
+                <span className="f-center-y">
+                  <span className="txt-mg-right">Update</span>
+                  {isLoading && (
+                    <ReactLoading
+                      type={"spokes"}
+                      color={"#ffffff"}
+                      height={24}
+                      width={24}
+                    />
+                  )}
+                </span>
+              </button>
               <input
                 className="btn btn-outline-secondary"
                 value="Hủy"

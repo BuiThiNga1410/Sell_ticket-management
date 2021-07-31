@@ -1,27 +1,38 @@
-import React, { useState } from 'react';
-import myaxios from '../../../../app/api';
-import { useForm } from 'react-hook-form';
+import React, { useState } from "react";
+import myaxios from "../../../../app/api";
+import { useForm } from "react-hook-form";
+import ReactLoading from "react-loading";
 
-import './ChangePass.scss';
+import "./ChangePass.scss";
 
 function ChangePass() {
-  const { register, formState: { errors }, handleSubmit, watch, reset } = useForm();
-  let user = JSON.parse(localStorage.getItem('user'));
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    watch,
+    reset,
+  } = useForm();
+  let user = JSON.parse(localStorage.getItem("user"));
   const password = watch("newPassword");
   const [status, setStatus] = useState();
+  const [isLoading, setLoading] = useState(false);
 
   const handleChangePass = (data) => {
+    setLoading(true);
     setStatus(null);
     const oldPass = data.oldPassword;
     const newPass = data.newPassword;
-    myaxios.put(`/accounts/${user.maNd}`, {
-      "MatKhauCu": oldPass,
-      "MatKhau": newPass
-    })
+    myaxios
+      .put(`/accounts/${user.maNd}`, {
+        MatKhauCu: oldPass,
+        MatKhau: newPass,
+      })
       .then(() => {
+        setLoading(false);
         setStatus({
           isSuccess: true,
-          message: 'Change password successfully'
+          message: "Change password successfully",
         });
 
         setTimeout(() => {
@@ -30,25 +41,25 @@ function ChangePass() {
         }, 2000);
       })
       .catch((error) => {
+        setLoading(false);
         setStatus({
           isSuccess: false,
-          message: 'Old password is invalid'
+          message: "Old password is invalid",
         });
-        throw (error);
-      })
-  }
-  console.log('status', status);
+        throw error;
+      });
+  };
+  console.log("status", status);
   return (
     <div className="change-pass-page">
       <div class="change-pass">
-        {!!status && (
-          <p className={`${status.isSuccess ? 'txt-success' : 'text-error'}`}>{status.message}</p>
-        )}
         <div className="form-changePass">
           <form className="form" onSubmit={handleSubmit(handleChangePass)}>
             <p className="form-title">Thay đổi mật khẩu</p>
             <div className="form-group">
-              <label className="form-label" htmlFor="oldPassword">Password</label>
+              <label className="form-label" htmlFor="oldPassword">
+                Old Password
+              </label>
               <input
                 type="password"
                 placeholder="Old password"
@@ -59,10 +70,14 @@ function ChangePass() {
                   required: "This filed is required",
                 })}
               />
-              {errors.oldPassword && <p className="text-error">{errors.oldPassword.message}</p>}
+              {errors.oldPassword && (
+                <p className="text-error">{errors.oldPassword.message}</p>
+              )}
             </div>
             <div className="form-group">
-              <label className="form-label" htmlFor="newPassword">Password</label>
+              <label className="form-label" htmlFor="newPassword">
+                New password
+              </label>
               <input
                 type="password"
                 placeholder="New Password"
@@ -73,14 +88,18 @@ function ChangePass() {
                   required: "This filed is required",
                   minLength: {
                     value: 6,
-                    message: 'Password must have at least 6 characters'
-                  }
+                    message: "Password must have at least 6 characters",
+                  },
                 })}
               />
-              {errors.newPassword && <p className="text-error">{errors.newPassword.message}</p>}
+              {errors.newPassword && (
+                <p className="text-error">{errors.newPassword.message}</p>
+              )}
             </div>
             <div className="form-group">
-              <label className="form-label" htmlFor="confirm-password">Confirm password</label>
+              <label className="form-label" htmlFor="confirm-password">
+                Confirm password
+              </label>
               <input
                 type="password"
                 placeholder="Confirm password"
@@ -91,19 +110,39 @@ function ChangePass() {
                   required: "This filed is required",
                   minLength: {
                     value: 6,
-                    message: 'Password must have at least 6 characters'
+                    message: "Password must have at least 6 characters",
                   },
-                  validate: value => value === password || 'Password do not match'
+                  validate: (value) =>
+                    value === password || "Password do not match",
                 })}
               />
-              {errors.confirmPassword && <p className="text-error">{errors.confirmPassword.message}</p>}
+              {errors.confirmPassword && (
+                <p className="text-error">{errors.confirmPassword.message}</p>
+              )}
             </div>
+            {!!status && (
+              <p
+                className={`txt-center ${
+                  status.isSuccess ? "txt-success" : "text-error"
+                }`}
+              >
+                {status.message}
+              </p>
+            )}
             <div className="form-btn">
-              <input
-                className="btn-submit"
-                type="submit"
-                value="Change password"
-              />
+              <button className="btn-submit" type="submit" disabled={isLoading}>
+                <span className="f-center-y">
+                  <span className="txt-mg-right">Change password</span>
+                  {isLoading && (
+                    <ReactLoading
+                      type={"spokes"}
+                      color={"#ffffff"}
+                      height={24}
+                      width={24}
+                    />
+                  )}
+                </span>
+              </button>
             </div>
           </form>
         </div>

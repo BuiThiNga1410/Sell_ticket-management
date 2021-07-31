@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import { useParams } from 'react-router';
 import myaxios from '../../../../app/api';
+import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
 
-UpdateCustomer.propTypes = {
-
-};
-
-function UpdateCustomer(props) {
+function UpdateCustomer() {
+  const { register, formState: { errors }, handleSubmit } = useForm();
   const { customerId } = useParams();
-  const [customer, setCustomer] = useState([]);
-  let valid = true;
+  const [customer, setCustomer] = useState();
+  const history = useHistory();
+
   useEffect(() => {
     myaxios.get(`/customers/${customerId}`)
       .then((response) => {
@@ -20,102 +19,148 @@ function UpdateCustomer(props) {
         console.log(error);
       })
   }, [])
-  const handleValidate = (e) => {
-    let regex = /./;
-    switch (e.target.id) {
-      case "sdt":
-        regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
-        break;
-      case "tenNd":
-        regex = /^\D+$/;
-        break;
-      default:
-        break;
-    }
-    if (!regex.test(e.target.value)) {
-      valid = false;
-      e.target.parentElement.childNodes[1].setAttribute("style", "display: block");
-    }
-    else {
-      valid = true;
-      e.target.parentElement.childNodes[1].setAttribute("style", "display: none");
-    }
 
-  }
-  const handleUpdate = (e) => {
-    e.preventDefault();
-    if (valid) {
-      let tenNd = document.getElementById("tenNd").value;
-      let sdt = document.getElementById("sdt").value;
-      let cmnd = document.getElementById("cmnd").value;
-      let diaChi = document.getElementById("diaChi").value;
-      let ngaySinh = document.getElementById("ngaySinh").value;
-      if(!( tenNd && sdt && cmnd && diaChi && ngaySinh)) {
-        alert("Vui lòng nhập đầy đủ thông tin");
-        return;
-      }
-      myaxios.put(`/customers/${customerId}`, {
-        "TenNd": tenNd,
-        "Sdt": sdt,
-        "Cmnd": cmnd,
-        "DiaChi": diaChi,
-        "NgaySinh": ngaySinh
-      })
-        .then((response) => {
+  const handleUpdate = (data) => {
+    myaxios.put(`/customers/${customerId}`, {
+      "TenNd": data.name,
+      "Sdt": data.sdt,
+      "Cmnd": data.cmnd,
+      "DiaChi": data.address,
+      "NgaySinh": data.dob.split("T")[0]
+    })
+      .then(() => {
+        setTimeout(() => {
           window.location.href = "/customer";
-        })
-        .catch((error) => {
-          console.log(error);
-        })
-    }
+        }, 2000);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
   }
   return (
-    <div className="container my-form">
-      <h4 className="text-title">CHỈNH SỬA THÔNG TIN KHÁCH HÀNG</h4>
-      <form>
-        <div class="form-group row">
-          <label for="maNd" class="col-sm-3 col-form-label">Mã khách hàng</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" id="maNd" defaultValue={customer.maNd} readOnly></input>
-          </div>
+    <>
+      {!!customer && (
+        <div className="container my-form">
+          <form className="form" onSubmit={handleSubmit(handleUpdate)}>
+            <h4 className="form-title">CHỈNH SỬA THÔNG TIN KHÁCH HÀNG</h4>
+            <div className="form-group">
+              <label className="form-label" htmlFor="id">Mã khách hàng</label>
+              <input
+                readOnly
+                name="id"
+                id="id"
+                value={customer.maNd}
+                className="form-input"
+              />
+            </div>
+            <div className="form-group">
+              <label className="form-label" htmlFor="name">Tên khách hàng</label>
+              <input
+                type="text"
+                placeholder="name"
+                name="name"
+                id="name"
+                defaultValue={customer.tenNd}
+                className="form-input"
+                {...register("name", {
+                  required: "This filed is required",
+                  pattern: {
+                    value: /\D+$/,
+                    message: 'Name is invalid'
+                  }
+                })}
+              />
+              {errors.name && <p className="text-error">{errors.name.message}</p>}
+            </div>
+            <div className="form-group">
+              <label className="form-label" htmlFor="sdt">Số điện thoại</label>
+              <input
+                type="text"
+                placeholder="sdt"
+                name="sdt"
+                id="sdt"
+                defaultValue={customer.sdt}
+                className="form-input"
+                {...register("sdt", {
+                  required: "This filed is required",
+                  pattern: {
+                    value: /^\d+$/,
+                    message: 'Phone number is invalid'
+                  }
+                })}
+              />
+              {errors.sdt && <p className="text-error">{errors.sdt.message}</p>}
+            </div>
+            <div className="form-group">
+              <label className="form-label" htmlFor="cmnd">CMND</label>
+              <input
+                type="text"
+                placeholder="cmnd"
+                name="cmnd"
+                id="cmnd"
+                className="form-input"
+                defaultValue={customer.cmnd}
+                {...register("cmnd", {
+                  required: "This filed is required",
+                  pattern: {
+                    value: /^\d+$/,
+                    message: 'CMND is invalid'
+                  }
+                })}
+              />
+              {errors.cmnd && <p className="text-error">{errors.cmnd.message}</p>}
+            </div>
+            <div className="form-group">
+              <label className="form-label" htmlFor="dob">Ngày sinh</label>
+              <input
+                type="date"
+                placeholder="dob"
+                name="dob"
+                id="dob"
+                className="form-input"
+                defaultValue={customer.ngaySinh?.split("T")[0]}
+                {...register("dob", {
+                  required: "This filed is required",
+                })}
+              />
+              {errors.dob && <p className="text-error">{errors.dob.message}</p>}
+            </div>
+            <div className="form-group">
+              <label className="form-label" htmlFor="address">Địa chỉ</label>
+              <input
+                type="text"
+                placeholder="address"
+                name="address"
+                id="address"
+                className="form-input"
+                defaultValue={customer.diaChi}
+                {...register("address", {
+                  required: "This filed is required",
+                  maxLength: {
+                    value: 255,
+                    message: 'Address do not more than 500 characters'
+                  }
+                })}
+              />
+              {errors.address && <p className="text-error">{errors.address.message}</p>}
+            </div>
+            <div className="form-btn">
+              <input
+                className="btn-submit"
+                type="submit"
+                value="Update"
+              />
+              <input
+                className="btn btn-outline-secondary"
+                value="Hủy"
+                type="button"
+                onClick={() => { history.push("/customer") }}
+              />
+            </div>
+          </form>
         </div>
-        <div class="form-group row">
-          <label for="tenNd" class="col-sm-3 col-form-label">Tên khách hàng</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" id="tenNd" defaultValue={customer.tenNd} onKeyUp={handleValidate} required></input>
-            <p className="text-error">Tên khách hàng nhập vào không hợp lệ</p>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="sdt" class="col-sm-3 col-form-label">Số điện thoại</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" id="sdt" defaultValue={customer.sdt} onKeyUp={handleValidate} required></input>
-            <p className="text-error">Số điện thoại nhập vào không hợp lệ</p>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="cmnd" class="col-sm-3 col-form-label">CMND</label>
-          <div class="col-sm-9">
-            <input type="number" class="form-control" id="cmnd" defaultValue={customer.cmnd}></input>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="diaChi" class="col-sm-3 col-form-label">Địa chỉ</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" id="diaChi" defaultValue={customer.diaChi}></input>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="ngaySinh" class="col-sm-3 col-form-label">Ngày sinh</label>
-          <div class="col-sm-9">
-            <input type="date" class="form-control" id="ngaySinh" defaultValue={customer.ngaySinh}></input>
-          </div>
-        </div>
-        <div className="center">
-          <button className="btn btn-primary" onClick={handleUpdate}>Cập nhật</button>
-        </div>
-      </form>
-    </div>
+      )}
+    </>
   );
 }
 

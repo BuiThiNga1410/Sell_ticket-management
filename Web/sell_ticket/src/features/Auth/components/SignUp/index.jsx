@@ -3,6 +3,7 @@ import React from "react";
 import "./SignUp.scss";
 import myaxios from "../../../../app/api";
 import { useForm } from 'react-hook-form';
+import { Link } from "react-router-dom";
 
 
 function SignUp () {
@@ -87,7 +88,7 @@ function SignUp () {
             />
             {errors.confirmPassword && <p className="text-error">{errors.confirmPassword.message}</p>}     
           </div>
-          <p className="redirect">Do you want to <a href="/login">Login</a> ?</p>
+          <p className="redirect">Do you want to <Link to="/login">Login</Link> ?</p>
           <p className="invalid">Email already used</p>
           <div className="form-btn">
             <input

@@ -20,7 +20,10 @@ code {
 }
 *::-webkit-scrollbar { width: 0 !important }
 
-
+button {
+  background-color: transparent;
+  border: none;
+}
 
 .my-row {
   display: flex;
@@ -82,7 +85,7 @@ tbody {
   /* font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace; */
 }
-.button{
+.button {
   width: auto;
   padding: 8px;
   background-color:rgb(94, 145, 179);
@@ -156,7 +159,7 @@ tbody {
   margin-top: 10px;
 }
 .my-form {
-  max-width: 700px !important;
+  max-width: 600px !important;
   width: 100% !important;
 }
 .search-form {

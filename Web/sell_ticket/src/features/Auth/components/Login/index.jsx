@@ -3,6 +3,7 @@ import React from "react";
 import "./Login.scss";
 import myaxios from "../../../../app/api";
 import { useForm } from 'react-hook-form';
+import { Link } from "react-router-dom";
 
 function Login() {
   const { register, formState: { errors }, handleSubmit } = useForm();
@@ -74,7 +75,7 @@ function Login() {
               })}
             />
             {errors.password && <p className="text-error">{errors.password.message}</p>}
-            <p className="redirect">Do you want <a href="/sign-up">Register account</a> ?</p>
+            <p className="redirect">Do you want <Link to="/sign-up">Register account</Link> ?</p>
             <p className="invalid">Invalid login information</p>
             <div className="form-btn">
               <input

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+import Edit from '../../../../img/edit.svg';
+import Trash from '../../../../img/trash-2.svg';
 import myaxios from '../../../../app/api';
 import './index.scss';
+import { Link } from 'react-router-dom';
 
 ViewCustomer.propTypes = {
 
@@ -89,8 +91,10 @@ function ViewCustomer(props) {
                   <td className="text-center">{customer.diaChi}</td>
                   <td className="text-center">{customer.ngaySinh && customer.ngaySinh.split("T")[0]}</td>
                   <td className="text-center">
-                    <a href={`/customer/edit/${customer.maNd}`} className="btn btn-primary btn-edit">Chỉnh sửa</a>
-                    <button class="btn btn-danger" onClick={(e) => handleDeleteCustomer(e, customer.maNd)}>Xóa</button>
+                    <Link to={`/customer/edit/${customer.maNd}`}><img src={Edit} alt="edit" /></Link>
+                    <button onClick={(e) => handleDeleteCustomer(e, customer.maNd)}>
+                      <img src={Trash} alt="delete" />
+                    </button>
                   </td>
                 </tr>
               )

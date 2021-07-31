@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "./Login.scss";
 import myaxios from "../../../../app/api";
 import { useForm } from 'react-hook-form';
 import { Link } from "react-router-dom";
+import ReactLoading from "react-loading";
 
 function Login() {
   const { register, formState: { errors }, handleSubmit } = useForm();
+  const [isLoading, setLoading] = useState(false);
 
   const handleLogin = (data) => {
+    setLoading(true);
     let email = data.email;
     let pass = data.password;
     myaxios
@@ -17,7 +20,7 @@ function Login() {
         MatKhau: pass,
       })
       .then((response) => {
-        console.log(response);
+        setLoading(false);
         if (response.data.maNd) {
           let user = {
             ...response.data,
@@ -33,6 +36,7 @@ function Login() {
         }
       })
       .catch((error) => {
+        setLoading(false);
         console.log(error);
       });
   };
@@ -78,11 +82,23 @@ function Login() {
             <p className="redirect">Do you want <Link to="/sign-up">Register account</Link> ?</p>
             <p className="invalid">Invalid login information</p>
             <div className="form-btn">
-              <input
+              <button
                 className="btn-submit"
                 type="submit"
-                value="Login"
-              />
+                disabled={isLoading}
+              >
+                <span className="f-center-y">
+                  <span className="txt-mg-right">Login</span>
+                  {isLoading && (
+                    <ReactLoading
+                      type={"spokes"}
+                      color={"#ffffff"}
+                      height={24}
+                      width={24}
+                    />
+                  )}
+                </span>
+              </button>
             </div>
           </div>
         </form>

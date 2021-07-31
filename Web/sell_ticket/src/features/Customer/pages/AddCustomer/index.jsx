@@ -1,18 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import myaxios from '../../../../app/api';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
+import ReactLoading from 'react-loading';
 
 function AddCustomer() {
   const { register, formState: { errors }, handleSubmit } = useForm();
+  const [isLoading, setLoading] = useState(false);
   const history = useHistory();
+
   const handleAdd = (data) => {
+    setLoading(true);
     myaxios.post("/accounts/3", {
       "Email": data.email,
       "MatKhau": data.password,
     })
       .then((response) => {
-        console.log(response.data)
         myaxios.put(`customers/${response.data.maNd}`, {
           "TenNd": data.name,
           "Sdt": data.sdt,
@@ -21,13 +24,16 @@ function AddCustomer() {
           "NgaySinh": data.dob.split("T")[0]
         })
           .then((res) => {
+            setLoading(false);
             window.location.href = "/customer";
           })
           .catch((error) => {
+            setLoading(false)
             console.log(error);
           })
       })
       .catch((error) => {
+        setLoading(false);
         console.log(error);
       });
   }
@@ -157,16 +163,28 @@ function AddCustomer() {
           {errors.address && <p className="text-error">{errors.address.message}</p>}
         </div>
         <div className="form-btn">
-          <input
+          <button
             className="btn-submit"
             type="submit"
-            value="Thêm mới"
-          />
+            disabled={isLoading}
+          >
+            <span className="f-center-y">
+              <span className="txt-mg-right">Thêm mới</span>
+              {isLoading && (
+                <ReactLoading
+                  type={"spokes"}
+                  color={"#ffffff"}
+                  height={24}
+                  width={24}
+                />
+              )}
+            </span>
+          </button>
           <input
             className="btn btn-outline-secondary"
             value="Hủy"
             type="button"
-            onClick={() => {history.push("/customer")}}
+            onClick={() => { history.push("/customer") }}
           />
         </div>
       </form>

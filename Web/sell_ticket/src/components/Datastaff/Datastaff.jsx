@@ -67,7 +67,7 @@ function Datastaff(props) {
                 />
               </div>
               <div>
-                <button className="btn btn-primary button addbusbutton myeditbutton">
+                <button className="btn btn-primary button addaccountbutton myeditbutton">
                   <Link
                     to="/staff/account/add"
                     className="link-add-button my-button"

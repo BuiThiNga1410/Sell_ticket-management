@@ -14,7 +14,7 @@ p {
   border-bottom: 1px solid rgb(236, 232, 232);
 }
 
-.booking_header__item:first-child {
+.booking_header__item.blue {
   color: blue;
 }
 .booking_note {
@@ -65,6 +65,7 @@ p {
   display: flex;
   justify-content: center;
   padding: 20px 0;
+  cursor: pointer;
 }
 .price-next {
   display: flex;
@@ -109,5 +110,16 @@ p {
   padding-top: 30px;
   padding-left: 80px;
   padding-right: 80px;
-  display: none;
+}
+
+.blue {
+  color: rgb(17, 78, 128);
+}
+
+.gray {
+  color: rgb(119, 118, 118)
+}
+
+.red {
+  color: rgb(172, 29, 29);
 }

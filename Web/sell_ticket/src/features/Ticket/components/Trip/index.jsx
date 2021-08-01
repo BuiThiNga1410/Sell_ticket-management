@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import '../Rating/Rating.scss';
 import './Trip.scss';
 import { Col, Row } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 
 Trip.propTypes = {
   trips: PropTypes.array,
@@ -22,6 +23,9 @@ function Trip(props) {
   const { trip } = props;
   const dep = trip.ngayXuatBen.split("T")[1].slice(0, -3);
   const dest = trip.ngayDen.split("T")[1].slice(0, -3);
+  const history = useHistory();
+  const prevPath = history.location.state?.prevPath;
+  
   const handleBeforeBooking = () => {
     const user = JSON.parse(localStorage.getItem('user'));
     if(!user.vaitro) {
@@ -35,14 +39,14 @@ function Trip(props) {
       alert("Chuyến xe đã hết chỗ, vui lòng chọn chuyến khác");
       return;
     }
-    if (!(user.tenNd && user.sdt)) {
+    if (!(user.tenNd && user.sdt) && prevPath !== '/qlTicket') {
       // eslint-disable-next-line no-restricted-globals
       if(confirm("Vui lòng cập nhật thông tin đầy đủ trước khi mua vé")) {
         window.location.href = "/account/profile";
       }
       return;
     }
-    window.location.href = `/ticket/booking?trip=${trip.maChuyenXe}&price=${trip.donGia}`;
+    window.location.href = `/ticket/booking?trip=${trip.maChuyenXe}&price=${trip.donGia}${prevPath ? `&prevPath=${prevPath}` : ''}`;
   }
   return (
     <div className="trip-page">

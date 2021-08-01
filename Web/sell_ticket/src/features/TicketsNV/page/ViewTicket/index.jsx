@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ReactLoading from "react-loading";
 import "./ViewTicket.scss";
 import myaxios from "../../../../app/api";
+import { Link } from "react-router-dom";
 
 function ViewTicket(props) {
   const [tickets, setTickets] = useState();
@@ -112,16 +113,16 @@ function ViewTicket(props) {
                       <th className="text-center">Ngày xuất bến</th>
                       <th className="text-center">Đơn giá</th>
                       <th className="text-center">
-                        <a href="/ticket/trip-list" className="btn btn-primary">
+                        <Link to={{pathname: '/ticket/trip-list', state: { prevPath: window.location.pathname }}} className="btn btn-primary">
                           Thêm vé
-                        </a>
+                        </Link>
                       </th>
                     </tr>
                   </thead>
                   <tbody>
                     {tickets.map((ticket) => {
                       return (
-                        <tr>
+                        <tr key={ticket.maVe}>
                           <td className="text-center">{ticket.maVe}</td>
                           <td className="text-center">{ticket.tenKh}</td>
                           <td className="text-center">{ticket.sdt}</td>
@@ -130,7 +131,7 @@ function ViewTicket(props) {
                           <td className="text-center">{ticket.donGia}</td>
                           <td className="text-center">
                             <button
-                              class="btn btn-danger"
+                              className="btn btn-danger"
                               onClick={(e) => handleDeleteTicket(e, ticket.maVe)}
                             >
                               Xóa vé

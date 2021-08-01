@@ -56,7 +56,7 @@ table {
 }
 .table td,
 .table th {
-  vertical-align: middle;
+  vertical-align: middle !important;
 }
 thead {
   position: relative;

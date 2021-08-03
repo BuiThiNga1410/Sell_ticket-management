@@ -20,7 +20,7 @@ function Header_admin() {
         <li className="header-item">
           <span>
             Chào
-            <a href="#" className="link">
+            <a href="/password/change" className="link">
               Admin
             </a>
           </span>

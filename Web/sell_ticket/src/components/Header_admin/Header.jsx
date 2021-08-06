@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Logo from '../../../src/img/logo.png';
 import "./Header_admin.scss";
 function Header_admin() {
   const handleLogOut = () => {
@@ -10,14 +11,14 @@ function Header_admin() {
     <div className="Header">
       <Link to="/">
         <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS69D9FzUs5f4XRrGWMRiwIooyI0zYCB5ZC-w&usqp=CAU"
+          src={Logo}
           alt="logo"
           className="header-logo"
         />
       </Link>
       <h1 className="header-title">HỆ THỐNG QUẢN LÝ BÁN VÉ DÀNH CHO ADMIN</h1>
       <ul className="header-list">
-        <li className="header-item">
+        <li className="header-admin-item">
           <span>
             Chào
             <a href="/password/change" className="link">
@@ -25,7 +26,7 @@ function Header_admin() {
             </a>
           </span>
         </li>
-        <li className="header-item">
+        <li className="header-admin-item">
           <button className="header-button" onClick={handleLogOut}>
             Đăng xuất
           </button>

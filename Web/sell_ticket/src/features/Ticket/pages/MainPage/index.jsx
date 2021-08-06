@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "../../../../index.css";
+import Banner from '../../../../img/banner.jpg';
 
 import "./MainPage.scss";
 import Search from "../../../../components/Search";
@@ -43,11 +44,13 @@ function MainPage(props) {
 
   return (
     <div>
-      <div className="search-bustrip">
-        <p className="title"> NHÀ XE THẮNG THANH XIN CHÀO QUÝ KHÁCH</p>
-        <Search />
+      <div className="banner-wrap">
+        <img className="logo-img" src="https://www.yellowpedal.com/assets/img/ride/bg_yp.png" alt="ticker" />
+        <p className="banner-title">SELL TICKET MANGEMENT</p>
+        <div className="search-wrap">
+          <Search />
+        </div>
       </div>
-
       <Slice
         name="BẾN XE KHÁCH"
         height={200}

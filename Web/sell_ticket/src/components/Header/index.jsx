@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Header.scss';
+import Logo from '../../../src/img/logo.png';
 
 Header.propTypes = {
 
@@ -16,7 +17,7 @@ function Header(props) {
     <div className="div-header">
       <div className="container header">
         <Link to='/'>
-        <img className="header-logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS69D9FzUs5f4XRrGWMRiwIooyI0zYCB5ZC-w&usqp=CAU" alt="logo"></img>
+          <img className="logo" src={Logo} alt="logo"></img>
         </Link>
         <ul className="header-list">
           <li className="header-item">
@@ -25,7 +26,7 @@ function Header(props) {
           {user.vaitro === 2 && (
             <>
               <li className="header-item">
-                <a href="/qlTicket"className="header-link">Quản lý vé xe</a>
+                <a href="/qlTicket" className="header-link">Quản lý vé xe</a>
                 <div className="header-item__menu">
                   <ul className="header-menu-listItem">
                     <li className="header-menu-item"><a className="header-menu-link" href="/qlTicket">Xem vé xe</a></li>

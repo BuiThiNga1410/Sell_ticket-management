@@ -1,16 +1,28 @@
-.search-bustrip {
+.banner-wrap {
+  position: relative;
+}
+.logo-img {
   width: 100%;
-  height: 500px;
-  background-size: cover;
-  background-image:url("../../../../img/banner.jpg");
-  background-size: cover;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  object-fit: cover;
 }
 
+.search-wrap {
+  position: absolute;
+  top: 50%;
+  width: 70%;
+  left: 15%;
+  transform: translateY(-50%);
+}
+
+.banner-title {
+  position: absolute;
+  top: 15%;
+  color: rgb(243, 207, 45);
+  font-weight: 700;
+  font-size: 48px !important;
+  left: 50%;
+  transform: translateX(-50%);
+}
 .title {
   color: rgb(233, 39, 39);
   font-size: 40px;

@@ -127,7 +127,7 @@ function FormAddBusTrip(props) {
         </div>
         <div className="form-item seat-and-price">
           <div className="seats">
-            <h5>Số chỗ ngồi</h5>
+            <h5>Số chỗ đã đặt</h5>
             <input
               className="numberOfSeats form-text"
               type="number"

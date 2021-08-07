@@ -43,7 +43,7 @@ function TripListPage(props) {
           <div className="search-list"><Search /></div>
           {trips.length ? (
             <div className="trip-list-wrap">
-              <p className="trip-number">Vé xe từ Hà Nội đi Sài Gòn: {trips.length} chuyến</p>
+              <p className="trip-number">Chuyến xe phù hợp: {trips.length} chuyến</p>
               {trips.map((trip) => {
                 return (
                   <div className="trip_detail"><Trip trip={trip} /></div>

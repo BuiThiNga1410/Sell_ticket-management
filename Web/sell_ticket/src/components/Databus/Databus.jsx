@@ -1,23 +1,29 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import ConfirmDialog from "../../shared/partials/ConfirmDialog";
+import Loading from "../../shared/partials/Loading";
 import Search from "../Search";
 import Search_admin from "../Search_admin/Search_admin";
 import "./Databus.scss";
 Databus.propTypes = {};
 
 function Databus(props) {
-  const [buses, setBuses] = useState([]);
+  const [buses, setBuses] = useState();
   const history = useHistory();
   const [filters, setFilters] = useState();
+  const [isDeleted, setIsDeleted] = useState(false);
+  const removeId = useRef();
+
   function handleDelete(id) {
+    setIsDeleted(false);
     fetch(`https://qlbvxk.herokuapp.com/api/buses/${id}`, {
       method: "DELETE",
     }).then((result) => {
       result.json().then((res) => {
         console.warn(res);
       });
-      history.push("/bus");
+
       window.location.reload();
     });
   }
@@ -72,7 +78,8 @@ function Databus(props) {
                   </Link>
                 </button>
               </div>
-              {buses.length ? (
+
+              {!!buses && buses.length && (
                 <div className="table-container">
                   <table className="mytable">
                     <thead>
@@ -113,7 +120,10 @@ function Databus(props) {
                             <td data-column="link">
                               <button
                                 className="btn-delete"
-                                onClick={() => handleDelete(bus.maXe)}
+                                onClick={() => {
+                                  setIsDeleted(true);
+                                  removeId.current = bus.maXe;
+                                }}
                               >
                                 Xóa
                               </button>
@@ -124,7 +134,8 @@ function Databus(props) {
                     </tbody>
                   </table>
                 </div>
-              ) : (
+              )}
+              {!!buses && !buses.length && (
                 <div className="notFound myLabel">
                   <p className="notFound-label">Không tìm thấy dữ liệu</p>
                   <img
@@ -134,8 +145,16 @@ function Databus(props) {
                   />
                 </div>
               )}
+              {!buses && <Loading />}
             </div>
           </div>
+          {!!isDeleted && (
+            <ConfirmDialog
+              title="Bạn có chắc chắn muốn xóa xe này"
+              handleConfirm={() => handleDelete(removeId.current)}
+              handleCancel={() => setIsDeleted(false)}
+            />
+          )}
         </div>
       </div>
     </div>

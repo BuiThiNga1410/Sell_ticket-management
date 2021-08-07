@@ -107,7 +107,8 @@ tbody {
   justify-content: center;
   align-items: center;
 }
-.overlay {
+.overlay,
+.overlay-show {
   position: fixed;
   top: 0;
   right: 0;
@@ -120,6 +121,11 @@ tbody {
   display: none;
   z-index: 1000;
 }
+
+.overlay-show {
+  display: flex;
+}
+
 .remove-content,
 .notification {
   background-color: #fff;

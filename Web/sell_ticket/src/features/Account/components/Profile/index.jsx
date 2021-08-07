@@ -19,7 +19,8 @@ function Profile(props) {
     const cmnd = data.cmnd;
     const address = data.address;
     const birthday = data.dob;
-    myaxios.put(`/customers/${user.maNd}`, {
+    const url = user.vaitro === 2 ? `staffs/${user.maNd}` : `customers/${user.maNd}`;
+    myaxios.put(url, {
       "TenNd": name,
       "Sdt": sdt,
       "Cmnd": cmnd,
@@ -121,7 +122,7 @@ function Profile(props) {
                 name="dob"
                 id="dob"
                 className="form-input"
-                defaultValue={user.ngaySinh}
+                defaultValue={user.ngaySinh.split('T')[0]}
                 {...register("dob", {
                   required: "This filed is required",
                 })}

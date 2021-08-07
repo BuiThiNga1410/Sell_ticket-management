@@ -1,18 +1,24 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 
 import "./Datastaff.scss";
 import { useState } from "react";
 import Search_admin from "../Search_admin/Search_admin";
 import { Link, useHistory } from "react-router-dom";
+import ConfirmDialog from "../../shared/partials/ConfirmDialog";
+import Loading from "../../shared/partials/Loading";
 
 Datastaff.propTypes = {};
 
 function Datastaff(props) {
-  const [employees, setEmployees] = useState([]);
+  const [employees, setEmployees] = useState();
   const [filters, setFilters] = useState();
   const history = useHistory();
+  const [isDeleted, setIsDeleted] = useState(false);
+  const removeId = useRef();
+
   function handleDelete(id) {
+    setIsDeleted(false);
     fetch(`https://qlbvxk.herokuapp.com/api/accounts/${id}`, {
       method: "DELETE",
     }).then((result) => {
@@ -23,6 +29,7 @@ function Datastaff(props) {
       window.location.reload();
     });
   }
+
   function handleFiltersChange(newFilters) {
     console.log("New filter: ", newFilters);
     if (newFilters.searchTerm == "") {
@@ -53,6 +60,7 @@ function Datastaff(props) {
         setEmployees(result);
       });
   }, []);
+
   return (
     <div>
       <div className="searchForm">
@@ -76,7 +84,7 @@ function Datastaff(props) {
                   </Link>
                 </button>
               </div>
-              {employees.length ? (
+              {!!employees && employees.length && (
                 <div className="table-container">
                   <table className="mytable">
                     <thead>
@@ -118,7 +126,10 @@ function Datastaff(props) {
                             <td data-column="link">
                               <button
                                 className="btn-delete"
-                                onClick={() => handleDelete(employee.maNd)}
+                                onClick={() => {
+                                  setIsDeleted(true);
+                                  removeId.current = employee.maNd;
+                                }}
                               >
                                 Xóa
                               </button>
@@ -129,7 +140,8 @@ function Datastaff(props) {
                     </tbody>
                   </table>
                 </div>
-              ) : (
+              )}
+              {!!employees && !employees.length && (
                 <div className="notFound myLabel">
                   <p className="notFound-label">Không tìm thấy dữ liệu</p>
                   <img
@@ -139,7 +151,15 @@ function Datastaff(props) {
                   />
                 </div>
               )}
+              {!employees && <Loading />}
             </div>
+            {!!isDeleted && (
+              <ConfirmDialog
+                title="Bạn có chắc chắn muốn xóa nhân viên này"
+                handleConfirm={() => handleDelete(removeId.current)}
+                handleCancel={() => setIsDeleted(false)}
+              />
+            )}
           </div>
         </div>
       </div>

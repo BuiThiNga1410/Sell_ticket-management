@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarker, faExchangeAlt } from "@fortawesome/free-solid-svg-icons";
@@ -8,12 +8,16 @@ import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 import Search_BusRoute from "../Search_BusRoute/Search_BusRoute";
 import "./Databusroute.scss";
+import ConfirmDialog from "../../shared/partials/ConfirmDialog";
+import Loading from "../../shared/partials/Loading";
 Databusroute.propTypes = {};
 
 function Databusroute(props) {
-  const [busroutes, setBusRoutes] = useState([]);
+  const [busroutes, setBusRoutes] = useState();
   const history = useHistory();
   const [busStations, setBusStations] = useState([]);
+  const [isDeleted, setIsDeleted] = useState(false);
+  const removeId = useRef();
 
   useEffect(() => {
     axios
@@ -25,6 +29,7 @@ function Databusroute(props) {
         console.log(error);
       });
   }, []);
+
   useEffect(() => {
     fetch("https://qlbvxk.herokuapp.com/api/busroutes")
       .then((res) => res.json())
@@ -32,7 +37,9 @@ function Databusroute(props) {
         setBusRoutes(result);
       });
   }, []);
+
   function handleDelete(id) {
+    setIsDeleted(false);
     fetch(`https://qlbvxk.herokuapp.com/api/busroutes/${id}`, {
       method: "DELETE",
     }).then((result) => {
@@ -43,9 +50,11 @@ function Databusroute(props) {
       window.location.reload();
     });
   }
+
   function handleBack() {
     window.location.href = "/busroute";
   }
+
   const handleSearch = (e) => {
     e.preventDefault();
     let dep = document.getElementById("dep").value;
@@ -75,6 +84,7 @@ function Databusroute(props) {
         });
     }
   };
+
   return (
     <div>
       <div className="searchForm">
@@ -141,7 +151,7 @@ function Databusroute(props) {
                 </Link>
               </button>
             </div>
-            {busroutes.length ? (
+            {!!busroutes && busroutes.length && (
               <div className="table-container">
                 <table>
                   <thead>
@@ -177,7 +187,10 @@ function Databusroute(props) {
                           <td data-column="link">
                             <button
                               className="btn-delete"
-                              onClick={() => handleDelete(busroute.maTuyenXe)}
+                              onClick={() => {
+                                setIsDeleted(true);
+                                removeId.current = busroute.maTuyenXe;
+                              }}
                             >
                               Xóa
                             </button>
@@ -188,7 +201,8 @@ function Databusroute(props) {
                   </tbody>
                 </table>
               </div>
-            ) : (
+            )}
+            {!!busroutes && !busroutes.length && (
               <div className="notFound">
                 <p className="notFound-label">Không tìm thấy dữ liệu</p>
                 <img
@@ -199,6 +213,14 @@ function Databusroute(props) {
               </div>
             )}
           </div>
+          {!busroutes && <Loading />}
+          {!!isDeleted && (
+            <ConfirmDialog
+              title="Bạn có chắc chắn muốn xóa tuyến xe này"
+              handleConfirm={() => handleDelete(removeId.current)}
+              handleCancel={() => setIsDeleted(false)}
+            />
+          )}
         </div>
       </div>
     </div>

@@ -145,7 +145,7 @@ function ViewTicket(props) {
               <div className="overlay">
                 <div className="remove-content">
                   <p className="remove-lable">
-                    Bạn có chắc chắn muốn xóa khách hàng này?
+                    Bạn có chắc chắn muốn xóa vé này?
                   </p>
                   <div className="actions">
                     <button className="btn btn-secondary" onClick={handleCancel}>

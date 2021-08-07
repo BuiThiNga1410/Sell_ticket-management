@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarker, faExchangeAlt } from "@fortawesome/free-solid-svg-icons";
@@ -6,14 +6,18 @@ import { faMapMarker, faExchangeAlt } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 import "./DataBusTrip.scss";
+import ConfirmDialog from "../../shared/partials/ConfirmDialog";
+import Loading from "../../shared/partials/Loading";
 
 DataBusTrip.propTypes = {};
 
 function DataBusTrip(props) {
-  const [bustrips, setBustrips] = useState([]);
+  const [bustrips, setBustrips] = useState();
   const history = useHistory();
 
   const [busStations, setBusStations] = useState([]);
+  const [isDeleted, setIsDeleted] = useState(false);
+  const removeId = useRef();
 
   const numberWithCommas = (x) => {
     x = x.toString();
@@ -32,6 +36,7 @@ function DataBusTrip(props) {
         console.log(error);
       });
   }, []);
+
   useEffect(() => {
     fetch("https://qlbvxk.herokuapp.com/api/bustrips")
       .then((res) => res.json())
@@ -39,17 +44,19 @@ function DataBusTrip(props) {
         setBustrips(result);
       });
   }, []);
+
   function handleDelete(id) {
+    setIsDeleted(false);
     fetch(`https://qlbvxk.herokuapp.com/api/bustrips/${id}`, {
       method: "DELETE",
     }).then((result) => {
       result.json().then((res) => {
         console.warn(res);
       });
-      history.push("/bustrips");
       window.location.reload();
     });
   }
+
   const handleSearch = (e) => {
     e.preventDefault();
     let benxeDi = document.getElementById("dep").value;
@@ -80,6 +87,7 @@ function DataBusTrip(props) {
         });
     }
   };
+
   return (
     <div>
       <div className="searchForm">
@@ -149,7 +157,7 @@ function DataBusTrip(props) {
                   </Link>
                 </button>
               </div>
-              {bustrips.length ? (
+              {!!bustrips && bustrips.length && (
                 <div className="table-container">
                   <table className="mytable">
                     <thead>
@@ -185,7 +193,10 @@ function DataBusTrip(props) {
                             <td data-column="link">
                               <button
                                 className="btn-delete"
-                                onClick={() => handleDelete(bustrip.maChuyenXe)}
+                                onClick={() => {
+                                  setIsDeleted(true);
+                                  removeId.current = bustrip.maChuyenXe;
+                                }}
                               >
                                 Xóa
                               </button>
@@ -196,7 +207,8 @@ function DataBusTrip(props) {
                     </tbody>
                   </table>
                 </div>
-              ) : (
+              )}
+              {!!bustrips && !bustrips.length && (
                 <div className="notFound">
                   <p className="notFound-label">Không tìm thấy dữ liệu</p>
                   <img
@@ -206,7 +218,15 @@ function DataBusTrip(props) {
                   />
                 </div>
               )}
+              {!bustrips && <Loading />}
             </div>
+            {!!isDeleted && (
+              <ConfirmDialog
+                title="Bạn có chắc chắn muốn xóa chuyến xe này"
+                handleConfirm={() => handleDelete(removeId.current)}
+                handleCancel={() => setIsDeleted(false)}
+              />
+            )}
           </div>
         </div>
       </div>

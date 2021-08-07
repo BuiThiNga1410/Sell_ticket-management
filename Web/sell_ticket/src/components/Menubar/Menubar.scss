@@ -3,12 +3,11 @@
     width: 100%;
     height: auto;
     text-align: center;
-    background-color: whitesmoke;
-    border-bottom: 2px solid black;
+    box-shadow: 1px 2px 4px rgb(236, 234, 234);
+    padding: 0 100px;
 }
 .nav{
     display: flex;
-    padding: 4px;
 }
 .nav li{
     position: relative;
@@ -18,24 +17,34 @@
     width: calc(100%/5);
    
 }
+
 .nav >li >a{
     color:rgb(31, 29, 29);
+    font-weight: 600;
 }
 .nav li a{
     text-decoration: none;
     line-height: 46px;
     padding: 0px 24px;
 }
+
+.nav >li.active {
+    background-color: rgb(155, 210, 252);
+}
+
+.nav >li.active >a {
+    color: #ffffff;
+}
+
 .nav >li:hover> a, .nav .subnav li:hover{
     color:#fff;
     background-color: rgb(155, 210, 252);
     display: block;
     cursor: pointer;
-    width: 285px;
     
 }
 .subnav{
-    min-width: 285px;
+    min-width: 200px;
     list-style: none;
     text-align: left;
     background-color: whitesmoke ;
@@ -43,8 +52,10 @@
 }
 .nav .subnav{
     display: none;
-    box-shadow: 0px 0px 10px rgb(0, 0, 0.3);
+    box-shadow: 0px 0px 10px rgb(221, 219, 219);
     position: absolute;
+    left: 0;
+    right: 0;
     background-color: whitesmoke;
    
  }

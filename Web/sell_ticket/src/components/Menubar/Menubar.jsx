@@ -1,17 +1,21 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   BrowserRouter as Router,
   Route,
   Link,
   NavLink,
+  useLocation,
 } from "react-router-dom";
 import "./Menubar.scss";
 
 function Menubar(props) {
+  const path = useLocation().pathname;
+  console.log('path', path)
+
   return (
     <div className="menu-bar">
       <ul className="nav">
-        <li>
+        <li className={path.includes('/staff') ? 'active' : ''}>
           <NavLink to="/staff">Quản lý nhân viên</NavLink>
           <ul className="subnav">
             <li>
@@ -22,7 +26,7 @@ function Menubar(props) {
             </li>
           </ul>
         </li>
-        <li>
+        <li className={path.includes('/bustrip') ? 'active' : ''}>
           <a href="/bustrip">Quản lý chuyến xe</a>
           <ul className="subnav">
             <li>
@@ -33,7 +37,7 @@ function Menubar(props) {
             </li>
           </ul>
         </li>
-        <li>
+        <li className={path.includes('/busroute') ? 'active' : ''}>
           <Link to="/busroute">Quản lý tuyến xe</Link>
           <ul className="subnav">
             <li>
@@ -44,7 +48,7 @@ function Menubar(props) {
             </li>
           </ul>
         </li>
-        <li>
+        <li className={path === '/bus' ? 'active' : ''}>
           <Link to="/bus">Quản lý xe</Link>
           <ul className="subnav">
             <li>
@@ -55,7 +59,7 @@ function Menubar(props) {
             </li>
           </ul>
         </li>
-        <li>
+        <li className={path.includes('/revenues') ? 'active' : ''}>
           <Link to="/revenues">Quản lý báo cáo</Link>
         </li>
       </ul>

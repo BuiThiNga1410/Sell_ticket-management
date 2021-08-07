@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import Loading from "../../shared/partials/Loading";
 import "./DataRevenues.scss";
 DataRevenues.propTypes = {};
 
 function DataRevenues(props) {
-  const [allRevenues, setAllRevenues] = useState([]);
+  const [allRevenues, setAllRevenues] = useState();
   const [isDay, setDay] = useState(true);
+
   var days = [];
   for (let i = 1; i <= 31; i++) {
     days.push(i);
@@ -20,7 +22,6 @@ function DataRevenues(props) {
       .then((res) => res.json())
       .then((result) => {
         setAllRevenues(result);
-        console.log(allRevenues);
       });
   }, []);
 
@@ -51,14 +52,13 @@ function DataRevenues(props) {
         .then((res) => res.json())
         .then((result) => {
           setAllRevenues(result);
-          console.log(allRevenues);
+          console.log('revenue', result);
         });
     } else if (!day && month && year) {
       fetch(`https://qlbvxk.herokuapp.com/api/revenues/month?month=${myMonth}`)
         .then((res) => res.json())
         .then((result) => {
           setAllRevenues(result);
-          console.log(allRevenues);
         });
     } else if (!day && !month && year) {
       setDay(false);
@@ -66,13 +66,13 @@ function DataRevenues(props) {
         .then((res) => res.json())
         .then((result) => {
           setAllRevenues(result);
-          console.log(allRevenues);
         });
     } else {
       fetch("https://qlbvxk.herokuapp.com/api/revenues")
         .then((res) => res.json())
         .then((result) => {
           setAllRevenues(result);
+          setDay(true);
         });
     }
   }
@@ -133,7 +133,7 @@ function DataRevenues(props) {
               </button>
             </form>
           </div>
-          {allRevenues.length ? (
+          {allRevenues && (allRevenues.length || Object.keys(allRevenues)) ? (
             <div className="table-container">
               <table className="mytable1">
                 <thead>
@@ -146,7 +146,7 @@ function DataRevenues(props) {
                   </tr>
                 </thead>
                 <tbody>
-                  {allRevenues.map((revenues) => {
+                  {allRevenues.length ? allRevenues.map((revenues) => {
                     return (
                       <tr>
                         {isDay && (
@@ -169,19 +169,37 @@ function DataRevenues(props) {
                         <td data-column="">{revenues.ghiChu}</td>
                       </tr>
                     );
-                  })}
+                  })
+                    :
+                    (
+                      <tr>
+                        <td data-column="id">
+                          {allRevenues.ngay.split("T")[0]}
+                        </td>
+                        <td data-column="id">
+                          {numberWithCommas(allRevenues.tongDoanhThu)}
+                        </td>
+                        <td data-column="">{allRevenues.soVe}</td>
+                        <td data-column="">{allRevenues.ghiChu}</td>
+                      </tr>
+                    )}
+
                 </tbody>
               </table>
             </div>
           ) : (
-            <div className="notFound myLabel">
-              <p className="notFound-label">Không tìm thấy dữ liệu</p>
-              <img
-                className="notFound-img"
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuW_Gkd6eDbGQ7X3JmDZKbSX8q8TZLOPEdv-lMLjICH_OEfS4MVRDAoFP3fsvQU1lV7Ac&usqp=CAU"
-                alt="not found"
-              />
-            </div>
+            <>
+              {allRevenues ? (
+                <div className="notFound myLabel">
+                  <p className="notFound-label">Không tìm thấy dữ liệu</p>
+                  <img
+                    className="notFound-img"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuW_Gkd6eDbGQ7X3JmDZKbSX8q8TZLOPEdv-lMLjICH_OEfS4MVRDAoFP3fsvQU1lV7Ac&usqp=CAU"
+                    alt="not found"
+                  />
+                </div>
+              ) : <Loading />}
+            </>
           )}
         </div>
       </div>

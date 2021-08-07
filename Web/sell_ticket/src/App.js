@@ -1,6 +1,6 @@
 import "./App.css";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import Footer from "./components/Footer";
 import Header from "./components/Header";

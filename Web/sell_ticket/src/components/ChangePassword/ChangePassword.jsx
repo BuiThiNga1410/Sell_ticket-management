@@ -132,7 +132,7 @@ function ChangePassword() {
             <div className="form-btn">
               <button className="btn-submit" type="submit" disabled={isLoading}>
                 <span className="f-center-y">
-                  <span className="txt-mg-right">Change password</span>
+                  <span className="txt-mg-right">Xác nhận</span>
                   {isLoading && (
                     <ReactLoading
                       type={"spokes"}

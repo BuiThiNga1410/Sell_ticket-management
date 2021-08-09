@@ -61,6 +61,14 @@ function Menubar(props) {
         </li>
         <li className={path.includes('/revenues') ? 'active' : ''}>
           <Link to="/revenues">Quản lý báo cáo</Link>
+          <ul className="subnav">
+            <li>
+              <Link to="/revenues">Báo cáo doanh thu</Link>
+            </li>
+            <li>
+              <Link to="/revenues/chart">Biểu đồ doanh thu</Link>
+            </li>
+          </ul>
         </li>
       </ul>
     </div>

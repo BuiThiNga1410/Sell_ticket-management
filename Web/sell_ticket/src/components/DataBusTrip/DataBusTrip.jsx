@@ -146,7 +146,7 @@ function DataBusTrip(props) {
                     <button className="btn btn-primary" onClick={handleSearch}>
                       Tìm chuyến xe
                     </button>
-                    <button className="btn btn-primary">Quay lại</button>
+                    <button className="btn btn-primary">Tất cả</button>
                   </div>
                 </form>
               </div>

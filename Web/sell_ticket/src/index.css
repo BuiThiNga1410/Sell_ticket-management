@@ -217,11 +217,11 @@ tbody {
   flex-direction: column;
   align-items: center;
 }
-table { 
+/* table { 
 
 	border-collapse: collapse; 
 	
-}
+} */
 .btn-delete{
 	width: 80px;
 	height: 30px;

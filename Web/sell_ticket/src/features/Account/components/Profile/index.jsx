@@ -122,7 +122,7 @@ function Profile(props) {
                 name="dob"
                 id="dob"
                 className="form-input"
-                defaultValue={user.ngaySinh.split('T')[0]}
+                defaultValue={user.ngaySinh?.split('T')[0]}
                 {...register("dob", {
                   required: "This filed is required",
                 })}

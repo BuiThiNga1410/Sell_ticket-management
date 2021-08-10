@@ -21,6 +21,7 @@ import FormAddBusStation from "../components/FormAddBusStation/FormAddBusStation
 import FormAddBusTrip from "../components/FormAddBusTrip/FormAddBusTrip";
 import DataRevenues from "../components/DataRevenues/DataRevenues";
 import ChangePassword from "../components/ChangePassword/ChangePassword";
+import BarChart from "../components/BarChart/BarChart";
 DieuHuongURL.propTypes = {};
 
 function DieuHuongURL(props) {
@@ -49,6 +50,8 @@ function DieuHuongURL(props) {
       <Route exact path="/revenues" component={DataRevenues} />
 
       <Route exact path="/password/change" component={ChangePassword}/>
+
+      <Route exact path="/revenues/chart" component={BarChart}/>
     </div>
   );
 }

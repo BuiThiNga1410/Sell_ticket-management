@@ -58,11 +58,11 @@ function ChangePassword() {
             <p className="form-title">Thay đổi mật khẩu</p>
             <div className="form-group">
               <label className="form-label" htmlFor="oldPassword">
-                Old Password
+                Mật khẩu cũ
               </label>
               <input
                 type="password"
-                placeholder="Old password"
+                placeholder="Mật khẩu cũ"
                 name="oldPassword"
                 id="oldPassword"
                 className="form-input"
@@ -76,11 +76,11 @@ function ChangePassword() {
             </div>
             <div className="form-group">
               <label className="form-label" htmlFor="newPassword">
-                New password
+                Mật khẩu mới
               </label>
               <input
                 type="password"
-                placeholder="New Password"
+                placeholder="Mật khẩu mới"
                 name="newPassword"
                 id="newPassword"
                 className="form-input"
@@ -98,11 +98,11 @@ function ChangePassword() {
             </div>
             <div className="form-group">
               <label className="form-label" htmlFor="confirm-password">
-                Confirm password
+                Xác nhận mật khẩu
               </label>
               <input
                 type="password"
-                placeholder="Confirm password"
+                placeholder="Xác nhận mật khẩu"
                 name="confirm-password"
                 id="confirm-password"
                 className="form-input"
@@ -132,7 +132,7 @@ function ChangePassword() {
             <div className="form-btn">
               <button className="btn-submit" type="submit" disabled={isLoading}>
                 <span className="f-center-y">
-                  <span className="txt-mg-right">Change password</span>
+                  <span className="txt-mg-right">Xác nhận</span>
                   {isLoading && (
                     <ReactLoading
                       type={"spokes"}

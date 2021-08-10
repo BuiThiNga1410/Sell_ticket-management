@@ -138,7 +138,7 @@ function Databusroute(props) {
                   Tìm tuyến xe
                 </button>
                 <button className="btn btn-primary" onClick={handleBack}>
-                  Quay lại
+                  Tất cả
                 </button>
               </div>
             </form>

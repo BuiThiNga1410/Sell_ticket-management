@@ -144,7 +144,7 @@ function Formupdatebusroute(props) {
                     value={garage.maNhaXe}
                     selected={
                       busRoute.tenNhaXe &&
-                        busRoute.tenNhaXe == garage.tenNhaXe
+                        busRoute.tenNhaXe === garage.tenNhaXe
                         ? "selected"
                         : ""
                     }

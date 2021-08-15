@@ -10,6 +10,7 @@ function Formupdatebus(props) {
   const [bus, setBus] = useState([]);
   const { id } = useParams();
   const [employees, setEmployees] = useState([]);
+  const [garages, setGarages] = useState([]);
 
   useEffect(() => {
     fetch("https://qlbvxk.herokuapp.com/api/staffs")
@@ -18,27 +19,39 @@ function Formupdatebus(props) {
         setEmployees(result);
         console.log("employee", employees);
       });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    fetch("https://qlbvxk.herokuapp.com/api/garages")
+      .then((res) => res.json())
+      .then((result) => {
+        setGarages(result);
+      });
+  });
 
   useEffect(() => {
     fetch("https://qlbvxk.herokuapp.com/api/buses/" + id)
       .then((res) => res.json())
       .then((result) => {
         setBus(result);
+        console.log(result);
       });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function submitForm() {
-    let ownerId = document.querySelector(".myselect").value;
+    let staff = document.querySelector("#staff").value;
     let numberPlate = document.getElementById("numberPlate").value;
-    let nhaXe = document.getElementById("nhaXe").value;
+    let nhaXe = document.querySelector("#garage").value;
+    console.log(staff);
+    console.log(numberPlate);
+    console.log(nhaXe);
     axios
       .put("https://qlbvxk.herokuapp.com/api/buses/" + id, {
-        MaNv: ownerId,
         BienSoXe: numberPlate,
-        NhaXe: nhaXe,
+        MaNv: staff,
+        MaNhaXe: nhaXe,
       })
       .then((res) => {
         console.log(res);
@@ -61,49 +74,60 @@ function Formupdatebus(props) {
     <div className="form-add-bus">
       <h3>CẬP NHẬT THÔNG TIN XE</h3>
       <div className="my-form-input">
-        <h5>Tên nhân viên:</h5>
-        <br />
-        <select className="form-text myselect">
-          {employees.map((staff) => {
-            return (
-              <option
-                value={staff.maNd}
-                selected={bus.tenNv === staff.tenNd ? "selected" : ""}
-              >
-                {staff.tenNd}
-              </option>
-            );
-          })}
-        </select>
-        <br />
-
-        <h5>Biển số xe:</h5>
-        <br />
-        <input
-          type="text"
-          required
-          id="numberPlate"
-          className="form-text"
-          defaultValue={bus.bienSoXe}
-        />
-        <br />
-        <h5>Nhà xe:</h5>
-        <br />
-        <input
-          type="text"
-          required
-          id="nhaXe"
-          className="form-text"
-          defaultValue={bus.nhaXe}
-        />
-        <br />
+        <form>
+          <div className="form-group form-add-bus-route-1">
+            <h5 for="numberPlate">Biển số xe</h5>
+            <input
+              type="text"
+              required
+              id="numberPlate"
+              defaultValue={bus.bienSoXe}
+              className="myform"
+            />
+          </div>
+          <div className="form-group form-add-bus-route-1">
+            <h5 for="staff">Nhân viên</h5>
+            <select id="staff" className="myselect">
+              {employees.map((staff) => {
+                return (
+                  <option
+                    value={staff.maNd}
+                    selected={bus.tenNv === staff.tenNd ? "selected" : ""}
+                  >
+                    {staff.tenNd}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+          <div className="form-group form-add-bus-route-1">
+            <h5 for="garage">Nhà xe</h5>
+            <select id="garage" className="myselect">
+              {garages.map((garage) => {
+                return (
+                  <option
+                    value={garage.maNhaXe}
+                    selected={
+                      bus.tenNhaXe &&
+                        bus.tenNhaXe === garage.tenNhaXe
+                        ? "selected"
+                        : ""
+                    }
+                  >
+                    {garage.tenNhaXe}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+        </form>
       </div>
-      <div className="button-add-bus">
+      <div className="button-area button-of-add-route">
         <button className="button" onClick={handleBack}>
           Quay lại
         </button>
 
-        <button type="submit" onClick={submitForm} className="button">
+        <button className="button" onClick={submitForm}>
           Cập nhật
         </button>
       </div>

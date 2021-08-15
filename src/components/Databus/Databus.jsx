@@ -3,8 +3,6 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ConfirmDialog from "../../shared/partials/ConfirmDialog";
 import Loading from "../../shared/partials/Loading";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMapMarker, faExchangeAlt } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
 import "./Databus.scss";
@@ -35,26 +33,6 @@ function Databus(props) {
 
       window.location.reload();
     });
-  }
-
-  function handleFiltersChange(newFilters) {
-    console.log("New filter: ", newFilters);
-    if (newFilters.searchTerm === "") {
-      fetch("https://qlbvxk.herokuapp.com/api/buses/")
-        .then((res) => res.json())
-        .then((result) => {
-          setBuses(result);
-        });
-    } else {
-      fetch(
-        `https://qlbvxk.herokuapp.com/api/buses/search?name=${newFilters.searchTerm}`
-      )
-        .then((res) => res.json())
-        .then((result) => {
-          setBuses(result);
-          console.log(result);
-        });
-    }
   }
 
   useEffect(() => {

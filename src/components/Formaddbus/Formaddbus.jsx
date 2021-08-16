@@ -60,7 +60,7 @@ function Formaddbus(props) {
     <div className="form-add-bus-route">
       <h3>THÊM TUYẾN XE</h3>
       <div className="my-form-input">
-        <form>
+        <form className="form">
           <div className="form-group form-add-bus-route-1">
             <h5 for="numberPlate">Biển số xe</h5>
             <input type="text" class="form-control" id="numberPlate" />

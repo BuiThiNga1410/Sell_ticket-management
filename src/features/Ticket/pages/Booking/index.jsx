@@ -18,7 +18,7 @@ const numberWithCommas = (x) => {
 
 function Booking(props) {
   let step = 1;
-  const [seats, setSeats] = useState([]);
+  const [seats, setSeats] = useState();
   const [customers, setCustomers] = useState([]);
   const history = useHistory();
   let selectedSeats = [];
@@ -26,10 +26,11 @@ function Booking(props) {
   const query = new URLSearchParams(props.location.search);
   const tripId = query.get("trip");
   const price = query.get("price");
+  const date = query.get("date");
   const user = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
-    myaxios.get(`seats/search?bustripid=${tripId}`)
+    myaxios.get(`tickets/seats?bustripid=${tripId}&date=${date}`)
       .then((response) => {
         setSeats(response.data);
         console.log(response.data);
@@ -47,7 +48,7 @@ function Booking(props) {
           console.log(error);
         })
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleClickNext = () => {
@@ -56,47 +57,47 @@ function Booking(props) {
         if (!selectedSeats.length) {
           alert("Vui lòng chọn chỗ");
         }
-        
+
         else {
           document.getElementsByClassName("booking_note")[0].setAttribute("style", "display: none;");
-        document.getElementsByClassName("form-booking")[0].setAttribute("style", "display: block");
+          document.getElementsByClassName("form-booking")[0].setAttribute("style", "display: block");
 
-        document.getElementsByClassName("booking_header__item")[1].setAttribute("style", "color: blue");
-        document.getElementsByClassName("booking_header__item")[0].setAttribute("style", "color: black");
-        step = 2;
+          document.getElementsByClassName("booking_header__item")[1].setAttribute("style", "color: blue");
+          document.getElementsByClassName("booking_header__item")[0].setAttribute("style", "color: black");
+          step = 2;
         }
         break;
       case 2:
         //handle booking
         let note = document.getElementById("note") ? document.getElementById("note").value : "";
-        let name = document.getElementById("name")? document.getElementById("name").value : "";
-        let phone = document.getElementById("phone")? document.getElementById("phone").value : "";
-        let customerId = document.getElementById("customerId") ? document.getElementById("customerId").value: 0;
+        let name = document.getElementById("name") ? document.getElementById("name").value : "";
+        let phone = document.getElementById("phone") ? document.getElementById("phone").value : "";
+        let customerId = document.getElementById("customerId") ? document.getElementById("customerId").value : 0;
         console.log(selectedSeats);
         if (selectedSeats.length && ((name && phone) || customerId)) {
 
-          if (user.vaitro !== 3) {
-            myaxios.post('/tickets/', {
-              "MaKh": user.vaitro === 3 ? +user.maNd : customerId,
-              "MaChoNgoi": selectedSeats,
-              "MaChuyenXe": tripId,
-              "GhiChu": note,
+          if (user.vaitro !== 3) {       
+          myaxios.post('/tickets/', {
+            "MaKh": customerId,
+            "MaChoNgoi": selectedSeats,
+            "MaChuyenXe": tripId,
+            "NgayDi": date,
+            "GhiChu": note,
+          })
+            .then((response) => {
+              user.vaitro === 3 ? history.push('/account/purchase') : history.push('/qlTicket');
             })
-              .then((response) => {
-                console.log(response.data);
-                console.log(note);
-                user.vaitro === 3 ? history.push('/account/purchase') : history.push('/qlTicket');
-              })
-              .catch((error) => {
-                console.log(error);
-              })
+            .catch((error) => {
+              console.log(error);
+            })
           } else {
             history.push({
               pathname: '/payment',
               state: {
-                MaKh: user.vaitro === 3 ? +user.maNd : customerId,
+                MaKh: +user.maNd,
                 MaChoNgoi: selectedSeats,
                 MaChuyenXe: tripId,
+                NgayDi: date,
                 GhiChu: note,
               } 
             });
@@ -110,6 +111,7 @@ function Booking(props) {
         break;
     }
   }
+
   const handleClickPrev = () => {
     switch (step) {
       case 2:
@@ -126,6 +128,22 @@ function Booking(props) {
         break;
     }
   }
+
+  const generateSeat = (start, end) => {
+    let array = [];
+    for (let i = start; i <= end; i++) {
+      array.push(i);
+    }
+    const newArray = array.map(seat => {
+      return (
+        <div className="chair-info" key={seat}>
+          <FontAwesomeIcon id={seat} className="chair-icon" onClick={handleClickChair} icon={faChair} color={seats?.includes(seat) ? 'red' : 'gray'} size="2x" />
+        </div>
+      )
+    })
+    return newArray;
+  }
+
   const handleClickChair = (e) => {
     if (e.target.getAttribute("color") === "blue") {
       e.target.setAttribute("color", "gray");
@@ -138,6 +156,7 @@ function Booking(props) {
     }
     document.getElementsByClassName("price-detail")[0].innerHTML = `${numberWithCommas(selectedSeats.length * price)}đ`;
   }
+
   return (
     <div className="booking-wrap">
       {/* <div className="container"><Trip /></div> */}
@@ -173,14 +192,7 @@ function Booking(props) {
                 <p className="floor-name">Tầng 1</p>
                 <div className="floor">
                   <div className="floor__row">
-                    {seats.slice(0, seats.length / 2).map((seat) => {
-                      return (
-                        <div className="chair-info" key={seat.maChoNgoi}>
-                          <FontAwesomeIcon id={seat.maChoNgoi} className="chair-icon" onClick={handleClickChair} icon={faChair} color={seat.tinhTrangChoNgoi ? 'red' : 'gray'} size="2x" />
-                        </div>
-                      )
-                    })}
-
+                    {generateSeat(1, 18)}
                   </div>
                 </div>
               </Col>
@@ -189,13 +201,7 @@ function Booking(props) {
                 <p className="floor-name">Tầng 2</p>
                 <div className="floor">
                   <div className="floor__row">
-                    {seats.slice(seats.length / 2).map((seat) => {
-                      return (
-                        <div className="chair-info" key={seat.maChoNgoi}>
-                          <FontAwesomeIcon id={seat.maChoNgoi} className="chair-icon" onClick={handleClickChair} icon={faChair} color={seat.tinhTrangChoNgoi ? 'red' : 'gray'} size="2x" />
-                        </div>
-                      )
-                    })}
+                    {generateSeat(19, 36)}
                   </div>
 
                 </div>

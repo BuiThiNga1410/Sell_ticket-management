@@ -49,60 +49,63 @@ function Formupdatestaff(props) {
       });
   }
   return (
-    <div className="form-add-staff">
-      <span className="add-title"> CẬP NHẬT NHÂN VIÊN</span>
-      <div className="form-staff">
-        <span>Tên nhân viên:</span>
-        <br />
-        <input
-          type="text"
-          required
-          id="nameOfStaff"
-          className="form-text"
-          defaultValue={employee.tenNd}
-        />
-        <br />
-        <span>Số điện thoại:</span>
-        <br />
-        <input
-          type="text"
-          required
-          id="phoneNumber"
-          className="form-text"
-          defaultValue={employee.sdt}
-        />
-        <br />
-        <span>CMND</span>
-        <br />
-        <input
-          type="text"
-          required
-          id="identification"
-          className="form-text"
-          defaultValue={employee.cmnd}
-        />
-        <br />
-        <span>Địa chỉ:</span>
-        <br />
-        <input
-          type="text"
-          required
-          id="address"
-          className="form-text"
-          defaultValue={employee.diaChi}
-        />
-        <br />
+    <div className="form-update-staff">
+      <h4 className="title-update-staff">CẬP NHẬT THÔNG TIN </h4>
+      <div className="my-form-input-1">
+        <form className="form">
 
-        <span>Ngày sinh:</span>
-        <br />
-        <input
-          type="date"
-          required
-          id="dateOfBirth"
-          className="form-text"
-          //defaultValue={employee.ngaySinh.split("T")[0]}
-        />
-        <br />
+          <div className="form-group form-add-bus-route-1">
+            <h5 for="nameOfStaff">Tên nhân viên</h5>
+            <input
+              type="text"
+              required
+              id="nameOfStaff"
+              defaultValue={employee.tenNd}
+              className="myform"
+            />
+          </div>
+          <div className="form-group form-add-bus-route-1">
+            <h5 for="phoneNumber">Số điện thoại</h5>
+            <input
+              type="text"
+              required
+              id="phoneNumber"
+              defaultValue={employee.sdt}
+              className="myform"
+            />
+          </div>
+          <div className="form-group form-add-bus-route-1">
+            <h5 for="identification">CMND</h5>
+            <input
+              type="text"
+              required
+              id="identification"
+              defaultValue={employee.cmnd}
+              className="myform"
+            />
+          </div>
+
+          <div className="form-group form-add-bus-route-1">
+            <h5 for="address">Địa chỉ</h5>
+            <input
+              type="text"
+              required
+              id="address"
+              defaultValue={employee.diaChi}
+              className="myform"
+            />
+          </div>
+          <div className="form-group form-add-bus-route-1">
+            <h5 for="dateOfBirth">Ngày sinh</h5>
+            <input
+              type="date"
+              required
+              id="dateOfBirth"
+              defaultValue={employee.diaChi}
+              className="myform"
+            />
+          </div>
+        </form>
       </div>
       <div className="button-area button-update-staff">
         <button className="button" onClick={handleBack}>

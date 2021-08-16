@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import myaxios from '../../../../app/api';
+import S3 from 'react-aws-s3';
 
 import './Profile.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,25 +8,31 @@ import { faCheckCircle } from '@fortawesome/free-regular-svg-icons';
 import { useForm } from 'react-hook-form';
 import ReactLoading from 'react-loading';
 
+import Avatar from '../../../../img/avatar.png';
+
 function Profile(props) {
   const { register, formState: { errors }, handleSubmit } = useForm();
   let user = JSON.parse(localStorage.getItem('user'));
   const [isLoading, setLoading] = useState(false);
+  const fileRef = useRef();
+  const img = useRef();
 
-  const handleChangeInfo = (data) => {
-    setLoading(true);
+  const updateInfor = (data) => {
+    console.log('img', img.current);
     const name = data.name;
     const sdt = data.sdt;
     const cmnd = data.cmnd;
     const address = data.address;
     const birthday = data.dob;
     const url = user.vaitro === 2 ? `staffs/${user.maNd}` : `customers/${user.maNd}`;
+    
     myaxios.put(url, {
       "TenNd": name,
       "Sdt": sdt,
       "Cmnd": cmnd,
       "DiaChi": address,
       "NgaySinh": birthday,
+      "ImageUrl": img.current
     })
       .then((response) => {
         setLoading(false);
@@ -40,6 +47,7 @@ function Profile(props) {
           "diaChi": address,
           "ngaySinh": birthday,
           "vaitro": user.vaitro,
+          "imageUrl": img.current
         }
         localStorage.setItem('user', JSON.stringify(newUser));
         setTimeout(() => {
@@ -51,12 +59,59 @@ function Profile(props) {
         console.log(error);
       })
   }
+
+  const handleChangeInfo = (data, e) => {
+    e.preventDefault();
+    setLoading(true);
+    if (fileRef.current.files[0]) {
+      const file = fileRef.current.files[0];
+      const newFileName = file.name;
+      const config = {
+        bucketName: `${process.env.REACT_APP_BUCKET}`,
+        region: `${process.env.REACT_APP_REGION}`,
+        accessKeyId: `${process.env.REACT_APP_ACCESS_KEY_ID}`,
+        secretAccessKey: `${process.env.REACT_APP_SECRET_ACCESS_KEY}`,
+      }
+      const ReactS3Client = new S3(config);
+      ReactS3Client.uploadFile(file, newFileName).then(res => {
+        if (res.status === 204) {
+          img.current = res.location;
+          updateInfor(data);
+        } else {
+          console.log("fail");
+        }
+      })
+      .catch(error => console.error(error))
+    } else {
+      img.current = user.imageUrl;
+      updateInfor(data);
+    }
+  }
+
+  const handleChangeImg = (e) => {
+    document.getElementsByClassName("profile-img")[0].setAttribute("src", URL.createObjectURL(e.target.files[0]))
+  }
+
   return (
     <div className="profile-page">
       <div className="profile">
         <div className="form-profile">
           <form className="form" onSubmit={handleSubmit(handleChangeInfo)}>
             <p className="form-title">THÔNG TIN CÁ NHÂN</p>
+            <div className="center profile-img-wrap">
+              <img 
+                className="profile-img" 
+                src={user.imageUrl || Avatar} 
+                alt="avatar" 
+                onClick={() => fileRef.current.click()}
+              />
+              <input 
+                className="hidden" 
+                onChange={handleChangeImg} 
+                type="file" 
+                ref={fileRef}
+              />
+            </div>
             <div className="form-group">
               <label className="form-label" htmlFor="name">Họ và tên</label>
               <input

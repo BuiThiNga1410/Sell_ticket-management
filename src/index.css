@@ -29,6 +29,10 @@ button {
   text-align: center;
 }
 
+.hidden {
+  display: none;
+}
+
 .my-row {
   display: flex;
   flex-wrap: wrap;   

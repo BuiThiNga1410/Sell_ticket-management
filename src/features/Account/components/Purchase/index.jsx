@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ReactLoading from "react-loading";
+import { Link } from 'react-router-dom';
 import myaxios from '../../../../app/api';
 
 import './Purchase.scss';
@@ -20,7 +21,7 @@ function Purchase() {
   useEffect(() => {
     myaxios.get(`tickets/search?userId=${user.maNd}`)
       .then((response) => {
-        setTickets(response.data);
+        setTickets(response.data.filter(ticket => ticket.trangThai === true));
       })
       .catch((error) => {
         console.log(error);
@@ -49,6 +50,9 @@ function Purchase() {
                   <td className="my-table-title my-table-item_center">
                     Ngày xuất bến
                   </td>
+                  <td className="my-table-title my-table-item_center">
+                    Đánh giá
+                  </td>
                 </tr>
                 {tickets.map((ticket) => {
                   return (
@@ -63,7 +67,10 @@ function Purchase() {
                         {ticket.bienSoXe}
                       </td>
                       <td className="my-table-item my-table-item_center">
-                        {ticket.ngayXuatBen}
+                        {ticket.ngayDi?.replace('T', ' ')}
+                      </td>
+                      <td className="my-table-item my-table-item_center">
+                        <Link to={`/review?kh=${user.maNd}&nx=${ticket.maNhaXe}`}>Đánh giá</Link>
                       </td>
                     </tr>
                   )

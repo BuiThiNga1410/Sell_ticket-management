@@ -12,7 +12,7 @@ function ViewTicket(props) {
     myaxios
       .get("/tickets")
       .then((response) => {
-        setTickets(response.data);
+        setTickets(response.data.filter(ticket => ticket.trangThai === true));
       })
       .catch((error) => {
         console.log(error);
@@ -41,6 +41,7 @@ function ViewTicket(props) {
       .delete(`/tickets/${removeId}`)
       .then((response) => {
         const x = tickets;
+        console.log('success');
         setTickets(x.filter((ticket) => ticket.maVe !== removeId));
       })
       .catch((error) => {

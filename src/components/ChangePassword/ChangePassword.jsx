@@ -122,9 +122,8 @@ function ChangePassword() {
             </div>
             {!!status && (
               <p
-                className={`txt-center ${
-                  status.isSuccess ? "txt-success" : "text-error"
-                }`}
+                className={`txt-center ${status.isSuccess ? "txt-success" : "text-error"
+                  }`}
               >
                 {status.message}
               </p>

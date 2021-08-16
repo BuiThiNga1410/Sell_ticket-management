@@ -61,7 +61,7 @@ function Formaddbusroute(props) {
     <div className="form-add-bus-route">
       <h3>THÊM TUYẾN XE</h3>
       <div className="my-form-input">
-      <form>
+        <form className="form">
           <div className="form-group form-add-bus-route-1">
             <h5 for="dep">Điểm xuất phát</h5>
             <select id="dep" className="myselect">
@@ -80,7 +80,7 @@ function Formaddbusroute(props) {
           </div>
           <div className="form-group form-add-bus-route-1">
             <h5 for="time">Thời gian di chuyển (giờ)</h5>
-            <input type="text" class="form-control" id="time"/>
+            <input type="text" class="form-control" id="time" />
           </div>
           <div className="form-group form-add-bus-route-1">
             <h5 for="garage">Nhà xe</h5>
@@ -102,7 +102,7 @@ function Formaddbusroute(props) {
         <button className="button" onClick={handleBack}>
           Quay lại
         </button>
-       
+
         <button className="button" onClick={submitForm}>
           Thêm tuyến xe
         </button>

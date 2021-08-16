@@ -84,7 +84,7 @@ function Formupdatebusroute(props) {
     <div className="form-add-bus-route">
       <h1 className="add-route-title">CẬP NHẬT TUYẾN XE</h1>
       <div className="my-form-input">
-        <form>
+        <form className="form">
           <div className="form-group form-add-bus-route-1">
             <h5 for="dep">Điểm xuất phát</h5>
             <select id="dep" className="myselect">

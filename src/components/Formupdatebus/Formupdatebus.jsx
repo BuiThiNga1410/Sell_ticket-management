@@ -72,9 +72,9 @@ function Formupdatebus(props) {
   }
   return (
     <div className="form-add-bus">
-      <h3>CẬP NHẬT THÔNG TIN XE</h3>
+      <h3 className="title-update-bus">CẬP NHẬT THÔNG TIN XE</h3>
       <div className="my-form-input">
-        <form>
+        <form className="form">
           <div className="form-group form-add-bus-route-1">
             <h5 for="numberPlate">Biển số xe</h5>
             <input

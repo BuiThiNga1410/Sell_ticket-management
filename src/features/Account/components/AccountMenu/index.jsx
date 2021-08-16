@@ -5,15 +5,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook } from '@fortawesome/free-solid-svg-icons';
 import { faUserCircle } from '@fortawesome/free-regular-svg-icons';
 
-AccountMenu.propTypes = {
-
-};
-
 function AccountMenu() {
   const user = JSON.parse(localStorage.getItem('user'));
   return (
     <div className="menu-div-account">
-      <div className="account-avt" />
+      <img src={user.imageUrl} alt="avatar" className="account-avt" />
       <p className="account-name">{user.tenNd || user.Email.split('@')[0]}</p>
       <ul className="menu-list"> 
         <li className="menu-item item-parent">

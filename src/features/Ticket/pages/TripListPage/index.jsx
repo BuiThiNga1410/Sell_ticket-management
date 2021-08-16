@@ -47,7 +47,7 @@ function TripListPage(props) {
               <p className="trip-number">Chuyến xe phù hợp: {trips.length} chuyến</p>
               {trips.map((trip) => {
                 return (
-                  <div className="trip_detail"><Trip trip={trip} /></div>
+                  <div className="trip_detail"><Trip trip={trip} date={date} /></div>
                 )
               })}
             </div>

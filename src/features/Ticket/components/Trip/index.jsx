@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import '../Rating/Rating.scss';
 import './Trip.scss';
 import { Col, Row } from 'react-bootstrap';
+import myaxios from '../../../../app/api';
 
 Trip.propTypes = {
   trips: PropTypes.array,
@@ -16,12 +17,32 @@ const numberWithCommas = (x) => {
   while (pattern.test(x))
     x = x.replace(pattern, "$1,$2");
   return x;
+}
+
+const timeDest = (date, time) => {
+  const a = date.slice(0, 2);
+  let b = +a + +time;
+  console.log('a', a);
+  // eslint-disable-next-line no-unused-vars
+  b = b < 24 ? `0${b}`.slice(-2) : `0${b - 24}`.slice(-2,);
+  return b + date.slice(2, -3);
 
 }
+
 function Trip(props) {
-  const { trip } = props;
-  const dep = trip.ngayXuatBen.split("T")[1].slice(0, -3);
-  const dest = trip.ngayDen.split("T")[1].slice(0, -3);
+  const { trip, date } = props;
+  const [numberEmpty, setNumberEmpty] = useState();
+  useEffect(() => {
+    myaxios.get(`tickets/seats?bustripid=${trip.maChuyenXe}&date=${date}T${trip.gioXuatBen}`)
+      .then((response) => {
+        setNumberEmpty(trip.soChoNgoi - response.data.length);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   const handleBeforeBooking = () => {
     const user = JSON.parse(localStorage.getItem('user'));
     if(!user.vaitro) {
@@ -31,7 +52,7 @@ function Trip(props) {
       }
       return;
     }
-    if (!trip.soChoTrong) {
+    if (!numberEmpty) {
       alert("Chuyến xe đã hết chỗ, vui lòng chọn chuyến khác");
       return;
     }
@@ -42,7 +63,7 @@ function Trip(props) {
       }
       return;
     }
-    window.location.href = `/ticket/booking?trip=${trip.maChuyenXe}&price=${trip.donGia}`;
+    window.location.href = `/ticket/booking?trip=${trip.maChuyenXe}&price=${trip.donGia}&date=${date}T${trip.gioXuatBen}`;
   }
   return (
     <div className="trip-page">
@@ -54,22 +75,22 @@ function Trip(props) {
           <Col>
             <div className="infor_group">
               <p className="infor__name">Nhà xe {trip.nhaXe}</p>
-              <p className="infor__date">{trip.ngayXuatBen.split("T")[0]}</p>
+              <p className="infor__date">{date}</p>
             </div>
 
             {/* <p className="infor-detail">Limousine 9 chỗ VIP</p> */}
 
             <div className="infor_group-time">
-              <p className="infor_group-time__hour">{dep}</p>
+              <p className="infor_group-time__hour">{trip.gioXuatBen.slice(0, -3)}</p>
               <p>{trip.tenBxDi}</p>
             </div>
 
             {/* <p className="infor_time"></p> */}
             <div className="infor_group-time">
-              <p className="infor_group-time__hour">{dest}</p>
+              <p className="infor_group-time__hour">{timeDest(trip.gioXuatBen, trip.thoiGianDiChuyen)}</p>
               <p>{trip.tenBxDen}</p>
             </div>
-            <p className="empty-chair">{trip.soChoTrong} chỗ trống</p>
+            <p className="empty-chair">{numberEmpty} chỗ trống</p>
             <p className="infor-price">{numberWithCommas(trip.donGia)}đ</p>
             <div className="flex-center">
               <button className="btn btn-book-ticket" onClick={handleBeforeBooking}>Đặt vé</button>

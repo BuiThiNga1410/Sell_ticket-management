@@ -9,7 +9,9 @@ function AccountMenu() {
   const user = JSON.parse(localStorage.getItem('user'));
   return (
     <div className="menu-div-account">
-      <img src={user.imageUrl} alt="avatar" className="account-avt" />
+      <div className="center">
+        <img src={user.imageUrl} alt="avatar" className="account-avt" />
+      </div>
       <p className="account-name">{user.tenNd || user.Email.split('@')[0]}</p>
       <ul className="menu-list"> 
         <li className="menu-item item-parent">

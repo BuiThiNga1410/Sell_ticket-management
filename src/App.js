@@ -16,6 +16,7 @@ import HeaderAdmin from "./components/Header_admin/Header";
 import Ticket from "./features/Ticket";
 import SaleReport from "./components/SaleReport";
 import FooterAdmin from "./components/Footer_admin/FooterAdmin";
+import Payment from "./features/Ticket/pages/Payment/Payment";
 
 // Lazy load - Code splitting
 // const Ticket = React.lazy(() => import('./features/Ticket'));
@@ -45,6 +46,7 @@ function App() {
                 <Route path="/ticket" component={Ticket} />
                 <Route path="/login" component={Login} />
                 <Route path="/sign-up" component={SignUp} />
+                <Route path="/payment" component={Payment} />
                 {user.vaitro === 2 && (
                   <div>
                     <Route path="/qlTicket" component={TicketNV} />

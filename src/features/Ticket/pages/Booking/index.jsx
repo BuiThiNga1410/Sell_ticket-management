@@ -7,9 +7,6 @@ import { Col, Form, FormControl, FormGroup, FormLabel, Row } from 'react-bootstr
 import myaxios from '../../../../app/api';
 import { useHistory } from 'react-router';
 
-Booking.propTypes = {
-
-};
 const numberWithCommas = (x) => {
   x = x.toString();
   var pattern = /(-?\d+)(\d{3})/;
@@ -25,10 +22,12 @@ function Booking(props) {
   const [customers, setCustomers] = useState([]);
   const history = useHistory();
   let selectedSeats = [];
+
   const query = new URLSearchParams(props.location.search);
   const tripId = query.get("trip");
   const price = query.get("price");
   const user = JSON.parse(localStorage.getItem('user'));
+
   useEffect(() => {
     myaxios.get(`seats/search?bustripid=${tripId}`)
       .then((response) => {
@@ -50,6 +49,7 @@ function Booking(props) {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
   const handleClickNext = () => {
     switch (step) {
       case 1:
@@ -74,20 +74,33 @@ function Booking(props) {
         let customerId = document.getElementById("customerId") ? document.getElementById("customerId").value: 0;
         console.log(selectedSeats);
         if (selectedSeats.length && ((name && phone) || customerId)) {
-          myaxios.post('/tickets/', {
-            "MaKh": user.vaitro === 3 ? +user.maNd : customerId,
-            "MaChoNgoi": selectedSeats,
-            "MaChuyenXe": tripId,
-            "GhiChu": note,
-          })
-            .then((response) => {
-              console.log(response.data);
-              console.log(note);
-              user.vaitro === 3 ? history.push('/account/purchase') : history.push('/qlTicket');
+
+          if (user.vaitro !== 3) {
+            myaxios.post('/tickets/', {
+              "MaKh": user.vaitro === 3 ? +user.maNd : customerId,
+              "MaChoNgoi": selectedSeats,
+              "MaChuyenXe": tripId,
+              "GhiChu": note,
             })
-            .catch((error) => {
-              console.log(error);
-            })
+              .then((response) => {
+                console.log(response.data);
+                console.log(note);
+                user.vaitro === 3 ? history.push('/account/purchase') : history.push('/qlTicket');
+              })
+              .catch((error) => {
+                console.log(error);
+              })
+          } else {
+            history.push({
+              pathname: '/payment',
+              state: {
+                MaKh: user.vaitro === 3 ? +user.maNd : customerId,
+                MaChoNgoi: selectedSeats,
+                MaChuyenXe: tripId,
+                GhiChu: note,
+              } 
+            });
+          }
         }
         else if (!name || !phone) {
           alert("Vui lòng cập nhật thông tin cá nhân");

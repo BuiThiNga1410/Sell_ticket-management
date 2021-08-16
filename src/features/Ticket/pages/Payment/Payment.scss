@@ -1,0 +1,40 @@
+.form-checkout {
+  width: 450px;
+  padding: 30px 20px;
+  box-shadow: 2px 2px 4px rgb(230, 230, 230);
+}
+
+.checkout-title {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.btn-pay {
+  background: #5469d4;
+  color: #ffffff;
+  width: 100%;
+  margin: 24px 0 0;
+  padding: 10px 8px;
+  border-radius: 4px;
+}
+
+.checkou-input {
+  width: 100%;
+  padding: 8px 4px;
+  border-radius: 4px;
+  border: 1px solid rgb(226, 226, 226);
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.checkout-label {
+  font-size: 14px;
+  color: rgb(87, 86, 86);
+}
+
+.StripeElement {
+  padding: 16px;
+  border: 1px solid rgb(226, 226, 226);
+  border-radius: 4px;
+}

@@ -157,7 +157,7 @@ function Databusroute(props) {
                       <th>Tuyến xe</th>
                       <th>Điểm xuất phát</th>
                       <th>Điểm đến</th>
-
+                      <th>Nhà xe</th>
                       <th>Cập nhật</th>
                       <th>Xóa</th>
                     </tr>
@@ -166,14 +166,16 @@ function Databusroute(props) {
                     {busroutes.map((busroute) => {
                       return (
                         <tr>
-                          <td data-column="route">{busroute.tenTuyenXe}</td>
+                          <td data-column="route" className="tuyenXeColumn">{busroute.tenTuyenXe}</td>
                           <td data-column="startingpoint">
                             {busroute.diaChiBxDi.split(",")[0]}
                           </td>
                           <td data-column="destination">
                             {busroute.diaChiBxDen.split(",")[0]}
                           </td>
-
+                          <td data-column="garage">
+                            {busroute.tenNhaXe}
+                          </td>
                           <td data-column="link">
                             <a
                               href={"/busroute/update/" + busroute.maTuyenXe}

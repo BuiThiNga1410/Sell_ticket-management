@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Loading from "../../shared/partials/Loading";
 import './DataReview.scss';
 import axios from "axios";

@@ -1,11 +1,15 @@
 import React from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import './Payment.scss';
+import { useHistory, useLocation } from 'react-router-dom';
+import myaxios from '../../../../app/api';
 
 const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
   const user = JSON.parse(localStorage.getItem('user'));
+  const location = useLocation();
+  const history = useHistory();
 
   const handleSubmit = async (event) => {
     // Block native form submission.
@@ -18,7 +22,21 @@ const CheckoutForm = () => {
     const cardElement = elements.getElement(CardElement);
 
     stripe.createToken(cardElement)
-      .then(res => console.log(res))
+      .then(() => {
+        myaxios.post('/tickets/', {
+          "MaKh": location.state.MaKh,
+          "MaChoNgoi": location.state.MaChoNgoi,
+          "MaChuyenXe": location.state.MaChuyenXe,
+          "NgayDi": location.state.NgayDi,
+          "GhiChu": location.state.GhiChu,
+        })
+          .then(() => {
+            history.push('/account/purchase');
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+      })
       .catch(err => console.log(err))
 
   };

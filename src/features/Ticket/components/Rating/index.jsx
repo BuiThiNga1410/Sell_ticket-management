@@ -1,15 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import './Rating.scss'
 import myaxios from '../../../../app/api';
+import { useHistory } from 'react-router-dom';
 
 function Rating(props) {
   const [numberStar, setNumberStar] = useState(0);
   const [note, setNote] = useState('');
+  const [nameNx, setNameNx] = useState();
   const query = new URLSearchParams(window.location.search);
   const nx = query.get("nx");
   const kh = query.get("kh");
+  const history = useHistory();
+
+  useEffect(() => {
+    myaxios.get(`garages/${nx}`)
+      .then(res => setNameNx(res.data.tenNhaXe))
+      .catch(err => {
+        throw err;
+      });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const handleClickStar = (e) => {
     if (e.target.getAttribute("color") === "yellow") {
@@ -29,7 +41,9 @@ function Rating(props) {
       "Sao": numberStar,
       "NoiDungDanhGia": note
    })
-    .then(res => console.log(res))
+    .then(() => {
+      history.push('/');
+    })
     .catch(err => {
       throw err;
     })
@@ -56,7 +70,7 @@ function Rating(props) {
   return (
     <div className="detail-ticket">
       <div className="rating">
-        <p className="rating__title">Phản hồi của bạn </p>
+        <p className="rating__label">Đánh giá nhà xe {nameNx} </p>
         <div className="rating__star">
           {generateStar()}
         </div>

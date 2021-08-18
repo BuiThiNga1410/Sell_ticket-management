@@ -1,0 +1,40 @@
+.review {
+  border-top: 1px solid rgb(180, 179, 179);
+  margin: 24px 0;
+  padding: 24px 24px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .review-avt {
+    width: 60px;
+    height: 60px;
+    margin-right: 24px;
+    border-radius: 50%;
+  }
+  
+  .review-item {
+    width: 500px;
+    padding: 16px 0;
+    border-top: 1px solid rgb(207, 205, 205);
+  }
+  
+  .review-item:first-child {
+    border-top: 0;
+  }
+  
+  .review-name {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .star-icon {
+    font-size: 12px;
+    margin-right: 4px;
+  }
+
+  .review-content {
+    font-size: 14px;
+    margin-top: 8px;
+  }
+}

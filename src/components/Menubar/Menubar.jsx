@@ -1,4 +1,4 @@
-import React  from "react";
+import React from "react";
 import {
   Link,
   NavLink,
@@ -54,6 +54,14 @@ function Menubar(props) {
             </li>
             <li>
               <Link to="/bus/add">Thêm xe</Link>
+            </li>
+          </ul>
+        </li>
+        <li className={path.includes('/review') ? 'active' : ''}>
+          <Link to="/review">Quản lý đánh giá</Link>
+          <ul className="subnav">
+            <li>
+              <Link to="/review">Chi tiết đánh giá</Link>
             </li>
           </ul>
         </li>

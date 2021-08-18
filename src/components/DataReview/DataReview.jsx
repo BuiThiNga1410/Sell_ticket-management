@@ -43,7 +43,7 @@ function DataReview(props) {
     };
 
     function handleBack() {
-      window.location.href = "/busroute";
+      window.location.href = "/reviews";
     }
 
     return (

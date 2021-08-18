@@ -2,14 +2,11 @@ import React, { useEffect, useState } from 'react';
 
 import './Booking.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheckCircle, faChair } from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { Col, Form, FormControl, FormGroup, FormLabel, Row } from 'react-bootstrap';
 import myaxios from '../../../../app/api';
 import { useHistory } from 'react-router';
 
-Booking.propTypes = {
-
-};
 const numberWithCommas = (x) => {
   x = x.toString();
   var pattern = /(-?\d+)(\d{3})/;
@@ -24,18 +21,21 @@ function Booking(props) {
   const [seats, setSeats] = useState();
   const [customers, setCustomers] = useState([]);
   const history = useHistory();
-  let selectedSeats = [];
+  const [selectedSeats, setSelected] = useState([]);
+
   const query = new URLSearchParams(props.location.search);
   const tripId = query.get("trip");
   const price = query.get("price");
   const date = query.get("date");
+  const numberSeat = query.get("number");
   const user = JSON.parse(localStorage.getItem('user'));
+
+  console.log('selecte', selectedSeats);
 
   useEffect(() => {
     myaxios.get(`tickets/seats?bustripid=${tripId}&date=${date}`)
       .then((response) => {
         setSeats(response.data);
-        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -44,7 +44,7 @@ function Booking(props) {
       myaxios.get("/customers")
         .then((response) => {
           setCustomers(response.data);
-          console.log(response.data);
+
         })
         .catch((error) => {
           console.log(error);
@@ -75,31 +75,35 @@ function Booking(props) {
         let name = document.getElementById("name") ? document.getElementById("name").value : "";
         let phone = document.getElementById("phone") ? document.getElementById("phone").value : "";
         let customerId = document.getElementById("customerId") ? document.getElementById("customerId").value : 0;
-        console.log(selectedSeats);
+    
         if (selectedSeats.length && ((name && phone) || customerId)) {
-          const a = {
-            "MaKh": user.vaitro === 3 ? +user.maNd : customerId,
-            "MaChoNgoi": selectedSeats,
-            "MaChuyenXe": +tripId,
-            "NgayDi": date,
-            "GhiChu": note,
-          };
-          console.log('data', a);
-          myaxios.post('/tickets/', {
-            "MaKh": user.vaitro === 3 ? +user.maNd : customerId,
-            "MaChoNgoi": selectedSeats,
-            "MaChuyenXe": tripId,
-            "NgayDi": date,
-            "GhiChu": note,
-          })
-            .then((response) => {
-              console.log(response.data);
-              console.log(note);
-              user.vaitro === 3 ? history.push('/account/purchase') : history.push('/qlTicket');
+
+          if (user.vaitro !== 3) {
+            myaxios.post('/tickets/', {
+              "MaKh": customerId,
+              "MaChoNgoi": selectedSeats,
+              "MaChuyenXe": tripId,
+              "NgayDi": date,
+              "GhiChu": note,
             })
-            .catch((error) => {
-              console.log(error);
-            })
+              .then((response) => {
+                user.vaitro === 3 ? history.push('/account/purchase') : history.push('/qlTicket');
+              })
+              .catch((error) => {
+                console.log(error);
+              })
+          } else {
+            history.push({
+              pathname: '/payment',
+              state: {
+                MaKh: +user.maNd,
+                MaChoNgoi: selectedSeats,
+                MaChuyenXe: tripId,
+                NgayDi: date,
+                GhiChu: note,
+              }
+            });
+          }
         }
         else if (!name || !phone) {
           alert("Vui lòng cập nhật thông tin cá nhân");
@@ -134,25 +138,35 @@ function Booking(props) {
     }
     const newArray = array.map(seat => {
       return (
-        <div className="chair-info" key={seat}>
-          <FontAwesomeIcon id={seat} className="chair-icon" onClick={handleClickChair} icon={faChair} color={seats?.includes(seat) ? 'red' : 'gray'} size="2x" />
+        // <div className="chair-info" key={seat}>
+        //   <FontAwesomeIcon id={seat} className="chair-icon" onClick={handleClickChair} icon={faChair} color={seats?.includes(seat) ? 'red' : 'gray'} size="2x" />
+        // </div>
+        <div className="chair-info center">
+          <div
+            className={`chair center ${seats?.includes(seat) ? 'disable' : selectedSeats.includes(seat) ? 'select' : ''}`}
+            id={seat}
+            onClick={() => handleClickChair(seat)}
+            key={seat}
+          >
+            {seat}
+          </div>
         </div>
+
       )
     })
     return newArray;
   }
 
-  const handleClickChair = (e) => {
-    if (e.target.getAttribute("color") === "blue") {
-      e.target.setAttribute("color", "gray");
-      selectedSeats = selectedSeats.filter(seat => seat !== +e.target.id);
+  const handleClickChair = (id) => {
+    if (selectedSeats.includes(id)) {
+      let temp = [...selectedSeats];
+      setSelected(temp.filter(seat => seat !== +id));
     }
-    else if (e.target.getAttribute("color") === "gray") {
-      e.target.setAttribute("color", "blue");
-      selectedSeats.push(+e.target.id);
-      console.log(selectedSeats);
+    else if (!seats.includes(id)) {
+      let temp = [...selectedSeats];
+      temp.push(+id);
+      setSelected(temp);
     }
-    document.getElementsByClassName("price-detail")[0].innerHTML = `${numberWithCommas(selectedSeats.length * price)}đ`;
   }
 
   return (
@@ -168,17 +182,17 @@ function Booking(props) {
             <div className="note">
               <p className="note__title">Chú thích</p>
               <div className="note__detail">
-                <FontAwesomeIcon icon={faChair} color="gray" size="2x" />
+                <div className="chair small" />
                 <p className="note__detail-item">Còn trống</p>
               </div>
 
               <div className="note__detail">
-                <FontAwesomeIcon icon={faChair} color="red" size="2x" />
+                <div className="chair small disable" />
                 <p className="note__detail-item">Đã đặt</p>
               </div>
 
               <div className="note__detail">
-                <FontAwesomeIcon icon={faChair} color="blue" size="2x" />
+                <div className="chair small select" />
                 <p className="note__detail-item">Đang chọn</p>
               </div>
             </div>
@@ -190,7 +204,7 @@ function Booking(props) {
                 <p className="floor-name">Tầng 1</p>
                 <div className="floor">
                   <div className="floor__row">
-                    {generateSeat(1, 18)}
+                    {generateSeat(0, numberSeat / 2 - 1)}
                   </div>
                 </div>
               </Col>
@@ -199,7 +213,7 @@ function Booking(props) {
                 <p className="floor-name">Tầng 2</p>
                 <div className="floor">
                   <div className="floor__row">
-                    {generateSeat(19, 36)}
+                    {generateSeat(numberSeat / 2, numberSeat - 1)}
                   </div>
 
                 </div>
@@ -253,7 +267,7 @@ function Booking(props) {
         <div className="price-next">
           <div className="my-price">
             <p className="price-title">Tổng cộng: </p>
-            <p className="price-detail">0đ</p>
+            <p className="price-detail">{numberWithCommas(selectedSeats.length * price)}đ</p>
           </div>
           <button className="btn btn-primary" onClick={handleClickNext}>Tiếp tục</button>
         </div>

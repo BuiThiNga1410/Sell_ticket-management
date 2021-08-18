@@ -43,7 +43,7 @@ function DataReview(props) {
     };
 
     function handleBack() {
-      window.location.href = "/reviews";
+      window.location.href = "/review";
     }
 
     return (

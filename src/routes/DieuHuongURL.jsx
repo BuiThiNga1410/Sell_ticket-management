@@ -20,6 +20,7 @@ import ChangePassword from "../components/ChangePassword/ChangePassword";
 import BarChart from "../components/BarChart/BarChart";
 import DataReview from "../components/DataReview/DataReview";
 import DataGarage from "../components/DataGarage/DataGarage";
+import FormAddGarage from "../components/FormAddGarage/FormAddGarage";
 DieuHuongURL.propTypes = {};
 
 function DieuHuongURL(props) {
@@ -53,6 +54,7 @@ function DieuHuongURL(props) {
       <Route exact path="/review" component={DataReview}/>
 
       <Route exact path="/garage" component={DataGarage}/>
+      <Route exact path="/garage/add" component={FormAddGarage}/>
     </div>
   );
 }

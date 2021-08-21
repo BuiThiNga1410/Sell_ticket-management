@@ -182,14 +182,17 @@ function DataBusTrip(props) {
                               {bustrip.soChoNgoi}
                             </td>
                             <td>
-                              {bustrip.ngayXuatBen.map((ngay) =>{
+
+                              {!!bustrip.ngayXuatBen?.length ? bustrip.ngayXuatBen.map((ngay) =>{
                                 return(
                                 <tr data-column="days" className="my-tr">
                                   <td>Ngày: {ngay.split(" | ")[0].split("T")[0]}</td>
                                   <td>Giờ: {ngay.split(" | ")[0].split("T")[1]}</td>
                                   <td>Số chỗ trống: {ngay.split(" | ")[1]}</td>
                                 </tr>)
-                              })
+                              } ) : (
+                                bustrip.gioXuatBen
+                              )
                               }
                             </td>
                             <td>{bustrip.thoiGianDiChuyen} giờ</td>

@@ -1,6 +1,10 @@
 .mytable{
     width: 90%;
 }
+.mytablebustrip{
+    width: 100%;
+   
+}
 .addbustripbutton{
     position: relative;
     left: 1130px;
@@ -28,10 +32,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
-    top: 78px;
-    left: -20px;
-    margin-bottom: 48px;
+    margin-top: 30px;
+    margin-bottom: 30px;
     width: 1010px;
 }
 .my-table-list{
@@ -40,4 +42,19 @@
 .button-revenues{
     width: 245px;
     height: 40px;
+}
+.my-search-bar{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.my-span{
+    height: 40px;
+}
+.button-in-bustrip{
+    height: 40px;
+}
+.my-tr{
+    color: none;
 }

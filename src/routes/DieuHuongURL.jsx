@@ -1,7 +1,5 @@
 import React from "react";
-import {
-  Route,
-} from "react-router-dom";
+import { Route } from "react-router-dom";
 import Formupdatebus from "../components/Formupdatebus/Formupdatebus";
 import Formaddbus from "../components/Formaddbus/Formaddbus";
 import Formaddbusroute from "../components/Formaddbusroute/Formaddbusroute";
@@ -21,6 +19,7 @@ import BarChart from "../components/BarChart/BarChart";
 import DataReview from "../components/DataReview/DataReview";
 import DataGarage from "../components/DataGarage/DataGarage";
 import FormAddGarage from "../components/FormAddGarage/FormAddGarage";
+import FormUpdateGarage from "../components/FormUpdateGarage/FormUpdateGarage";
 DieuHuongURL.propTypes = {};
 
 function DieuHuongURL(props) {
@@ -47,14 +46,15 @@ function DieuHuongURL(props) {
 
       <Route exact path="/revenues" component={DataRevenues} />
 
-      <Route exact path="/password/change" component={ChangePassword}/>
+      <Route exact path="/password/change" component={ChangePassword} />
 
-      <Route exact path="/revenues/chart" component={BarChart}/>
+      <Route exact path="/revenues/chart" component={BarChart} />
 
-      <Route exact path="/review" component={DataReview}/>
+      <Route exact path="/review" component={DataReview} />
 
-      <Route exact path="/garage" component={DataGarage}/>
-      <Route exact path="/garage/add" component={FormAddGarage}/>
+      <Route exact path="/garage" component={DataGarage} />
+      <Route exact path="/garage/add" component={FormAddGarage} />
+      <Route exact path="/garage/update/:id" component={FormUpdateGarage} />
     </div>
   );
 }

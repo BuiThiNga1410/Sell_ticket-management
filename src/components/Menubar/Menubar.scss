@@ -4,7 +4,7 @@
     height: auto;
     text-align: center;
     box-shadow: 1px 2px 4px rgb(236, 234, 234);
-    padding: 0 100px;
+    padding: 0 10px;
 }
 .nav{
     display: flex;
@@ -14,7 +14,7 @@
 }
 .nav > li{
     display: inline-block;
-    width: calc(100%/6);
+    width: calc(100%/7);
    
 }
 

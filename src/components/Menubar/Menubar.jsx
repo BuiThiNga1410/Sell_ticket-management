@@ -57,6 +57,17 @@ function Menubar(props) {
             </li>
           </ul>
         </li>
+        <li className={path === '/garage' ? 'active' : ''}>
+          <Link to="/garage">Quản lý nhà xe</Link>
+          <ul className="subnav">
+            <li>
+              <Link to="/garage">Danh sách nhà</Link>
+            </li>
+            <li>
+              <Link to="/garage/add">Thêm xe</Link>
+            </li>
+          </ul>
+        </li>
         <li className={path.includes('/review') ? 'active' : ''}>
           <Link to="/review">Quản lý đánh giá</Link>
           <ul className="subnav">

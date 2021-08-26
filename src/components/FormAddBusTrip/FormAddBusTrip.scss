@@ -6,7 +6,7 @@
     margin-bottom: 20px;
 }
 .mytime{
-    height: 36px;
+    height: 35px;
     width: 160px;
     margin-bottom: 20px;
     margin-top: 10px;
@@ -30,11 +30,24 @@ h3{
     margin-right: 20px;
 }
 .price{
-    width: 160px;
-    margin-right: 20px;
+    width: 350px;
+    height: 40px;
+    margin-bottom: 10px;
 }
 .mybutton{
     margin-top: 20px;    
     display: flex;
     justify-content: center;
+}
+.buttonarea{
+    margin-top: 20px;
+}
+.half-column{
+    width: 50%;
+}
+.my-checkbox{
+    display: flex;
+}
+.checkbox-item{
+    margin: 10px;
 }

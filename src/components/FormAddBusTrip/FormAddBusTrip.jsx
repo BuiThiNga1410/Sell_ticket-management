@@ -7,6 +7,24 @@ function FormAddBusTrip(props) {
   const [busroutes, setBusRoutes] = useState([]);
   const [buses, setBuses] = useState([]);
   const history = useHistory();
+  const [busRouteId, setBusRouteId] = useState();
+  const [schedule, setSchedule] = useState([]);
+
+  function handleChange(e) {
+    setBusRouteId(e.target.value);
+  }
+
+  function handleChangeCheckbox(e) {
+    var temp = [...schedule];
+    if (e.target.checked) {
+      temp.push(e.target.value);
+      setSchedule(temp);
+    } else {
+      temp.pop(e.target.value);
+      setSchedule(temp);
+    }
+  }
+
   useEffect(() => {
     fetch("https://qlbvxk.herokuapp.com/api/busroutes")
       .then((res) => res.json())
@@ -14,30 +32,30 @@ function FormAddBusTrip(props) {
         setBusRoutes(result);
       });
   }, []);
+
   useEffect(() => {
-    fetch("https://qlbvxk.herokuapp.com/api/buses/")
+    fetch(`https://qlbvxk.herokuapp.com/api/buses/busroute?id=${busRouteId}`)
       .then((res) => res.json())
       .then((result) => {
         setBuses(result);
       });
-  }, []);
+  }, [busRouteId]);
+
   function handleBack() {
     window.location.href = "/bustrip";
   }
   function submitForm() {
     let busRouteId = document.querySelector("#busroute").value;
     let busId = document.querySelector("#bus").value;
-    let date = document.getElementById("date").value;
     let time = document.getElementById("time").value;
-    let numberOfSeats = document.getElementById("numberOfSeats").value;
+    let schedule_trip = schedule.join("");
     let price = document.getElementById("price").value;
-    let datetime = date + "T" + time;
     axios
       .post("https://qlbvxk.herokuapp.com/api/bustrips", {
         MaTuyenXe: busRouteId,
         MaXe: busId,
-        NgayXuatBen: datetime,
-        SoChoDaDat: numberOfSeats,
+        GioXuatBen: time,
+        LichTrinh: schedule_trip,
         DonGia: price,
       })
       .then((res) => {
@@ -53,7 +71,6 @@ function FormAddBusTrip(props) {
       })
       .catch((error) => {
         console.log(error);
-        console.log(datetime);
         console.log(busRouteId);
         console.log(busId);
         console.log(price);
@@ -65,7 +82,12 @@ function FormAddBusTrip(props) {
         <h3>THÊM CHUYẾN XE</h3>
         <div className="form-item">
           <h5>Tuyến xe</h5>
-          <select className="form-text myselect" id="busroute">
+          <select
+            className="form-text myselect"
+            id="busroute"
+            onChange={handleChange}
+            value={busRouteId}
+          >
             {busroutes.map((busroute) => {
               return (
                 <option value={busroute.maTuyenXe}>
@@ -76,68 +98,129 @@ function FormAddBusTrip(props) {
           </select>
         </div>
         <div className="form-item">
-          <h5>Nhà xe - Biển số</h5>
+          <h5>Biển số xe</h5>
           <select className="form-text myselect" id="bus">
-            {buses.map((bus) => {
-              return (
-                <option value={bus.maXe}>
-                  {bus.nhaXe} - {bus.bienSoXe}
-                </option>
-              );
-            })}
+            {!!buses?.length
+              ? buses.map((bus) => {
+                  return <option value={bus.maXe}>{bus.bienSoXe}</option>;
+                })
+              : null}
           </select>
         </div>
-        <div className="form-item datetime">
-          <div className="date">
-            <h5>Ngày xuất bến</h5>
-            <input type="date" id="date" className="mydate" />
-          </div>
-          <div className="time">
-            <h5>Giờ xuất bến</h5>
-            <select id="time" className="mytime">
-              <option value="00:00:00">00:00</option>
-              <option value="01:00:00">01:00</option>
-              <option value="02:00:00">02:00</option>
-              <option value="03:00:00">03:00</option>
-              <option value="04:00:00">04:00</option>
-              <option value="05:00:00">05:00</option>
-              <option value="06:00:00">06:00</option>
-              <option value="07:00:00">07:00</option>
-              <option value="08:00:00">08:00</option>
-              <option value="09:00:00">09:00</option>
-              <option value="10:00:00">10:00</option>
-              <option value="11:00:00">11:00</option>
-              <option value="12:00:00">12:00</option>
-              <option value="13:00:00">13:00</option>
-              <option value="14:00:00">14:00</option>
-              <option value="15:00:00">15:00</option>
-              <option value="16:00:00">16:00</option>
-              <option value="17:00:00">17:00</option>
-              <option value="18:00:00">18:00</option>
-              <option value="19:00:00">19:00</option>
-              <option value="20:00:00">20:00</option>
-              <option value="21:00:00">21:00</option>
-              <option value="22:00:00">22:00</option>
-              <option value="23:00:00">23:00</option>
-              <option value="24:00:00">24:00</option>
-            </select>
+        <div className="form-item">
+          <h5>Giờ xuất bến</h5>
+          <select id="time" className="myselect">
+            <option value="00:00:00">00:00</option>
+            <option value="01:00:00">01:00</option>
+            <option value="02:00:00">02:00</option>
+            <option value="03:00:00">03:00</option>
+            <option value="04:00:00">04:00</option>
+            <option value="05:00:00">05:00</option>
+            <option value="06:00:00">06:00</option>
+            <option value="07:00:00">07:00</option>
+            <option value="08:00:00">08:00</option>
+            <option value="09:00:00">09:00</option>
+            <option value="10:00:00">10:00</option>
+            <option value="11:00:00">11:00</option>
+            <option value="12:00:00">12:00</option>
+            <option value="13:00:00">13:00</option>
+            <option value="14:00:00">14:00</option>
+            <option value="15:00:00">15:00</option>
+            <option value="16:00:00">16:00</option>
+            <option value="17:00:00">17:00</option>
+            <option value="18:00:00">18:00</option>
+            <option value="19:00:00">19:00</option>
+            <option value="20:00:00">20:00</option>
+            <option value="21:00:00">21:00</option>
+            <option value="22:00:00">22:00</option>
+            <option value="23:00:00">23:00</option>
+            <option value="24:00:00">24:00</option>
+          </select>
+        </div>
+        <div className="form-item">
+          <h5>Đơn giá</h5>
+          <input className="price form-text" type="number" id="price" />
+        </div>
+        <div className="form-item">
+          <h5>Lịch trình</h5>
+          <div className="my-checkbox">
+            <div className="half-column">
+              <div>
+                <input
+                  type="checkbox"
+                  id="schedule"
+                  className="checkbox-item"
+                  value="0"
+                  onChange={handleChangeCheckbox}
+                />
+                <label for="sunday"> Chủ nhật</label>
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  id="schedule"
+                  className="checkbox-item"
+                  value="1"
+                  onChange={handleChangeCheckbox}
+                />
+                <label for="monday"> Thứ 2</label>
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  id="schedule"
+                  className="checkbox-item"
+                  value="2"
+                  onChange={handleChangeCheckbox}
+                />
+                <label for="tuesday"> Thứ 3</label>
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  id="schedule"
+                  className="checkbox-item"
+                  value="3"
+                  onChange={handleChangeCheckbox}
+                />
+                <label for="wednesday"> Thứ 4</label>
+              </div>
+            </div>
+            <div className="half-column">
+              <div>
+                <input
+                  type="checkbox"
+                  id="schedule"
+                  className="checkbox-item"
+                  value="4"
+                  onChange={handleChangeCheckbox}
+                />
+                <label for="thursday"> Thứ 5</label>
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  id="schedule"
+                  className="checkbox-item"
+                  value="5"
+                  onChange={handleChangeCheckbox}
+                />
+                <label for="friday"> Thứ 6</label>
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  id="schedule"
+                  className="checkbox-item"
+                  value="6"
+                  onChange={handleChangeCheckbox}
+                />
+                <label for="saturday"> Thứ 7</label>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="form-item seat-and-price">
-          <div className="seats">
-            <h5>Số chỗ đã đặt</h5>
-            <input
-              className="numberOfSeats form-text"
-              type="number"
-              id="numberOfSeats"
-            />
-          </div>
-          <div className="price">
-            <h5>Đơn giá</h5>
-            <input className="price form-text" type="number" id="price" />
-          </div>
-        </div>
-        <div className="mybutton">
+        <div className="mybutton buttonarea">
           <button className="button" onClick={handleBack} type="button">
             Quay lại
           </button>

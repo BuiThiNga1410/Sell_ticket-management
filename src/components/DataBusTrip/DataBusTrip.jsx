@@ -142,18 +142,21 @@ function DataBusTrip(props) {
                       type="date"
                       id="date"
                     />
-                    <button className="btn btn-primary button-in-bustrip" onClick={handleSearch}>
+                    <button
+                      className="btn btn-primary button-in-bustrip"
+                      onClick={handleSearch}
+                    >
                       Tìm chuyến xe
                     </button>
-                    <button className="btn btn-primary button-in-bustrip">Tất cả</button>
-                    
+                    <button className="btn btn-primary button-in-bustrip">
+                      Tất cả
+                    </button>
                   </div>
-                  
                 </form>
               </div>
 
               {!!bustrips && bustrips.length && (
-                <div className="table-container">
+                <div className="table-container-trip">
                   <table className="mytablebustrip">
                     <thead>
                       <tr>
@@ -182,18 +185,25 @@ function DataBusTrip(props) {
                               {bustrip.soChoNgoi}
                             </td>
                             <td>
-
-                              {!!bustrip.ngayXuatBen?.length ? bustrip.ngayXuatBen.map((ngay) =>{
-                                return(
-                                <tr data-column="days" className="my-tr">
-                                  <td>Ngày: {ngay.split(" | ")[0].split("T")[0]}</td>
-                                  <td>Giờ: {ngay.split(" | ")[0].split("T")[1]}</td>
-                                  <td>Số chỗ trống: {ngay.split(" | ")[1]}</td>
-                                </tr>)
-                              } ) : (
-                                bustrip.gioXuatBen
-                              )
-                              }
+                              {!!bustrip.ngayXuatBen?.length
+                                ? bustrip.ngayXuatBen.map((ngay) => {
+                                    return (
+                                      <tr data-column="days" className="my-tr">
+                                        <td>
+                                          Ngày:{" "}
+                                          {ngay.split(" | ")[0].split("T")[0]}
+                                        </td>
+                                        <td>
+                                          Giờ:{" "}
+                                          {ngay.split(" | ")[0].split("T")[1]}
+                                        </td>
+                                        <td>
+                                          Số chỗ trống: {ngay.split(" | ")[1]}
+                                        </td>
+                                      </tr>
+                                    );
+                                  })
+                                : bustrip.gioXuatBen}
                             </td>
                             <td>{bustrip.thoiGianDiChuyen} giờ</td>
                             <td>{numberWithCommas(bustrip.donGia)}</td>

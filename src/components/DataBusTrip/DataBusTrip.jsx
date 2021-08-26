@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarker, faExchangeAlt } from "@fortawesome/free-solid-svg-icons";
 
 import axios from "axios";
-import { Link } from "react-router-dom";
 import "./DataBusTrip.scss";
 import ConfirmDialog from "../../shared/partials/ConfirmDialog";
 import Loading from "../../shared/partials/Loading";

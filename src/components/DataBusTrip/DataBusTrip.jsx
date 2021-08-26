@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarker, faExchangeAlt } from "@fortawesome/free-solid-svg-icons";
 
 import axios from "axios";
-import { Link } from "react-router-dom";
 import "./DataBusTrip.scss";
 import ConfirmDialog from "../../shared/partials/ConfirmDialog";
 import Loading from "../../shared/partials/Loading";
@@ -91,14 +90,14 @@ function DataBusTrip(props) {
     <div>
       <div className="searchForm">
         <h1 className="title-table">DANH SÁCH CHUYẾN XE</h1>
-        <div className="container">
+        <div className="my-container">
           <div className="my-row">
             <div className="table-list my-table-list">
-              <div>
+              <div className="my-search-bar">
                 <form className="my-search-form-1">
                   <div class="input-group">
                     <div class="input-group-prepend ">
-                      <span class="input-group-text">
+                      <span class="input-group-text my-span">
                         <FontAwesomeIcon icon={faMapMarker} color="blue" />
                       </span>
                     </div>
@@ -117,7 +116,7 @@ function DataBusTrip(props) {
                     </select>
 
                     <div class="input-group-prepend">
-                      <span class="input-group-text">
+                      <span class="input-group-text my-span">
                         <div class="search-exchange">
                           <FontAwesomeIcon icon={faExchangeAlt} color="blue" />
                           <FontAwesomeIcon icon={faMapMarker} color="blue" />
@@ -142,23 +141,22 @@ function DataBusTrip(props) {
                       type="date"
                       id="date"
                     />
-                    <button className="btn btn-primary" onClick={handleSearch}>
+                    <button
+                      className="btn btn-primary button-in-bustrip"
+                      onClick={handleSearch}
+                    >
                       Tìm chuyến xe
                     </button>
-                    <button className="btn btn-primary">Tất cả</button>
+                    <button className="btn btn-primary button-in-bustrip">
+                      Tất cả
+                    </button>
                   </div>
                 </form>
               </div>
-              <div>
-                <button className="btn btn-primary button addbusbutton editbutton">
-                  <Link to="/bustrip/add" className="link-add-button my-button">
-                    Thêm chuyến xe
-                  </Link>
-                </button>
-              </div>
+
               {!!bustrips && bustrips.length && (
-                <div className="table-container">
-                  <table className="mytable">
+                <div className="table-container-trip">
+                  <table className="mytablebustrip">
                     <thead>
                       <tr>
                         <th>Tên bến xe đi</th>
@@ -166,11 +164,10 @@ function DataBusTrip(props) {
                         <th>Tên bến xe đến</th>
 
                         <th>Nhà xe</th>
-                        <th>Số chỗ trống</th>
-                        <th>Ngày xuất bến</th>
-                        <th>Ngày đến</th>
+                        <th>Số chỗ ngồi</th>
+                        <th>Ngày/giờ xuất bến - Số chỗ trống</th>
+                        <th>Thời gian</th>
                         <th>Đơn giá</th>
-
                         <th>Xóa</th>
                       </tr>
                     </thead>
@@ -182,12 +179,32 @@ function DataBusTrip(props) {
 
                             <td data-column="dest">{bustrip.tenBxDen}</td>
 
-                            <td data-column="nhaXe">{bustrip.nhaXe}</td>
-                            <td data-column="numberOfEmplySeats">
-                              {bustrip.soChoTrong}
+                            <td data-column="nhaXe">{bustrip.tenNhaXe}</td>
+                            <td data-column="numberOfSeats">
+                              {bustrip.soChoNgoi}
                             </td>
-                            <td>{bustrip.ngayXuatBen.split("T")[0]}</td>
-                            <td>{bustrip.ngayDen.split("T")[0]}</td>
+                            <td>
+                              {!!bustrip.ngayXuatBen?.length
+                                ? bustrip.ngayXuatBen.map((ngay) => {
+                                    return (
+                                      <tr data-column="days" className="my-tr">
+                                        <td>
+                                          Ngày:{" "}
+                                          {ngay.split(" | ")[0].split("T")[0]}
+                                        </td>
+                                        <td>
+                                          Giờ:{" "}
+                                          {ngay.split(" | ")[0].split("T")[1]}
+                                        </td>
+                                        <td>
+                                          Số chỗ trống: {ngay.split(" | ")[1]}
+                                        </td>
+                                      </tr>
+                                    );
+                                  })
+                                : bustrip.gioXuatBen}
+                            </td>
+                            <td>{bustrip.thoiGianDiChuyen} giờ</td>
                             <td>{numberWithCommas(bustrip.donGia)}</td>
                             <td data-column="link">
                               <button

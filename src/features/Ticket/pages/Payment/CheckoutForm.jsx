@@ -14,7 +14,7 @@ const CheckoutForm = () => {
   const handleSubmit = async (event) => {
     // Block native form submission.
     event.preventDefault();
-
+    const money = document.getElementById('money').value;
     if (!stripe || !elements) {
       return;
     }
@@ -29,6 +29,7 @@ const CheckoutForm = () => {
           "MaChuyenXe": location.state.MaChuyenXe,
           "NgayDi": location.state.NgayDi,
           "GhiChu": location.state.GhiChu,
+          "DaThanhToan": +money / location.state.MaChoNgoi.length,
         })
           .then(() => {
             history.push('/account/purchase');
@@ -47,8 +48,8 @@ const CheckoutForm = () => {
         <h4 className="checkout-title">Thanh toán bằng thẻ</h4>
         <label className="checkout-label">Email</label>
         <input className="checkou-input" value={user.Email} disabled />
-        <label className="checkout-label">Tên trên thẻ</label>
-        <input name="name" className="checkou-input" />
+        <label className="checkout-label" htmlFor="money">Số tiền</label>
+        <input type="number" id="money" className="checkou-input" required min={location.state.Price * location.state.MaChoNgoi.length/2} />
         <label className="checkout-label">Thông tin thẻ</label>
         <CardElement
           options={{

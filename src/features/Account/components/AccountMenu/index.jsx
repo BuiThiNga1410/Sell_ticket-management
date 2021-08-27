@@ -2,7 +2,7 @@ import React from 'react';
 
 import './AccountMenu.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBook } from '@fortawesome/free-solid-svg-icons';
+import { faBook, faCalendarTimes } from '@fortawesome/free-solid-svg-icons';
 import { faUserCircle } from '@fortawesome/free-regular-svg-icons';
 
 function AccountMenu() {
@@ -21,7 +21,8 @@ function AccountMenu() {
             <li className="menu-item"><a className="menu-item__link" href="/account/changePass">Đổi mật khẩu</a></li>
           </ul>
         </li>
-        <li className="menu-item"><a className="menu-item__link" href="/account/purchase"><FontAwesomeIcon icon={faBook} color="orange" className="menu-icon" />Đơn mua</a></li>
+        <li className="menu-item"><a className="menu-item__link" href="/account/purchase"><FontAwesomeIcon icon={faBook} color="orange" className="menu-icon" />Vé của tôi</a></li>
+        <li className="menu-item"><a className="menu-item__link" href="/account/cancelTickets"><FontAwesomeIcon icon={faCalendarTimes} color="orange" className="menu-icon" />Vé đã hủy</a></li>
       </ul>
     </div>
 

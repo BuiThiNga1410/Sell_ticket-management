@@ -127,7 +127,7 @@ function ViewTicket(props) {
                           <td className="text-center">{ticket.tenKh}</td>
                           <td className="text-center">{ticket.sdt}</td>
                           <td className="text-center">{ticket.tenTuyenXe}</td>
-                          <td className="text-center">{ticket.ngayXuatBen}</td>
+                          <td className="text-center">{ticket.ngayDi.replace(/T/, ' ')}</td>
                           <td className="text-center">{ticket.donGia}</td>
                           <td className="text-center">
                             <button

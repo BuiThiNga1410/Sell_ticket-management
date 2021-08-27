@@ -12,6 +12,7 @@ function Rating(props) {
   const query = new URLSearchParams(window.location.search);
   const nx = query.get("nx");
   const kh = query.get("kh");
+  const mv = query.get("mv");
   const history = useHistory();
 
   useEffect(() => {
@@ -23,26 +24,19 @@ function Rating(props) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const handleClickStar = (e) => {
-    if (e.target.getAttribute("color") === "yellow") {
-      e.target.setAttribute("color", "gray");
-      setNumberStar(numberStar - 1);
-    }
-    else {
-      e.target.setAttribute("color", "yellow");
-      setNumberStar(numberStar + 1);
-    }
+  const handleClickStar = (id) => {
+    setNumberStar(+id);
   }
   
   const handleSubmit = () => {
     myaxios.post(`/reviews`, {
       "MaNd": +kh, 
-      "MaNhaXe": +nx,
+      "MaVe": +mv,
       "Sao": numberStar,
       "NoiDungDanhGia": note
    })
     .then(() => {
-      history.push('/');
+      history.push('/account/purchase');
     })
     .catch(err => {
       throw err;
@@ -54,19 +48,18 @@ function Rating(props) {
   }
   
   const generateStar = () => {
-    const arr = [];
+    let arr = [];
+    let tempStar = numberStar;
     for (let i = 1; i <= 5; i++) {
-      arr.push(i);
+      arr.push(
+      <div className="rating__star-icon" key={i}>
+        <FontAwesomeIcon id={i} onClick={() => handleClickStar(i)} icon={faStar} color={tempStar >= 1 ? 'yellow' : 'gray'} />
+      </div>);
+      tempStar -= 1;
     }
-    const newArr = arr.map(star => {
-      return (
-        <div className="rating__star-icon" key={star}>
-          <FontAwesomeIcon id={star} onClick={handleClickStar} icon={faStar} color="gray" />
-        </div>
-      )
-    })
-    return newArr;
+    return arr;
   }
+
   return (
     <div className="detail-ticket">
       <div className="rating">

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarker, faExchangeAlt } from "@fortawesome/free-solid-svg-icons";
 
 import axios from "axios";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import "./Databusroute.scss";
 import ConfirmDialog from "../../shared/partials/ConfirmDialog";
 import Loading from "../../shared/partials/Loading";
@@ -88,7 +88,7 @@ function Databusroute(props) {
       <div className="searchForm">
         <h1 className="title-table">DANH SÁCH TUYẾN XE</h1>
         <div className="container">
-          <div>
+          <div className="form-search-bus-route">
             <form className="my-search-form">
               <div class="input-group">
                 <div class="input-group-prepend ">
@@ -142,13 +142,6 @@ function Databusroute(props) {
             </form>
           </div>
           <div className="table-list">
-            <div>
-              <button className="button addbusroutebutton btn btn-primary">
-                <Link to="/busroute/add" className="link-add-button">
-                  Thêm tuyến xe
-                </Link>
-              </button>
-            </div>
             {!!busroutes && busroutes.length && (
               <div className="table-container">
                 <table>
@@ -166,16 +159,16 @@ function Databusroute(props) {
                     {busroutes.map((busroute) => {
                       return (
                         <tr>
-                          <td data-column="route" className="tuyenXeColumn">{busroute.tenTuyenXe}</td>
+                          <td data-column="route" className="tuyenXeColumn">
+                            {busroute.tenTuyenXe}
+                          </td>
                           <td data-column="startingpoint">
                             {busroute.diaChiBxDi.split(",")[0]}
                           </td>
                           <td data-column="destination">
                             {busroute.diaChiBxDen.split(",")[0]}
                           </td>
-                          <td data-column="garage">
-                            {busroute.tenNhaXe}
-                          </td>
+                          <td data-column="garage">{busroute.tenNhaXe}</td>
                           <td data-column="link">
                             <a
                               href={"/busroute/update/" + busroute.maTuyenXe}

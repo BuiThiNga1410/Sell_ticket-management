@@ -90,11 +90,8 @@ only screen and (max-width: 760px),
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
-  top: 77px;
   width: 730px; 
-  left: 122px;
-  margin-bottom: 48px;
+  margin-bottom: 40px;
 }
 
 .my-search-form__input {
@@ -108,4 +105,9 @@ only screen and (max-width: 760px),
 }
 .tuyenXeColumn{
 	width: 30%;
+}
+.form-search-bus-route{
+	display: flex;
+    justify-content: center;
+    margin-top: 50px;
 }

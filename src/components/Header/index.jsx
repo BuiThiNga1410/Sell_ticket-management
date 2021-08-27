@@ -2,10 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Header.scss';
 import Logo from '../../../src/img/logo.png';
+import Avatar from '../../../src/img/avatar.png';
 
-Header.propTypes = {
-
-};
 function Header(props) {
   const user = JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user')) : {};
   const name = user.maNd ? user.Email.split("@")[0] : "";
@@ -52,7 +50,10 @@ function Header(props) {
           )}
           {user.maNd
             ? (<div className="header-group-right header-item">
-              <a href='/account' className="header-link user-name">Xin chào {name}</a>
+              <a href='/account' className="header-link flex">
+                <p className="user-name">{name}</p>
+                <img className="header-avt" src={user.imageUrl ? user.imageUrl : Avatar} alt={name} />
+              </a>
               <button className="btn btn-primary" type="button" onClick={handleLogOut}>Đăng xuất</button>
             </div>
             )

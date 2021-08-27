@@ -18,7 +18,7 @@ const ListReview = (props) => {
 
   return (
     <>
-      {reviews && (
+      {reviews && reviews.length && (
         <div className="review">
           {reviews.map(review => {
             return (

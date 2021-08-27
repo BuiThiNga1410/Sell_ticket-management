@@ -7,13 +7,12 @@ import { Col, Form, FormControl, FormGroup, FormLabel, Row } from 'react-bootstr
 import myaxios from '../../../../app/api';
 import { useHistory } from 'react-router';
 
-const numberWithCommas = (x) => {
+export const numberWithCommas = (x) => {
   x = x.toString();
   var pattern = /(-?\d+)(\d{3})/;
   while (pattern.test(x))
     x = x.replace(pattern, "$1,$2");
   return x;
-
 }
 
 function Booking(props) {
@@ -83,6 +82,7 @@ function Booking(props) {
               "MaKh": customerId,
               "MaChoNgoi": selectedSeats,
               "MaChuyenXe": tripId,
+              "DaThanhToan": price/2,
               "NgayDi": date,
               "GhiChu": note,
             })
@@ -100,6 +100,7 @@ function Booking(props) {
                 MaChoNgoi: selectedSeats,
                 MaChuyenXe: tripId,
                 NgayDi: date,
+                Price: price,
                 GhiChu: note,
               }
             });

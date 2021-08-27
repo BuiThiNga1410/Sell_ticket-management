@@ -4,6 +4,7 @@ import { Redirect, Route, Switch, useRouteMatch } from 'react-router';
 import ProfilePage from './pages/ProfilePage';
 import ChangePassPage from './pages/ChangePassPage';
 import PurchasePage from './pages/PurchasePage';
+import CancelTicketsPage from './pages/CancelTickets';
 
 Account.propTypes = {
 
@@ -18,6 +19,7 @@ function Account(props) {
       <Route path={`${match.url}/profile`} component={ProfilePage} />
       <Route path={`${match.url}/changePass`} component={ChangePassPage} />
       <Route path={`${match.url}/purchase`} component={PurchasePage} />
+      <Route path={`${match.url}/cancelTickets`} component={CancelTicketsPage} />
     </Switch>
   );
 }

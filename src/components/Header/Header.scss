@@ -96,10 +96,18 @@
   text-decoration: none;
 }
 .user-name {
+  display: flex;
+  align-items: center;
   color: rgb(218, 240, 27);
   font-size: 16px;
   font-weight: 600;
-  margin-right: 16px;
+  margin-right: 8px;
+}
+
+.header-avt {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
 }
 .user-name:hover {
   color: #fff;

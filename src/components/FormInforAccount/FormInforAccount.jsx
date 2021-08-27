@@ -11,8 +11,6 @@ function FormInforAccount(props) {
   const {
     register,
     formState: { errors },
-    setError,
-    clearErrors,
     handleSubmit,
     watch,
   } = useForm();

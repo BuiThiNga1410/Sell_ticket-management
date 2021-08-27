@@ -2,12 +2,15 @@ import React, { useEffect, useState, useRef } from "react";
 import Loading from "../../shared/partials/Loading";
 import ConfirmDialog from "../../shared/partials/ConfirmDialog";
 import { useHistory } from "react-router-dom";
+import "./DataGarage.scss";
+import FormAddGarage from "../FormAddGarage/FormAddGarage";
 
 function DataGarage(props) {
   const [garages, setGarages] = useState();
   const [isDeleted, setIsDeleted] = useState(false);
   const removeId = useRef();
   const history = useHistory();
+  const [showFormAdd, setShowFormAdd] = useState(false);
 
   useEffect(() => {
     fetch("https://qlbvxk.herokuapp.com/api/garages")
@@ -35,6 +38,15 @@ function DataGarage(props) {
       <div className="searchForm">
         <h1 className="title-table">DANH SÁCH NHÀ XE</h1>
         <div className="container">
+          <div className="button-add-garage">
+            <button
+              className="btn btn-primary button addbusbutton myeditbutton"
+              onClick={() => setShowFormAdd(!showFormAdd)}
+            >
+              Thêm nhà xe
+            </button>
+          </div>
+          {!!showFormAdd && <FormAddGarage />}
           <div className="my-row">
             <div className="table-list my-table-list">
               {!!garages && garages.length && (
@@ -100,7 +112,7 @@ function DataGarage(props) {
           {!garages && <Loading />}
           {!!isDeleted && (
             <ConfirmDialog
-              title="Bạn có chắc chắn muốn xóa tuyến xe này"
+              title="Bạn có chắc chắn muốn xóa nhà xe này"
               handleConfirm={() => handleDelete(removeId.current)}
               handleCancel={() => setIsDeleted(false)}
             />

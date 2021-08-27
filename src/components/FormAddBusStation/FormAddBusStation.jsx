@@ -37,15 +37,22 @@ function FormAddBusStation(props) {
   return (
     <div className="form-add-bus-route">
       <span className="add-route-title">THÊM BẾN XE</span>
-      <div className="form-add-bus-station">
-        <h5>Tên bến xe</h5>
-
-        <input type="text" required id="nameOfBusStation" className="myform" />
-        <br />
-        <h5>Địa chỉ</h5>
-
-        <input type="text" required id="address" className="myform" />
-        <br />
+      <div className="my-form-input form-add-busroute">
+        <form className="form">
+          <div className="form-group form-add-bus-route-1">
+            <h5 for="dest">Tên bến xe</h5>
+            <input
+              type="text"
+              className="form-control"
+              id="nameOfBusStation"
+              required
+            />
+          </div>
+          <div className="form-group form-add-bus-route-1">
+            <h5 for="time">Địa chỉ</h5>
+            <input type="text" class="form-control" id="address" />
+          </div>
+        </form>
       </div>
       <div className="button-area button-of-add-route">
         <button className="button" onClick={handleBack}>

@@ -31,7 +31,7 @@ function SearchAdmin(props) {
         <div className="btn-group">
           <input
             type="text"
-            className="my-form-control"
+            className="my-form-control-1"
             name
             id
             aria-describedby="helpId"

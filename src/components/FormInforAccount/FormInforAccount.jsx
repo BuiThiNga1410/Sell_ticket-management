@@ -30,6 +30,11 @@ function FormInforAccount(props) {
         MatKhau: password,
       })
       .then((res) => {
+        setLoading(false);
+        setStatus({
+          isSuccess: true,
+          message: "Cấp tài khoản thành công",
+        });
         if (res.data.maNd) {
           let acc = {
             maNd: res.data.maNd,
@@ -40,7 +45,13 @@ function FormInforAccount(props) {
         }
       })
       .catch((error) => {
+        setLoading(false);
         console.log(error);
+        setStatus({
+          isSuccess: false,
+          message: "Username đã tồn tại",
+        });
+        throw error;
       });
   };
   console.log("status", status);
@@ -63,9 +74,13 @@ function FormInforAccount(props) {
                 {...register("userName", {
                   required: "This filed is required",
                 })}
+                // onBlur={getAccountByUserName}
               />
-              {errors.userName && (
+              {/* {errors.userName && (
                 <p className="text-error">{errors.userName.message}</p>
+              )} */}
+              {errors.usename && (
+                <p className="text-error">{errors.username.message}</p>
               )}
             </div>
             <div className="form-group">

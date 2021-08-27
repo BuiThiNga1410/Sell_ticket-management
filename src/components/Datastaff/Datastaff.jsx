@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from "react";
 import "./Datastaff.scss";
 import { useState } from "react";
 import SearchAdmin from "../Search_admin/SearchAdmin";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import ConfirmDialog from "../../shared/partials/ConfirmDialog";
 import Loading from "../../shared/partials/Loading";
 
@@ -68,31 +68,18 @@ function Datastaff(props) {
                   onSubmit={handleFiltersChange}
                 />
               </div>
-              <div>
-                <button className="btn btn-primary button addaccountbutton myeditbutton">
-                  <Link
-                    to="/staff/account/add"
-                    className="link-add-button my-button"
-                  >
-                    Cấp tài khoản
-                  </Link>
-                </button>
-              </div>
               {!!employees && employees.length && (
                 <div className="table-container">
                   <table className="mytable">
                     <thead>
                       <tr>
                         <th>ID</th>
-
                         <th>Họ và tên</th>
-
                         <th>Địa chỉ</th>
                         <th>Số điện thoại</th>
                         <th>CMND</th>
                         <th>Username</th>
                         <th>Cập nhật</th>
-
                         <th>Xóa</th>
                       </tr>
                     </thead>

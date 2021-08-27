@@ -1,15 +1,11 @@
 import React from "react";
 import axios from "axios";
 import { useHistory } from "react-router";
-
+import "./FormAddGarage.scss";
 FormAddGarage.propTypes = {};
 
 function FormAddGarage(props) {
   const history = useHistory();
-
-  function handleBack() {
-    window.location.href = "/garage";
-  }
 
   function submitForm() {
     let garage = document.getElementById("garage").value;
@@ -32,8 +28,7 @@ function FormAddGarage(props) {
       });
   }
   return (
-    <div className="form-add-bus-route">
-      <h3>THÊM NHÀ XE</h3>
+    <div className="form-add-garage">
       <div className="my-form-input">
         <form className="form">
           <div className="form-group form-add-bus-route-1">
@@ -43,12 +38,8 @@ function FormAddGarage(props) {
         </form>
       </div>
       <div className="button-area button-of-add-route">
-        <button className="button" onClick={handleBack}>
-          Quay lại
-        </button>
-
         <button className="button" onClick={submitForm}>
-          Thêm nhà xe
+          Gửi yêu cầu
         </button>
       </div>
     </div>

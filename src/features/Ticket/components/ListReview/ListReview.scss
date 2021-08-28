@@ -15,6 +15,7 @@
   }
   
   .review-item {
+    position: relative;
     width: 500px;
     padding: 16px 0;
     border-top: 1px solid rgb(207, 205, 205);
@@ -37,5 +38,11 @@
   .review-content {
     font-size: 14px;
     margin-top: 8px;
+  }
+
+  .review-edit {
+    position: absolute;
+    right: 0;
+   // margin-left: 24px;
   }
 }

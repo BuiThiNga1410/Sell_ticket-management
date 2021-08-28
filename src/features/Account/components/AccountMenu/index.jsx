@@ -4,13 +4,14 @@ import './AccountMenu.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook, faCalendarTimes } from '@fortawesome/free-solid-svg-icons';
 import { faUserCircle } from '@fortawesome/free-regular-svg-icons';
+import Avatar from '../../../../img/avatar.png';
 
 function AccountMenu() {
   const user = JSON.parse(localStorage.getItem('user'));
   return (
     <div className="menu-div-account">
       <div className="center">
-        <img src={user.imageUrl} alt="avatar" className="account-avt" />
+        <img src={user.imageUrl || Avatar} alt="avatar" className="account-avt" />
       </div>
       <p className="account-name">{user.tenNd || user.Email.split('@')[0]}</p>
       <ul className="menu-list"> 

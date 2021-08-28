@@ -31,7 +31,7 @@ const Reviews = () => {
               </div>
               <p className="review-content">{reviews.noiDungDanhGia}</p>
             </div>
-            <Link to={`/reviews/edit?id=${reviews.maDanhGia}`}>
+            <Link className="review-edit" to={`/reviews/edit?id=${reviews.maDanhGia}`}>
               <i class="far fa-edit"></i>
             </Link>
           </div>

@@ -49,7 +49,14 @@ const CheckoutForm = () => {
         <label className="checkout-label">Email</label>
         <input className="checkou-input" value={user.Email} disabled />
         <label className="checkout-label" htmlFor="money">Số tiền</label>
-        <input type="number" id="money" className="checkou-input" required min={location.state.Price * location.state.MaChoNgoi.length/2} />
+        <input 
+          type="number" 
+          id="money" 
+          className="checkou-input" 
+          required 
+          min={location.state.Price * location.state.MaChoNgoi.length/2} 
+          max={location.state.Price * location.state.MaChoNgoi.length}
+          />
         <label className="checkout-label">Thông tin thẻ</label>
         <CardElement
           options={{

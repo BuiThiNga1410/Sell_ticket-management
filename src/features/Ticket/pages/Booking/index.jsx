@@ -232,7 +232,7 @@ function Booking(props) {
               <FormControl as="select">
                 {customers.map((customer) => {
                   return (
-                    <option value={customer.maNd}>{customer.sdt}</option>
+                    <option value={customer.maNd}>{customer.email}</option>
                   )
                 })}
               </FormControl>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import myaxios from '../../app/api';
 import './SaleReport.scss';
 import ReactLoading from 'react-loading';
@@ -9,10 +9,27 @@ import { useHistory } from 'react-router-dom';
 function SaleReport() {
   const { register, formState: { errors }, handleSubmit, setError, clearErrors } = useForm();
   const history = useHistory();
+  const petrol= useRef(0);
+  const roadToll = useRef(0);
   const [isLoading, setLoading] = useState(false);
   const [status, setStatus] = useState();
-  const [detailRevenue, setDetailRevenue] = useState();
+  const detailRevenue = useRef();
   const [isError, setIsError] = useState(false);
+
+  const handleChangeOverview = () => {
+    document.getElementById('note').value = '';
+    if (detailRevenue.current) {
+      document.getElementById('note').value = 'Số vé: ' + detailRevenue.current.numberTicket + '  Tiền vé: ' + detailRevenue.current.money;
+    }
+    if (petrol.current) {
+      // eslint-disable-next-line no-useless-concat
+      document.getElementById('note').value += `${detailRevenue.current ? '\n' : ''}` + 'Tiền xăng: ' + petrol.current;
+    }
+    if (roadToll.current) {
+      // eslint-disable-next-line no-useless-concat
+      document.getElementById('note').value += `${petrol.current ? '  ' : ''}` + 'Tiền phí đi đường: ' + roadToll.current;
+    }
+  }
 
   const getDetailRevenue = (e) => {
     const date = e.target.value;
@@ -20,9 +37,9 @@ function SaleReport() {
       .then(res => {
         if (!res.data.length) {
           setIsError(true);
-          setDetailRevenue(null);
+          detailRevenue.current = null;
           setError('date', { message: 'Không có chuyến xe nào xuất phát vào ngày này'});
-          document.getElementById('note').value = '';
+          handleChangeOverview();
           return;
         }
         setIsError(false);
@@ -32,12 +49,11 @@ function SaleReport() {
           numberTicket += item.veDaBan;
           return sum + item.veDaBan * item.loaiGia;
         }, 0);
-        setDetailRevenue({
+        detailRevenue.current = {
           numberTicket: numberTicket,
           money: money,
-        })
-        // eslint-disable-next-line no-useless-concat
-        document.getElementById('note').value = 'Số vé đã bán: ' + numberTicket + '\n' + 'Thành tiền: ' + money;
+        };
+        handleChangeOverview();
       })
       .catch(err => {
         throw err;
@@ -48,11 +64,13 @@ function SaleReport() {
   function handleSaleReport(data) {
     setLoading(true);
     setStatus(null);
+ 
+    console.log('note', document.getElementById("note").value);
     myaxios.post('/revenues', {
       "Ngay": data.date,
-      "SoVe": detailRevenue?.numberTicket,
-      "TongDoanhThu": detailRevenue?.money - data.petrolMoney - data.roadTolls,
-      "GhiChu": data.note,
+      "SoVe": detailRevenue?.current?.numberTicket,
+      "TongDoanhThu": detailRevenue?.current?.money - data.petrolMoney - data.roadTolls,
+      "GhiChu": document.getElementById("note").value,
     })
       .then((res) => {
         setLoading(false);
@@ -66,7 +84,7 @@ function SaleReport() {
         setLoading(false);
         setStatus({
           isSuccess: false,
-          message: "Sale report failed",
+          message: "Đã xảy ra lỗi",
         });
         console.log(error);
       })
@@ -85,7 +103,9 @@ function SaleReport() {
             {...register("date", {
               required: "This filed is required",
             })}
-            onChange={getDetailRevenue}
+            onChange={(e) => {
+              getDetailRevenue(e);
+            }}
           />
           {errors.date && <p className="text-error">{errors.date.message}</p>}
         </div>
@@ -101,6 +121,10 @@ function SaleReport() {
                 message: 'Petrol money must be number'
               }
             })}
+            onBlur={(e) => {
+              petrol.current = e.target.value;
+              handleChangeOverview();
+            }}
           />
           {errors.petrolMoney && <p className="text-error">{errors.petrolMoney.message}</p>}
         </div>
@@ -117,6 +141,10 @@ function SaleReport() {
                 message: 'Road tolls must be number'
               }
             })}
+            onBlur={(e) => {
+              roadToll.current = e.target.value;
+              handleChangeOverview();
+            }}
           />
           {errors.roadTolls && <p className="text-error">{errors.roadTolls.message}</p>}
         </div>

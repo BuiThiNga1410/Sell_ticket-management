@@ -113,7 +113,7 @@ function ViewTicket(props) {
                       <th className="text-center">Ngày xuất bến</th>
                       <th className="text-center">Đơn giá</th>
                       <th className="text-center">
-                        <a href="/ticket/trip-list" className="btn btn-primary">
+                        <a href="/ticket" className="btn btn-primary">
                           Thêm vé
                         </a>
                       </th>

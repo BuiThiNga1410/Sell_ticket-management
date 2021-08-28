@@ -96,8 +96,12 @@ function Purchase() {
                       <td className="my-table-item my-table-item_center">
                         {(new Date() - new Date(ticket.ngayDi)) > 0 && (
                           <>
-                            <Link to={`/reviews/add?kh=${user.maNd}&nx=${ticket.maNhaXe}&mv=${ticket.maVe}`}>Đánh giá</Link>
-                            <Link className="review-link" to={`/reviews?id=${ticket.maVe}`}>Xem đánh giá</Link>
+                            {!ticket.danhGia  ? 
+                              <Link to={`/reviews/add?kh=${user.maNd}&nx=${ticket.maNhaXe}&mv=${ticket.maVe}`}>Đánh giá</Link>
+                              :
+                              <Link className="review-link" to={`/reviews?id=${ticket.maVe}`}>Xem đánh giá</Link>
+                            }
+          
                           </>
                         )}
                       </td>

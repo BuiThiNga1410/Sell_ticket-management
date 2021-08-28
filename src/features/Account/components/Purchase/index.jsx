@@ -85,7 +85,7 @@ function Purchase() {
                         {numberWithCommas(ticket.donGia)}đ
                       </td>
                       <td className="my-table-item my-table-item_center">
-                        {numberWithCommas(ticket.daThanhToan)}đ
+                        {numberWithCommas(Math.floor(ticket.daThanhToan))}đ
                       </td>
                       <td className="my-table-item my-table-item_center">
                         {ticket.bienSoXe}

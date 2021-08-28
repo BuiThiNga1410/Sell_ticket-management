@@ -19,15 +19,15 @@ function SaleReport() {
   const handleChangeOverview = () => {
     document.getElementById('note').value = '';
     if (detailRevenue.current) {
-      document.getElementById('note').value = 'Số vé: ' + detailRevenue.current.numberTicket + '  Tiền vé: ' + detailRevenue.current.money;
+      document.getElementById('note').value = 'Số vé: ' + detailRevenue.current.numberTicket + '  Tiền vé: ' + detailRevenue.current.money + 'đ';
     }
     if (petrol.current) {
       // eslint-disable-next-line no-useless-concat
-      document.getElementById('note').value += `${detailRevenue.current ? '\n' : ''}` + 'Tiền xăng: ' + petrol.current;
+      document.getElementById('note').value += `${detailRevenue.current ? '\n' : ''}` + 'Tiền xăng: ' + petrol.current + 'đ';
     }
     if (roadToll.current) {
       // eslint-disable-next-line no-useless-concat
-      document.getElementById('note').value += `${petrol.current ? '  ' : ''}` + 'Tiền phí đi đường: ' + roadToll.current;
+      document.getElementById('note').value += `${petrol.current ? '  ' : ''}` + 'Tiền phí đi đường: ' + roadToll.current + 'đ';
     }
   }
 
